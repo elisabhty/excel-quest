@@ -89,6 +89,22 @@ svg{display:block}
 #vPath button:focus-visible{outline:3px solid #b36b14;outline-offset:3px}
 .floorsbtn svg{width:14px;height:14px}
 
+.path-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:20px}
+.path-tools h3{margin:0;font:700 18px var(--font)}
+.path-views{display:flex;gap:3px;padding:3px;border-radius:14px;background:#eee3d7}
+.path-views button{min-height:44px;padding:0 12px;border-radius:11px;color:#602539;font:600 14px var(--font)}
+.path-views button[aria-pressed="true"]{background:#fff;color:#451527;box-shadow:var(--shadow)}
+.path-list{list-style:none;margin:12px 0 24px;padding:0}
+.path-list li + li{margin-top:6px}
+.path-list button{display:flex;align-items:center;gap:10px;width:100%;min-height:58px;padding:9px 12px;border-radius:14px;background:#fffaf2;color:#451527;text-align:left}
+.path-list button[aria-current="step"]{box-shadow:inset 0 0 0 2px #8e1d42}
+.path-list button:disabled{color:#62535a;background:#eee7df}
+.path-list .path-room-copy{flex:1;min-width:0}
+.path-list small,.path-list b{display:block}
+.path-list small{margin-bottom:2px;font:500 12px var(--font)}
+.path-list b{font:650 15px/1.25 var(--font)}
+.path-room-status{flex:none;max-width:34%;text-align:right;font:600 12px var(--font)}
+
 /* couloir */
 .corridor{position:relative;margin:10px -16px 0}
 .corridor>svg.carpet{position:absolute;left:0;top:0;pointer-events:none}
@@ -1295,7 +1311,15 @@ body.rm .ribbon{transition:none}
           <span><small id="pathNextAction"></small><b id="pathNextTitle"></b></span>
           <span aria-hidden="true">→</span>
         </button>
+        <div class="path-tools">
+          <h3 id="pathRoomsTitle">Les chambres</h3>
+          <div class="path-views" role="group" aria-label="Affichage des chambres">
+            <button type="button" id="pathMapView" aria-pressed="true" aria-controls="corridor">Couloir</button>
+            <button type="button" id="pathListView" aria-pressed="false" aria-controls="pathList">Liste</button>
+          </div>
+        </div>
         <div class="corridor" id="corridor"></div>
+        <ol class="path-list" id="pathList" aria-labelledby="pathRoomsTitle" hidden></ol>
       </div>
 
       <div class="view" id="vFiches">
@@ -9249,16 +9273,32 @@ function renderPath() {
   $('#hBar').style.width = (nd / 10 * 100) + '%';
   $('#hProgress').setAttribute('aria-valuenow', nd);
   $('#hCount').textContent = `${nd} sur 10 terminées`;
-  const next = curLesson(), lesson = LESSONS[next - 1];
+  const next = nextPathLesson();
   $('#pathNext').hidden = !LDEF[next];
   if (LDEF[next]) {
-    const resume = DB.resume['l' + next];
-    const action = resume && resume.i > 0 && resume.i < LDEF[next].steps.length - 1 ? 'Reprendre' : 'Commencer';
+    const action = lessonResume(next) ? 'Reprendre' : 'Commencer';
     $('#pathNextAction').textContent = `${action} · ${roomLabel(next)}`;
-    $('#pathNextTitle').textContent = typo(lesson.t);
+    $('#pathNextTitle').textContent = typo(LESSONS[next - 1].t);
+  }
+  const listView = DB.pathView === 'list';
+  $('#pathMapView').setAttribute('aria-pressed', !listView);
+  $('#pathListView').setAttribute('aria-pressed', listView);
+  $('#corridor').hidden = listView;
+  const list = $('#pathList');
+  list.hidden = !listView;
+  if (listView) {
+    list.innerHTML = FL.map(l => {
+      const state = roomState(l.n);
+      const status = state === 'lock' ? 'Verrouillée' : state === 'done' ? 'Terminée' : lessonResume(l.n) ? 'En cours' : l.d;
+      return `<li><button type="button" data-l="${l.n}"${state === 'lock' ? ' disabled' : ''}${l.n === next ? ' aria-current="step"' : ''}>
+        <span class="path-room-copy"><small>${roomLabel(l.n)}</small><b>${esc(typo(l.t))}</b></span>
+        <span class="path-room-status">${status}</span>
+      </button></li>`;
+    }).join('');
   }
   $('#hCap').textContent = `Étage ${F} · Le Grand Hôtel`; $('#hTitle').textContent = typo(MODULES[F - 1][0]);
   $('#hSub').textContent = ['Les bases d’Excel, une chambre à la fois', 'Formules et premiers résultats, une chambre à la fois', 'Trier, filtrer et analyser, une chambre à la fois'][F - 1] || '';
+  if (listView) return;
   const box = $("#corridor"), W = box.clientWidth || 393, H = 184, top = 84, dh = 106;
   const xs = LESSONS.map((l, i) => i === 9 ? .5 : .5 + .25 * Math.sin(i * .9));
   const P = xs.map((x, i) => [Math.round(W * x), top + dh + i * H]);
@@ -9276,7 +9316,7 @@ function renderPath() {
   </svg>`;
   FL.forEach((l, i) => {
     const [x, y] = P[i], st = roomState(l.n), final = l.n === 10, side = x > W / 2 + 2 ? 'l' : 'r';
-    const res = DB.resume['l' + l.n], inProg = !!LDEF[l.n] && st === 'cur' && res && res.i > 0;
+    const inProg = lessonResume(l.n);
     if (i < 9) {
       const dx = x > W / 2 + 2 ? W * .12 : x < W / 2 - 2 ? W * .88 : (i % 2 ? W * .12 : W * .88);
       h += `<div class="deco" style="left:${Math.round(dx)}px;top:${y + 78}px;width:${DECOW[i % DECOS.length]}px">${DECOS[i % DECOS.length]}</div>`;
@@ -9320,7 +9360,7 @@ $('#chipStreak').onclick = () => { SND.tap(); const s = streak();
 $('#chipXp').onclick = () => { SND.tap();
   openSheet(`<div class="grab"></div><h4>${DB.xp} XP</h4><p class="sub">${typo('Les XP sont tes points d’expérience. Une leçon se termine toujours : Ding est là pour t’aider, mais la précision est récompensée.')}</p>${pointsHTML()}<div class="col" style="margin-top:16px"><button class="btn" data-a="x">Compris</button></div>`);
   $('#modalPane').onclick = e => { if (e.target.closest('[data-a]')) closeSheet(); }; };
-window.addEventListener('resize', () => { if ($('#home').classList.contains('on')) renderPath(); else { if (L && L.view !== null && grid.children.length) { fitCols(); paintSel(); } fitStack($('#cstack'), 74, true); fitStack($('#dbody'), 50, true); } });
+window.addEventListener('resize', () => { if ($('#home').classList.contains('on')) { if (DB.pathView !== 'list') renderPath(); } else { if (L && L.view !== null && grid.children.length) { fitCols(); paintSel(); } fitStack($('#cstack'), 74, true); fitStack($('#dbody'), 50, true); } });
 $('#corridor').addEventListener('click', e => {
   const g = e.target.closest('[data-go]'); if (g) { SND.tap(); return startOrResume(+g.dataset.go); }
   if (e.target.closest('#liftEnd')) { SND.tap(); const F = floorNow(); if (LDEF[F * 10 + 1] && (floorDone(F) || OPEN_ALL)) return goFloor(F + 1); toast(LDEF[F * 10 + 1] ? `Étage ${F + 1} : termine d’abord les 10 chambres de l’étage ${F}` : `L’étage ${F + 1} n’est pas inclus dans cette version de l’application`, IC.lock.replace('<svg', '<svg width="16" height="16"')); return; }
@@ -9328,9 +9368,31 @@ $('#corridor').addEventListener('click', e => {
 });
 $('#pathNext').onclick = () => {
   SND.tap();
-  const next = curLesson();
+  const next = nextPathLesson();
   if (LDEF[next]) startOrResume(next);
 };
+$('#pathList').onclick = e => {
+  const button = e.target.closest('button[data-l]');
+  if (button && !button.disabled) openRoom(+button.dataset.l);
+};
+function changePathView(view) {
+  DB.pathView = view;
+  save();
+  renderPath();
+}
+$('#pathMapView').onclick = () => changePathView('map');
+$('#pathListView').onclick = () => changePathView('list');
+
+function lessonResume(n) {
+  const res = DB.resume['l' + n];
+  return !DB.done.includes(n) && LDEF[n] && res?.wb && res.i > 0 && res.i < LDEF[n].steps.length - 1 ? res : null;
+}
+function nextPathLesson() {
+  if (lessonResume(DB.lastLesson) && roomState(DB.lastLesson) !== 'lock') return DB.lastLesson;
+  const inProgress = LESSONS.find(l => lessonResume(l.n) && roomState(l.n) !== 'lock');
+  return inProgress?.n ?? curLesson();
+}
+
 function xpLeft(n) { return LDEF[n].steps.filter(s => s.t === 'ask' || s.t === 'quiz').reduce((t, s) => t + (DB.best[s.id] === undefined ? XP_FIRST : DB.best[s.id] ? 0 : XP_FIRST - XP_LATER), 0) + (DB.done.includes(n) ? 0 : XP_BONUS); }
 const allFiches = () => Object.values(LDEF).flatMap(d => (d.fiches || []).map((f, i, a) => [f, d.n, i, a.length]));
 const LAST = () => Math.max(...Object.keys(LDEF).map(Number));
@@ -9343,12 +9405,12 @@ function openRoom(n) {
   SND.tap();
   const st = roomState(n), l = LESSONS[n - 1];
   if (st === 'lock') { toast(`Chambre ${roomNo(n)} : termine d’abord la chambre ${roomNo(curLesson())}`, IC.lock.replace('<svg', '<svg width="16" height="16"')); return; }
-  const res = DB.resume['l' + n], inProg = !!LDEF[n] && res && res.i > 0 && st !== 'done';
+  const res = lessonResume(n);
   const hero = `<div class="lsh-hero"><div class="grab"></div>${doorSVG(st === 'done' ? 'done' : 'cur', roomNo(n), n === 10)}<svg class="ding sticker" viewBox="0 0 120 120"><use href="#sDing"/></svg></div>`;
   const metas = `<div class="metas"><span>${IC.clock}${l.d}</span>${LDEF[n] ? `<span>${IC.target}${exosOf(n)} exercices</span><span><svg viewBox="0 0 24 24" fill="#E8A33A"><use href="#sBolt"/></svg>${xpLeft(n) ? `Jusqu’à ${xpLeft(n)} XP` : 'Tous les XP gagnés'}</span>` : ''}${st === 'done' ? `<span class="stars">${[1, 2, 3].map(k => starSVG(k <= (DB.stars[n] || 0))).join('')}</span>` : ''}</div>`;
   let btns;
   if (LDEF[n]) btns = st === 'done' ? `<button class="btn" data-a="restart">Rejouer la leçon</button><button class="btn gray" data-a="x">Fermer</button>`
-    : inProg ? `<button class="btn" data-a="resume">Reprendre · ${Math.round(res.i / LDEF[n].steps.length * 100)} %</button><button class="btn gray" data-a="restart">Recommencer depuis le début</button>`
+    : res ? `<button class="btn" data-a="resume">Reprendre · ${Math.round(res.i / LDEF[n].steps.length * 100)} %</button><button class="btn gray" data-a="restart">Recommencer depuis le début</button>`
     : `<button class="btn" data-a="restart">Commencer</button>`;
   else btns = `<p class="sub">${typo(`Cette version de l’application contient les chambres 101 à ${roomNo(LAST())}.`)}</p><button class="btn gray" data-a="x">Fermer</button>`;
   openSheet(`${hero}<div class="cap2">${roomLabel(n)} · Étage ${floorOf(n)} · Leçon ${(n - 1) % 10 + 1}</div><h4>${typo(l.t)}</h4><p class="sub">${typo(l.s)}</p>${metas}<div class="col">${btns}</div>`, null, 'flush');
@@ -9356,8 +9418,7 @@ function openRoom(n) {
 }
 function startOrResume(n) {
   if (!LDEF[n]) return openRoom(n);
-  const res = DB.resume['l' + n];
-  startLesson(n, res && res.i > 0 && res.i < LDEF[n].steps.length - 1 ? res.i : 0);
+  startLesson(n, lessonResume(n)?.i ?? 0);
 }
 function floorsSheet() {
   SND.tap();
@@ -9401,8 +9462,9 @@ $('#lClose').onclick = () => { SND.tap(); quitLesson(); };
 $('#lNote').onclick = () => { SND.tap(); noteComposer(null, true); };
 function quitLesson() {
   autoStop(); L = null; clearInterval(callTimerT); ringStop(); $('#lesson').classList.remove('incall'); showScreen('home'); renderHome();
-  const r = $(`.room[data-l="${Math.min(curLesson(), 10)}"]`), sc = $('#hscroll');
-  if (r && curLesson() > 1) sc.scrollTo({top: Math.max(0, r.offsetTop + $('#corridor').offsetTop - sc.clientHeight * .55), behavior: DB.set.reduce ? 'auto' : 'smooth'});
+  $('#hscroll').scrollTop = 0;
+  const shortcut = $('#pathNext');
+  (shortcut.hidden ? $('#bFloors') : shortcut).focus({preventScroll: true});
 }
 
 /* ================= moteur ================= */
@@ -9424,7 +9486,7 @@ function startLesson(n, i) { FLOOR = floorOf(n); DB.floor = FLOOR;
   paintAutoBtns(); markDay(); go(i);
 }
 const cond = st => !st.if || L.choices[st.if[0]] === st.if[1];
-function persist() { if (!L) return; const st = STEPS[L.i]; DB.resume['l' + L.n] = {i: L.i, id: st.id, choices: L.choices, gain: L.gain, results: L.results, met: [...L.met], wb: L.wb, ask: L.ask ? {id: L.ask.st.id, first: L.ask.first, misses: L.ask.misses} : L.quiz ? {id: st.id, first: L.quiz.first} : null}; save(); }
+function persist() { if (!L) return; DB.lastLesson = L.n; const st = STEPS[L.i]; DB.resume['l' + L.n] = {i: L.i, id: st.id, choices: L.choices, gain: L.gain, results: L.results, met: [...L.met], wb: L.wb, ask: L.ask ? {id: L.ask.st.id, first: L.ask.first, misses: L.ask.misses} : L.quiz ? {id: st.id, first: L.quiz.first} : null}; save(); }
 function resumeAuto() { if (L && L.paused) { L.paused = false; paintAutoBtns(); document.body.classList.toggle('auto', autoOn()); } }
 // outils du tableur disponibles à cette étape : réglages de la leçon, complétés au fil des étapes
 function toolsAt(i) { const t = Object.assign({}, LDEF[L.n].tools); for (let k = 0; k <= i && k < N; k++) if (STEPS[k].tools) Object.assign(t, STEPS[k].tools); return t; }
