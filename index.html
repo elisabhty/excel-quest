@@ -4663,7 +4663,9 @@ function showScreen(id) {
   setTimeout(() => { cur.classList.remove('on'); cur.style.zIndex = nx.style.zIndex = ''; nx.classList.remove('up', 'fadein'); }, 480);
 }
 const curLesson = () => { for (let n = 1; n <= 10; n++) if (!DB.done.includes(n)) return n; return 11; };
-const roomState = n => DB.done.includes(n) ? 'done' : n === curLesson() ? 'cur' : 'lock';
+// aperçu : toutes les chambres disponibles sont ouvertes (remettre false pour imposer l’ordre des chambres)
+const OPEN_ALL = true;
+const roomState = n => DB.done.includes(n) ? 'done' : n === curLesson() ? 'cur' : OPEN_ALL && LDEF[n] ? 'open' : 'lock';
 
 function dialSVG(cur) {
   const cx = 150, cy = 132, R = 118;
