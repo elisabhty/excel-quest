@@ -1917,7 +1917,7 @@ function showSheet(id, quiet) {
   gwrap.scrollTo(0, 0); buildGrid(); if (!quiet) persist();
 }
 const snapStr = () => JSON.stringify(L.wb);
-function pushHist(before) { L.hist.push(before); if (L.hist.length > 40) L.hist.shift(); L.redo = []; }
+function pushHist(before) { L.lostSheet = false; L.hist.push(before); if (L.hist.length > 40) L.hist.shift(); L.redo = []; }
 function refresh(rebuild) {
   if (rebuild || SHEET().id !== curSheetId || colsFor(SHEET()).length !== COLS.length) return buildGrid();
   paintCells(); renderTabs(); fitCols(); paintSel(); paintClip();
@@ -2166,7 +2166,7 @@ function grab(r, sh) { sh = sh || SHEET(); const o = []; for (let y = r.r1; y <=
 function cmd(k, node) {
   const r = selRect();
   if (k === 'undo') {
-    if (!L.hist.length) { fb('Il n’y a rien à annuler pour l’instant.', 'hint'); return emit({type: 'cmd', name: 'undo', none: true}); }
+    if (!L.hist.length) { fb(L.lostSheet ? 'Annuler ne permet pas de récupérer une feuille supprimée.' : 'Il n’y a rien à annuler pour l’instant.', 'hint'); return emit({type: 'cmd', name: 'undo', none: true}); }
     L.redo.push(snapStr()); L.wb = JSON.parse(L.hist.pop()); L.clip = null; refresh(true); persist(); flashCells(rcells(selRect() || RR('A1')));
     return emit({type: 'cmd', name: 'undo'});
   }
@@ -2520,7 +2520,7 @@ function deleteDialog(id) {
     if (b.dataset.a !== 'del') return emit({type: 'delcancel', id});
     if (L.wb.sheets.length < 2) return;
     mutate(() => { const a = L.wb.sheets, j = a.findIndex(x => x.id === id); a.splice(j, 1); if (L.wb.act === id) { L.wb.act = a[Math.max(0, j - 1)].id; L.sheet = {a: 'A1', r: null, col: null, row: null}; } if (L.clip && L.clip.sheet === id) L.clip = null; }, {type: 'delsheet', id, name: sh.name});
-    if (!sheetOf(id)) { L.hist = []; L.redo = []; } // comme dans Excel, une feuille supprimée ne se récupère pas avec Annuler
+    if (!sheetOf(id)) { L.hist = []; L.redo = []; L.lostSheet = true; } // comme dans Excel, une feuille supprimée ne se récupère pas avec Annuler
   };
 }
 
@@ -3804,6 +3804,8 @@ const RES6 = () => { const s = RES3(); Object.assign(s.cells, {D1: {v: 'Arrivée
 const SUIVI0 = () => Object.assign(mkSheet('suivi', 'Suivi réception', {}), {color: '#3478F6'});
 const ORDRE = {title: 'Ordre demandé par Thomas', rows: [['1', 'Réservations'], ['2', 'Suivi réception (bleu)'], ['3', 'Préparation'], ['4', 'Petit-déj']]};
 const sameData = (a, b) => JSON.stringify(a.cells) === JSON.stringify(b.cells);
+// Excel ne récupère pas une feuille supprimée : le jeu la remet seulement pour l’exercice
+const LOST = ' Dans Excel, elle serait perdue : je la remets pour cette fois.';
 lesson(7, {
   wb: () => ({sheets: [SH_PDJ(), RES6(), PREP5()], act: 'pdj'}),
   tools: {edit: true, range: true, sheets: true, rib: ['undo', 'fill', 'font']},
@@ -3816,7 +3818,7 @@ lesson(7, {
     {id: 'l7f4', t: 'Couleur d’onglet', img: `<svg viewBox="0 0 170 60" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}"><rect x="40" y="14" width="90" height="30" rx="6" fill="#fff" stroke="#D1D1D6"/><text x="85" y="33" font-size="11" text-anchor="middle">Suivi réception</text><rect x="48" y="40" width="74" height="4" rx="2" fill="#3478F6"/></svg>`, pts: ['La couleur d’un onglet sert de <b>repère visuel</b>.', 'Elle ne change pas les informations de la feuille.']},
     {id: 'l7f5', t: 'Déplacer une feuille', img: `<svg viewBox="0 0 170 60" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}">${['Réserv.', 'Suivi', 'Prépa.', 'Petit-déj'].map((t, i) => `<rect x="${4 + i * 41}" y="18" width="38" height="24" rx="5" fill="${i === 1 ? '#E7F4EC' : '#fff'}" stroke="${i === 1 ? '#3478F6' : '#D1D1D6'}"/><text x="${23 + i * 41}" y="34" font-size="8.5" text-anchor="middle">${t}</text>`).join('')}</svg>`, pts: ['On peut modifier l’<b>ordre</b> des feuilles d’un classeur.', 'Les données enregistrées dans les cellules ne changent pas.']},
     {id: 'l7f6', t: 'Dupliquer une feuille', img: `<svg viewBox="0 0 170 60" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}"><rect x="12" y="18" width="62" height="26" rx="6" fill="#fff" stroke="#D1D1D6"/><text x="43" y="35" font-size="10" text-anchor="middle">Préparation</text><rect x="86" y="18" width="78" height="26" rx="6" fill="#E7F4EC" stroke="#107C41"/><text x="125" y="35" font-size="10" text-anchor="middle" fill="#107C41" font-weight="700">Préparation (2)</text></svg>`, pts: ['Dupliquer une feuille crée une copie avec son contenu et sa mise en forme.', 'La feuille d’origine reste présente.']},
-    {id: 'l7f7', t: 'Supprimer une feuille', img: `<svg viewBox="0 0 170 60" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}"><rect x="40" y="16" width="90" height="28" rx="6" fill="#FFE2DC" stroke="#FF3B30"/><text x="85" y="34" font-size="10" text-anchor="middle" fill="#B3261E">Préparation (2)</text><path d="M126 10l12 12M138 10l-12 12" stroke="#FF3B30" stroke-width="2.4"/></svg>`, pts: ['Supprimer une feuille retire cette feuille <b>et son contenu</b> du classeur.', 'Cette action est définitive : Annuler ne récupère pas la feuille. Vérifie toujours que tu supprimes la bonne feuille.']},
+    {id: 'l7f7', t: 'Supprimer une feuille', img: `<svg viewBox="0 0 170 60" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}"><rect x="40" y="16" width="90" height="28" rx="6" fill="#FFE2DC" stroke="#FF3B30"/><text x="85" y="34" font-size="10" text-anchor="middle" fill="#B3261E">Préparation (2)</text><path d="M126 10l12 12M138 10l-12 12" stroke="#FF3B30" stroke-width="2.4"/></svg>`, pts: ['Supprimer une feuille retire cette feuille <b>et son contenu</b> du classeur.', 'Ce n’est pas la même chose qu’effacer le contenu de cellules : la feuille entière disparaît.', 'Annuler ne permet pas de la récupérer : vérifie toujours que tu supprimes la bonne feuille.']},
   ],
   end: {title: 'Un classeur bien organisé !', talk: ['Bravo ! Tu viens d’apprendre à gérer les feuilles d’un classeur Excel.', 'Tu sais maintenant créer une feuille, la renommer et colorer son onglet.', 'Tu sais aussi changer l’ordre des feuilles, en créer une copie et supprimer une feuille devenue inutile.', 'Et surtout, tu as compris qu’il faut toujours vérifier ce qu’on supprime pour éviter de perdre des informations.'],
     teaser: {from: 'thomas', text: '« Maintenant que nous avons une feuille de suivi, j’aimerais commencer à noter les informations de la journée. Mais je voudrais éviter que quelqu’un saisisse une date incorrecte ou un numéro de chambre qui n’existe pas. »'},
@@ -3867,7 +3869,7 @@ lesson(7, {
     on(ev) {
       if (ev.type === 'plus') return true;
       if (ev.type === 'copy') return {miss: 'Tu as créé une copie avec des données. Thomas souhaite une feuille vide.', revert: true};
-      if (ev.type === 'delsheet') return {miss: 'Attention, nous voulons en ajouter une, pas en supprimer.', revert: true};
+      if (ev.type === 'delsheet') return {miss: 'Attention, nous voulons en ajouter une, pas en supprimer.' + LOST, revert: true};
       if (ev.type === 'sel') return {info: 'Tu as sélectionné une cellule, mais nous avons besoin d’une nouvelle feuille.'};
       if (ev.type === 'fmt') return {miss: 'Ce menu modifie l’apparence des cellules. Cherche plutôt le bouton + des feuilles.', revert: true};
     }, done: 'Bravo ! Tu viens de créer une nouvelle feuille.'});
@@ -3910,7 +3912,7 @@ lesson(7, {
     on(ev, X) {
       if (ev.type === 'move') { const o = X.order; if (o.join() === want.join()) return true; if (o[0] === 'pdj') return {info: 'Bien. Thomas souhaite commencer par les réservations : Petit-déj ira à la fin.'}; if (o[0] === 'res' && o[1] !== 'suivi') return {info: 'La nouvelle feuille doit se trouver juste après Réservations.'}; return {info: 'Continue : il faut Réservations, Suivi réception, Préparation, puis Petit-déj.'}; }
       if (ev.type === 'copy') return {miss: 'Tu as créé une feuille supplémentaire. Pour cet exercice, nous voulons seulement changer l’ordre des onglets.', revert: true};
-      if (ev.type === 'delsheet') return {miss: 'Attention, réorganiser ne signifie pas supprimer. Les quatre feuilles doivent rester présentes.', revert: true};
+      if (ev.type === 'delsheet') return {miss: 'Attention, réorganiser ne signifie pas supprimer. Les quatre feuilles doivent rester présentes.' + LOST, revert: true};
       if (ev.type === 'cmd' && ev.name === 'paste') return {miss: 'Tu as déplacé des informations dans le tableau. Nous voulons déplacer la feuille entière, grâce à son onglet.', revert: true};
     }, done: 'Excellent ! Notre classeur est maintenant beaucoup mieux organisé.'});
   coach('Les feuilles sont dans un ordre logique, et Thomas retrouvera plus facilement les informations importantes.', {ok: true, hl: 'tabs'});
@@ -3926,13 +3928,14 @@ lesson(7, {
       if (ev.type === 'move') return {miss: 'La feuille a changé de place, mais aucune copie n’a été créée. Active l’option « Créer une copie ».', revert: true};
       if (ev.type === 'rename') return {miss: 'Renommer ne crée pas de copie. Utilise « Déplacer ou copier… » et active « Créer une copie ».', revert: true};
       if (ev.type === 'cmd' && ev.name === 'paste') return {miss: 'Tu as copié des informations, mais Thomas souhaite une copie complète de la feuille.', revert: true};
-      if (ev.type === 'delsheet') return {miss: 'Attention, nous voulons copier une feuille, pas en supprimer.', revert: true};
+      if (ev.type === 'delsheet') return {miss: 'Attention, nous voulons copier une feuille, pas en supprimer.' + LOST, revert: true};
     }, done: 'Bravo ! Tu viens de dupliquer une feuille.'});
   coach('La copie contient les mêmes informations que l’original, avec la même mise en forme.', {ok: true});
   coach('Thomas peut maintenant faire ses vérifications sur cette copie, sans modifier la feuille principale.', {ok: true});
   // 10. supprimer
   msg('thomas', 'C’est bon, j’ai terminé ma vérification ! La copie temporaire ne sert plus. Tu peux la supprimer pour éviter qu’on la confonde avec la vraie liste.', 'D’accord ! Dans Excel, on peut supprimer une feuille lorsqu’elle n’est plus nécessaire.', {ok: false});
-  coach('Mais attention : supprimer une feuille supprime aussi toutes les données qu’elle contient, et cette suppression ne peut pas être annulée. Il faut toujours vérifier qu’on supprime la bonne.');
+  coach('Attention ! Dans Excel, supprimer une feuille entière est une opération importante. La commande Annuler ne permet pas de la récupérer comme une simple modification de cellule. Vérifie bien avant de confirmer !');
+  coach('Ce n’est pas la même chose qu’effacer le contenu de cellules : la feuille disparaît du classeur, avec toutes ses données.');
   coach('Ici, nous devons supprimer uniquement la copie temporaire. La feuille Préparation d’origine doit rester dans le classeur.', {hl: {tab: 'prep'}});
   const isCopy = id => /_c\d+$/.test(id);
   ask({act: 'Supprime la feuille « Préparation (2) ».', text: 'Exercice 7 · supprimer une feuille',
@@ -3941,11 +3944,11 @@ lesson(7, {
       if (ev.type === 'delsheet') {
         if (isCopy(ev.id)) return true;
         const m = {prep: 'Attention ! C’est notre feuille originale. Nous devons la conserver.', res: 'Cette feuille contient les réservations des clients. Elle ne doit pas être supprimée.', suivi: 'C’est la nouvelle feuille de Thomas. Nous devons la garder.'};
-        return {miss: m[ev.id] || 'Cette feuille doit rester dans le classeur.', revert: true};
+        return {miss: (m[ev.id] || 'Cette feuille doit rester dans le classeur.') + LOST, revert: true};
       }
       if (ev.type === 'rename') return {miss: 'Changer son nom ne la supprime pas. Utilise la commande Supprimer.', revert: true};
       if (ev.type === 'cmd' && ev.name === 'clear') return {miss: 'Tu as effacé son contenu, mais la feuille existe toujours. Nous voulons supprimer la feuille elle-même.', revert: true};
-      if (ev.type === 'delcancel') return {info: 'La copie est toujours présente. Si tu es sûr d’avoir sélectionné Préparation (2), confirme sa suppression.'};
+      if (ev.type === 'delcancel') return {info: 'La copie est toujours présente. Si tu as bien sélectionné Préparation (2), confirme sa suppression.'};
     }, done: 'Parfait ! La copie temporaire a été supprimée.'});
   coach('Et notre feuille Préparation d’origine est toujours là.', {ok: true, hl: {tab: 'prep'}});
   coach('Avant de supprimer une feuille, vérifie toujours son nom et son contenu.', {ok: true});
@@ -4497,7 +4500,7 @@ lesson(10, {
         if (n !== 'Contrôle réunion') return {miss: n.toLowerCase() === 'contrôle réunion' ? 'Presque ! Respecte les majuscules : « Contrôle réunion ».' : /contr[oô]le r[ée]union/i.test(n) ? 'Attention aux accents : « Contrôle réunion ».' : 'Camille souhaite exactement le nom « Contrôle réunion ».', revert: true};
         return ctrlNext(X);
       }
-      if (ev.type === 'delsheet') return BASE4.includes(ev.id) ? {miss: 'Attention, cette feuille fait partie du classeur du Grand Hôtel. Nous devons la conserver.', revert: true} : ctrlNext(X);
+      if (ev.type === 'delsheet') return BASE4.includes(ev.id) ? {miss: 'Attention, cette feuille fait partie du classeur du Grand Hôtel. Nous devons la conserver.' + LOST, revert: true} : ctrlNext(X);
       if (ev.type === 'commit') return {cancel: true, miss: norm(ev.text).toLowerCase().startsWith('contr') ? 'Tu as saisi le nom dans une cellule. Il faut renommer l’onglet.' : 'Camille souhaite une feuille vide : pas besoin de saisir des données.'};
       if (ev.type === 'tabcolor') return {miss: 'Camille n’a pas demandé de couleur pour cette feuille.', revert: true};
     }, done: 'Excellent ! Tu as créé une feuille, choisi un nom clair et organisé sa position.'});
@@ -4545,7 +4548,7 @@ lesson(10, {
       ['Sélection', 'A1:D5 dans Réservations', X => (X.act === 'res' && X.sel === 'A1:D5') || 'Le classeur est presque prêt. Il reste à sélectionner le tableau complet des réservations.']]},
     hints: ['Vérifie les trois feuilles utilisées pendant le contrôle, puis regarde les onglets.', 'Les nouvelles valeurs concernent Adam, Nora, la colonne Contrôle et la nouvelle demande. La feuille temporaire ne doit pas rester dans le classeur.', 'Supprime « Contrôle réunion » depuis le menu de son onglet, reviens dans Réservations, sélectionne A1:D5, puis touche le bouton d’envoi.'], hh: ['tabs', {tab: 'ctrl'}, {pbtn: true}],
     on(ev, X) {
-      if (ev.type === 'delsheet') return BASE4.includes(ev.id) ? {miss: 'Attention, une feuille importante manque. Nous devons conserver les quatre feuilles du Grand Hôtel.', revert: true} : {info: 'Le brouillon est supprimé. Les quatre feuilles du Grand Hôtel sont toujours là.', kind: 'good'};
+      if (ev.type === 'delsheet') return BASE4.includes(ev.id) ? {miss: 'Attention, une feuille importante manque. Nous devons conserver les quatre feuilles du Grand Hôtel.' + LOST, revert: true} : {info: 'Le brouillon est supprimé. Les quatre feuilles du Grand Hôtel sont toujours là.', kind: 'good'};
       if (ev.type === 'valid') return {miss: 'Les règles de saisie de la réception doivent être conservées.', revert: true};
       if (ev.type === 'plus' || ev.type === 'copy') return {miss: 'Camille souhaite un classeur propre, sans feuille supplémentaire.', revert: true};
       if (ev.type === 'move') return {miss: 'L’ordre des feuilles doit rester le même.', revert: true};
