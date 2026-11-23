@@ -80,6 +80,13 @@ svg{display:block}
 .ptrack{flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.2);overflow:hidden}
 .ptrack i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#E9C56F,#FFE29A);transition:width .8s var(--spring)}
 .floorsbtn{position:absolute;right:14px;top:14px;z-index:2;height:30px;padding:0 11px;border-radius:15px;background:rgba(255,255,255,.14);color:#fff;font:600 13px var(--font);display:flex;align-items:center;gap:4px}
+.path-next{display:flex;align-items:center;gap:12px;width:100%;min-height:62px;margin-top:16px;padding:10px 14px;border:1px solid #e8d6c3;border-radius:18px;background:#fffaf2;color:#51152a;text-align:left;box-shadow:var(--shadow)}
+.path-next[hidden]{display:none}
+.path-next span:first-child{flex:1;min-width:0}
+.path-next small,.path-next b{display:block}
+.path-next small{font:700 12px/1.3 var(--font);color:#7a364f}
+.path-next b{margin-top:3px;font:700 16px/1.25 var(--font)}
+#vPath button:focus-visible{outline:3px solid #b36b14;outline-offset:3px}
 .floorsbtn svg{width:14px;height:14px}
 
 /* couloir */
@@ -92,7 +99,7 @@ svg{display:block}
 .room .door svg{width:100%;height:auto;overflow:visible}
 .room .spill{position:absolute;left:0;bottom:-26px;width:120px;height:46px;margin-left:-60px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,214,120,.75),rgba(255,214,120,0));pointer-events:none;animation:glow 3s ease-in-out infinite}
 @keyframes glow{50%{opacity:.6}}
-.room .lbl{position:absolute;bottom:10px;width:132px;text-align:left;cursor:pointer}
+.room .lbl{position:absolute;bottom:6px;width:132px;min-height:44px;padding:4px 0;text-align:left;cursor:pointer;background:transparent}
 .room .lbl.r{left:58px}
 .room .lbl.l{right:58px;text-align:right}
 .room.final .lbl.r{left:68px}
@@ -101,7 +108,7 @@ svg{display:block}
 .room .lbl b{display:block;margin-top:1px;font:600 16px/1.22 var(--font);letter-spacing:-.015em;color:var(--label)}
 .room .lbl span{display:flex;align-items:center;gap:4px;margin-top:3px;font:400 13px var(--font);color:var(--label2)}
 .room .lbl.l span{justify-content:flex-end}
-.room.lock .lbl b{color:#9A9AA0}
+.room.lock .lbl b{color:#68616a}
 .room.lock .lbl small{color:var(--label3)}
 .room.cur .lbl small{color:var(--wine)}
 .room .bub{position:absolute;left:0;bottom:142px;transform:translateX(-50%);white-space:nowrap;height:36px;padding:0 16px;border-radius:18px;background:var(--wine);color:#fff;font:700 15px/36px var(--font);
@@ -1282,8 +1289,12 @@ body.rm .ribbon{transition:none}
           <div class="cap" id="hCap">Étage 1 · Le Grand Hôtel</div>
           <h2 id="hTitle">Premier jour au Grand Hôtel</h2>
           <div class="sub" id="hSub">Les bases d’Excel, une chambre à la fois</div>
-          <div class="pline"><div class="ptrack"><i id="hBar" style="width:0"></i></div><span id="hCount">0 sur 10</span></div>
+          <div class="pline"><div class="ptrack" id="hProgress" role="progressbar" aria-label="Chambres terminées à cet étage" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><i id="hBar" aria-hidden="true"></i></div><span id="hCount">0 sur 10</span></div>
         </section>
+        <button class="path-next press" id="pathNext" type="button" hidden>
+          <span><small id="pathNextAction"></small><b id="pathNextTitle"></b></span>
+          <span aria-hidden="true">→</span>
+        </button>
         <div class="corridor" id="corridor"></div>
       </div>
 
@@ -9236,7 +9247,16 @@ function renderPath() {
   requestAnimationFrame(() => requestAnimationFrame(() => { const nd = $('#needle'); if (nd) nd.style.transform = `rotate(${-180 + (F - 1) * 20}deg)`; }));
   const nd = DB.done.filter(n => floorOf(n) === F).length;
   $('#hBar').style.width = (nd / 10 * 100) + '%';
-  $('#hCount').textContent = `${nd} chambre${nd > 1 ? 's' : ''} sur 10`;
+  $('#hProgress').setAttribute('aria-valuenow', nd);
+  $('#hCount').textContent = `${nd} sur 10 terminées`;
+  const next = curLesson(), lesson = LESSONS[next - 1];
+  $('#pathNext').hidden = !LDEF[next];
+  if (LDEF[next]) {
+    const resume = DB.resume['l' + next];
+    const action = resume && resume.i > 0 && resume.i < LDEF[next].steps.length - 1 ? 'Reprendre' : 'Commencer';
+    $('#pathNextAction').textContent = `${action} · ${roomLabel(next)}`;
+    $('#pathNextTitle').textContent = typo(lesson.t);
+  }
   $('#hCap').textContent = `Étage ${F} · Le Grand Hôtel`; $('#hTitle').textContent = typo(MODULES[F - 1][0]);
   $('#hSub').textContent = ['Les bases d’Excel, une chambre à la fois', 'Formules et premiers résultats, une chambre à la fois', 'Trier, filtrer et analyser, une chambre à la fois'][F - 1] || '';
   const box = $("#corridor"), W = box.clientWidth || 393, H = 184, top = 84, dh = 106;
@@ -9262,11 +9282,11 @@ function renderPath() {
       h += `<div class="deco" style="left:${Math.round(dx)}px;top:${y + 78}px;width:${DECOW[i % DECOS.length]}px">${DECOS[i % DECOS.length]}</div>`;
     }
     const stars = DB.stars[l.n] || 0;
-    const sub = st === 'done' ? `<span class="stars">${[1, 2, 3].map(k => starSVG(k <= stars)).join('')}</span>` : `<span>${st === 'lock' ? IC.lock.replace('<svg', '<svg width="12" height="12"') : ''}${l.d}</span>`;
+    const sub = st === 'done' ? `<span class="stars" aria-hidden="true">${[1, 2, 3].map(k => starSVG(k <= stars)).join('')}</span>` : `<span>${st === 'lock' ? 'Verrouillée' : l.d}</span>`;
     h += `<div class="room ${st}${final ? ' final' : ''}" data-l="${l.n}" style="left:${x}px;top:${y}px">
       ${st === 'cur' ? '<div class="spill"></div>' : ''}
       <div class="door" data-l="${l.n}">${doorSVG(st, roomNo(l.n), final)}</div>
-      <div class="lbl ${side}" data-l="${l.n}"><small>${roomLabel(l.n)}</small><b>${typo(l.t)}</b>${sub}</div>
+      <button type="button" class="lbl ${side}" data-l="${l.n}"${st === 'lock' ? ' disabled' : ''}><small>${roomLabel(l.n)}${st === 'done' ? ' · Terminée' : ''}</small><b>${typo(l.t)}</b>${sub}</button>
       ${st === 'cur' && floorOf(curLesson()) === F ? `<div class="bub" data-go="${l.n}">${inProg ? 'Reprendre' : l.n === 1 && !DB.done.length ? 'Commencer' : 'Entrer'}</div>
         <svg class="rding sticker sway" viewBox="0 0 120 120" style="${side === 'r' ? 'left:-96px' : 'left:44px'}"><use href="#sDing"/></svg>` : ''}
     </div>`;
@@ -9306,6 +9326,11 @@ $('#corridor').addEventListener('click', e => {
   if (e.target.closest('#liftEnd')) { SND.tap(); const F = floorNow(); if (LDEF[F * 10 + 1] && (floorDone(F) || OPEN_ALL)) return goFloor(F + 1); toast(LDEF[F * 10 + 1] ? `Étage ${F + 1} : termine d’abord les 10 chambres de l’étage ${F}` : `L’étage ${F + 1} n’est pas inclus dans cette version de l’application`, IC.lock.replace('<svg', '<svg width="16" height="16"')); return; }
   const r = e.target.closest('[data-l]'); if (r) openRoom(+r.dataset.l);
 });
+$('#pathNext').onclick = () => {
+  SND.tap();
+  const next = curLesson();
+  if (LDEF[next]) startOrResume(next);
+};
 function xpLeft(n) { return LDEF[n].steps.filter(s => s.t === 'ask' || s.t === 'quiz').reduce((t, s) => t + (DB.best[s.id] === undefined ? XP_FIRST : DB.best[s.id] ? 0 : XP_FIRST - XP_LATER), 0) + (DB.done.includes(n) ? 0 : XP_BONUS); }
 const allFiches = () => Object.values(LDEF).flatMap(d => (d.fiches || []).map((f, i, a) => [f, d.n, i, a.length]));
 const LAST = () => Math.max(...Object.keys(LDEF).map(Number));
@@ -9336,7 +9361,7 @@ function startOrResume(n) {
 }
 function floorsSheet() {
   SND.tap();
-  openSheet(`<div class="grab"></div><h4>Les étages du Grand Hôtel</h4><p class="sub">${typo('Chaque étage est un module. Termine ses 10 chambres pour débloquer l’étage suivant.')}</p>
+  openSheet(`<div class="grab"></div><h4>Les étages du Grand Hôtel</h4><p class="sub">${typo(OPEN_ALL ? 'Choisis un étage parmi ceux disponibles. Ta progression est enregistrée pour chaque chambre.' : 'Chaque étage est un module. Termine ses 10 chambres pour débloquer l’étage suivant.')}</p>
     <div class="groupx">${MODULES.map((m, i) => `<button class="floor${i + 1 === floorNow() ? ' on' : ''}" data-fl="${i + 1}"><span class="lb">${i + 1}</span><span class="rt"><b>${typo(m[0])}</b><small>${typo(m[1])}</small></span><span class="tr">${floorOpen(i + 1) ? IC.chev : IC.lock}</span></button>`).join('')}</div>
     <div class="col" style="margin-top:14px"><button class="btn gray" data-a="x">Fermer</button></div>`);
   $('#modalPane').onclick = e => { const f = e.target.closest('[data-fl]'); if (f && !floorOpen(+f.dataset.fl)) { toast(!LDEF[(+f.dataset.fl - 1) * 10 + 1] ? `L’étage ${f.dataset.fl} n’est pas inclus dans cette version de l’application` : `Étage ${f.dataset.fl} : termine d’abord l’étage ${+f.dataset.fl - 1}`); return; } if (f) { closeSheet(); goFloor(+f.dataset.fl); return; } if (e.target.closest('[data-a]')) closeSheet(); };
