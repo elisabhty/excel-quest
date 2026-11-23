@@ -1246,12 +1246,10 @@ body.rm .ribbon{transition:none}
   #ccard.act #cstack .xrefchip{margin:2px 0 0;padding:4px 10px;font-size:12.5px}
 }
 
-/* feuille avec champ de saisie : carte en haut de l'écran, au-dessus de la zone du clavier */
-.sheetm.kbtop{align-items:flex-start}
-.sheetm.kbtop .pane{margin:calc(var(--safeT) + 8px) 8px 0;width:calc(100% - 16px);max-height:calc(100% - var(--safeT) - 16px);border-radius:20px;padding:6px 16px 14px;transform:translateY(calc(-100% - 60px));box-shadow:0 14px 40px rgba(0,0,0,.2)}
-.sheetm.kbtop.vis .pane{transform:none}
-.sheetm.kbtop .grab{display:none}
-.sheetm.kbtop .navrow{position:sticky;top:-6px;z-index:3;background:inherit;margin-top:-6px;padding-top:6px}
+/* feuille avec champ de saisie : elle glisse au-dessus du clavier ; Annuler / OK restent visibles */
+.sheetm .pane{transition:transform .42s var(--spring),margin-bottom .28s cubic-bezier(.2,.8,.2,1)}
+.sheetm .pane.kbup{border-radius:22px;padding-bottom:12px}
+.sheetm .pane > .navrow{position:sticky;top:-8px;z-index:3;background:inherit}
 
 .appic{background:#2B4C7E url(data:image/webp;base64,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) center/cover no-repeat}
 .appic svg{display:none}
@@ -9136,16 +9134,30 @@ const readMs = (text, extra = 0) => { const [k, mx] = PACE[DB.set.pace] || PACE.
 
 /* ================= feuilles modales et bulles ================= */
 function openSheet(html, onOpen, cls) {
-  const m = $('#modal'), p = $('#modalPane'); p.className = 'pane' + (cls ? ' ' + cls : ''); p.style.maxHeight = ''; p.scrollTop = 0; p.innerHTML = html; m.classList.add('on');
+  const m = $('#modal'), p = $('#modalPane'); p.className = 'pane' + (cls ? ' ' + cls : ''); p.style.maxHeight = p.style.marginBottom = ''; p.scrollTop = 0; p.innerHTML = html; m.classList.add('on');
   requestAnimationFrame(() => requestAnimationFrame(() => m.classList.add('vis')));
   if (onOpen) setTimeout(onOpen, 60);
 }
-// une feuille qui contient un champ de saisie s'ouvre en haut : le clavier du téléphone ne peut pas la recouvrir
-const kbtopSync = () => $('#modal').classList.toggle('kbtop', !!$('#modalPane').querySelector('input:not([type=checkbox]):not([type=radio]):not([type=range])'));
-new MutationObserver(kbtopSync).observe($('#modalPane'), {childList: true});
-const kbGuess = () => { const vv = window.visualViewport, k = vv ? innerHeight - vv.height - vv.offsetTop : 0; return k > 60 ? k : matchMedia('(pointer: coarse)').matches ? Math.round(innerHeight * 0.48) : 0; };
-$('#modalPane').addEventListener('focusin', e => { if (!e.target.matches('input')) return; setTimeout(() => { const p = $('#modalPane'), top = p.getBoundingClientRect().top, safe = innerHeight - kbGuess() - 10; if (safe - top < 140) return; p.style.maxHeight = (safe - top) + 'px'; const r = e.target.getBoundingClientRect(); if (r.bottom > safe - 8) p.scrollTop += r.bottom - safe + 24; }, 320); });
-$('#modalPane').addEventListener('focusout', () => setTimeout(() => { if (!$('#modalPane').contains(document.activeElement)) $('#modalPane').style.maxHeight = ''; }, 150));
+// feuille avec champ de saisie : elle monte au-dessus du clavier du téléphone, comme une feuille iOS
+const sheetInput = () => { const a = document.activeElement; return !!(a && a.matches && a.matches('input:not([type=checkbox]):not([type=radio])') && $('#modalPane').contains(a)); };
+const COARSE = matchMedia('(pointer: coarse)').matches;
+function kbLift() {
+  const vv = window.visualViewport;
+  if (vv && innerHeight - vv.height > 60) return Math.max(0, Math.round(innerHeight - vv.offsetTop - vv.height));
+  // le navigateur ne signale pas le clavier : hauteur estimée (clavier, suggestions et barre du navigateur)
+  return sheetInput() && COARSE ? Math.round(innerHeight * 0.48) : 0;
+}
+function placeSheet() {
+  const p = $('#modalPane'); if (!p || !$('#modal').classList.contains('on')) return;
+  const lift = kbLift();
+  p.style.marginBottom = lift ? lift + 'px' : '';
+  p.style.maxHeight = lift ? `calc(${innerHeight - lift}px - var(--safeT) - 12px)` : '';
+  p.classList.toggle('kbup', !!lift);
+  if (lift && sheetInput()) setTimeout(() => { const top = p.getBoundingClientRect().top, bot = innerHeight - lift - 8, r = document.activeElement.getBoundingClientRect(); if (r.bottom > bot) p.scrollTop += r.bottom - bot + 16; else if (r.top < top + 52) p.scrollTop -= top + 52 - r.top; }, 260);
+  if (location.hash === '#kb') { let d = $('#kbdbg'); if (!d) { d = document.createElement('div'); d.id = 'kbdbg'; d.style.cssText = 'position:fixed;left:8px;top:calc(env(safe-area-inset-top) + 4px);z-index:999;background:#000c;color:#fff;font:12px ui-monospace,monospace;padding:4px 8px;border-radius:8px;pointer-events:none'; document.body.appendChild(d); } const vv = window.visualViewport; d.textContent = `ih ${innerHeight} · vvh ${vv ? Math.round(vv.height) : '–'} · vvt ${vv ? Math.round(vv.offsetTop) : '–'} · lift ${lift}`; }
+}
+$('#modalPane').addEventListener('focusin', () => { [0, 300, 650].forEach(t => setTimeout(placeSheet, t)); });
+$('#modalPane').addEventListener('focusout', () => setTimeout(placeSheet, 180));
 function closeSheet() { const m = $('#modal'); m.classList.remove('vis'); setTimeout(() => { if (!m.classList.contains('vis')) m.classList.remove('on'); }, 420); }
 $('#modal').addEventListener('click', e => { if (e.target.id === 'modal') closeSheet(); });
 let toastT = null;
@@ -10250,7 +10262,7 @@ document.addEventListener('visibilitychange', () => { if (document.hidden) ringS
 window.addEventListener('scroll', () => { if (window.scrollY || window.scrollX) window.scrollTo(0, 0); });
 if (window.visualViewport) {
   const vv = window.visualViewport;
-  const fit = () => { const kb = Math.max(0, window.innerHeight - vv.height - vv.offsetTop); $('#modal').style.bottom = kb > 60 ? kb + 'px' : ''; if (window.scrollY) window.scrollTo(0, 0); };
+  const fit = () => { placeSheet(); if (window.scrollY) window.scrollTo(0, 0); };
   vv.addEventListener('resize', fit); vv.addEventListener('scroll', fit);
 }
 document.addEventListener('focusout', () => setTimeout(() => window.scrollTo(0, 0), 60));
