@@ -1269,6 +1269,28 @@ body.rm .ribbon{transition:none}
 .tabbar button{min-height:46px;justify-content:center;color:#626268}
 .tabbar button.on{font-weight:700}
 #home button:focus-visible,#home input:focus-visible{outline:2px solid var(--wine);outline-offset:2px}
+.floor-group{margin-top:14px}
+.floor-group .floor b{color:var(--label)}
+.floor-group .floor.on{background:#fbf3f6}
+.floor-group .floor.on .tr,.floor-detail{color:var(--wine)}
+.floor-detail{display:block;margin-top:5px;font-size:12px;font-weight:600}
+.future-floors{margin-top:15px}
+.future-floors summary{cursor:pointer;padding:12px 4px;min-height:44px;font-weight:600;color:var(--label2)}
+.future-floors summary span{font-size:13px;margin-left:4px}
+.future-floors .floor{cursor:default}
+.floor:disabled b{color:var(--label2)}
+.room-close{position:absolute;right:12px;top:10px;z-index:4;border-radius:50%;width:44px;height:44px;display:grid;place-items:center;background:#fffc;color:#4a322b;font-size:27px}
+.lhead .prog{flex-direction:column;justify-content:center;align-items:stretch;gap:4px;min-width:0;padding:0 11px}
+.lesson-position{display:flex;justify-content:space-between;gap:4px;font-size:11px;font-weight:650}
+#lessonRoom{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#lessonPercent{flex:none;font-variant-numeric:tabular-nums}
+.lhead .tr{flex:none;height:4px}
+.lhead .cb{width:44px;height:44px;border-radius:50%}
+.lhead{padding-top:calc(6px + var(--safeT));padding-bottom:6px}
+.floorsbtn::before,.topbar .chip::before{content:"";position:absolute;inset:-7px 0}
+.topbar .chip{position:relative;min-width:44px;justify-content:center}
+.set:has(#segPace){flex-wrap:wrap}
+#segPace button{min-height:44px}
 </style>
 </head>
 <body>
@@ -1349,7 +1371,7 @@ body.rm .ribbon{transition:none}
 
       <div class="view" id="vNotes">
         <div class="ltrow"><h1 class="lt">Notes</h1><button class="addbtn press" id="bAddNote" aria-label="Nouvelle note"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div>
-        <label class="search"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><input id="nSearch" type="search" placeholder="Rechercher" autocomplete="off"></label>
+        <label class="search"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><input id="nSearch" type="search" aria-label="Rechercher une note" placeholder="Texte ou chambre" autocomplete="off"></label>
         <div id="nList"></div>
       </div>
 
@@ -1358,7 +1380,7 @@ body.rm .ribbon{transition:none}
         <div class="sec-t">Leçons</div>
         <div class="group">
           <button class="set" data-set="auto"><div class="tx"><b>Lecture automatique</b><span>L’histoire défile seule. Touche une bulle pour aller plus vite.</span></div><i class="sw" id="swAuto"></i></button>
-          <div class="set"><div class="tx"><b>Vitesse de lecture</b></div><div class="seg" id="segPace"><button data-p="lente">Lente</button><button data-p="normale">Normale</button><button data-p="rapide">Rapide</button></div></div>
+          <div class="set"><div class="tx"><b>Vitesse de lecture</b></div><div class="seg" id="segPace" role="group" aria-label="Vitesse de lecture"><button data-p="lente">Lente</button><button data-p="normale">Normale</button><button data-p="rapide">Rapide</button></div></div>
           <button class="set" data-set="skip"><div class="tx"><b>Bouton « Passer »</b><span>Pendant l’histoire, il t’emmène directement au prochain moment où tu joues.</span></div><i class="sw" id="swSkip"></i></button>
           <button class="set" data-set="reduce"><div class="tx"><b>Réduire les animations</b></div><i class="sw" id="swReduce"></i></button>
           <button class="set" data-set="sound"><div class="tx"><b>Sons et vibrations</b></div><i class="sw" id="swSound"></i></button>
@@ -1385,7 +1407,7 @@ body.rm .ribbon{transition:none}
   <section class="screen" id="lesson">
     <header class="lhead">
       <button class="cb fz" id="lClose" aria-label="Quitter la leçon"><svg class="ic" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-      <div class="prog fz"><div class="tr"><i id="lBar"></i></div></div>
+      <div class="prog fz" id="lessonProgress" role="progressbar" aria-valuemin="0" aria-valuemax="100"><div class="lesson-position"><span id="lessonRoom"></span><span id="lessonPercent"></span></div><div class="tr"><i id="lBar"></i></div></div>
       <button class="cb fz" id="lNote" aria-label="Écrire une note"><svg class="ic" viewBox="0 0 24 24"><path d="M14.5 4.5H6.5a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-8"/><path d="M18.4 3.6a1.9 1.9 0 0 1 2.7 2.7L12.5 15l-3.6.9.9-3.6z"/></svg></button>
       <div class="xp fz" id="lXpPill"><svg viewBox="0 0 24 24" fill="#E8A33A"><use href="#sBolt"/></svg><span id="lXp">0</span></div>
     </header>
@@ -9207,7 +9229,7 @@ const uid = () => Math.random().toString(36).slice(2, 9);
 function noteComposer(note, lessonCtx) {
   const isNew = !note, ding = note && note.src === 'ding';
   openSheet(`<div class="grab"></div><div class="navrow"><button class="l" data-a="cancel">Annuler</button><b>${isNew ? 'Nouvelle note' : ding ? 'Note de Ding' : 'Ma note'}</b><button class="r" data-a="save">${ding ? 'OK' : 'Enregistrer'}</button></div>
-    <textarea class="ta" id="taNote" placeholder="Écris ce que tu veux retenir…" ${ding ? 'readonly' : ''}>${note ? esc(note.text) : ''}</textarea>
+    <textarea class="ta" id="taNote" aria-label="Texte de la note" placeholder="Écris ce que tu veux retenir…" ${ding ? 'readonly' : ''}>${note ? esc(note.text) : ''}</textarea>
     ${note ? `<p class="sub" style="margin-top:10px">${ding ? 'Explication gardée pendant la leçon ' + (note.lesson || 1) : 'Écrite le ' + fmtDate(note.ts) + (note.lesson ? ' · Leçon ' + note.lesson : '')}</p><div class="col"><button class="btn gray" data-a="del" style="color:var(--red)">Supprimer la note</button></div>` : (lessonCtx ? `<p class="sub" style="margin:10px 2px 0">Rangée avec la leçon ${L ? L.n : 1}. La leçon t’attend pendant que tu écris.</p>` : '')}`,
     null, ding ? '' : 'tall');
   $('#modalPane').onclick = e => {
@@ -9226,8 +9248,12 @@ function noteComposer(note, lessonCtx) {
   };
 }
 function renderNotes() {
-  const q = ($('#nSearch').value || '').trim().toLowerCase();
-  const list = DB.notes.filter(n => !q || n.text.toLowerCase().includes(q));
+  const q = foldSearch($('#nSearch').value);
+  const list = DB.notes.filter(n => {
+    if (!q) return true;
+    const location = n.lesson ? roomLabel(n.lesson) + ' ' + roomNo(n.lesson) + ' ' + LESSONS[n.lesson - 1].t : 'Notes libres';
+    return foldSearch(n.text + ' ' + location).includes(q);
+  });
   const box = $('#nList');
   if (!DB.notes.length) {
     box.innerHTML = `<div class="empty"><svg class="ding sticker" viewBox="0 0 120 120"><use href="#sDing"/></svg><b>Aucune note pour l’instant</b>
@@ -9299,7 +9325,7 @@ const LIFTDOOR = (() => { const [w, h] = SPR.lift; return `<svg viewBox="0 0 ${w
 
 let needleSet = false;
 function renderPath() {
-  const F = floorNow(), f0 = (F - 1) * 10, FL = LESSONS.filter(l => floorOf(l.n) === F), cur = curLesson() - f0;
+  const F = floorNow(), f0 = (F - 1) * 10, FL = LESSONS.filter(l => floorOf(l.n) === F), cur = (FL.find(l => !DB.done.includes(l.n))?.n ?? f0 + 11) - f0;
   $('#dialBox').innerHTML = dialSVG(F);
   requestAnimationFrame(() => requestAnimationFrame(() => { const nd = $('#needle'); if (nd) nd.style.transform = `rotate(${-180 + (F - 1) * 20}deg)`; }));
   const nd = DB.done.filter(n => floorOf(n) === F).length;
@@ -9333,7 +9359,7 @@ function renderPath() {
   $('#hSub').textContent = ['Les bases d’Excel, une chambre à la fois', 'Formules et premiers résultats, une chambre à la fois', 'Trier, filtrer et analyser, une chambre à la fois'][F - 1] || '';
   if (listView) return;
   const box = $("#corridor"), W = box.clientWidth || 393, H = 184, top = 84, dh = 106;
-  const xs = LESSONS.map((l, i) => i === 9 ? .5 : .5 + .25 * Math.sin(i * .9));
+  const xs = FL.map((l, i) => i === 9 ? .5 : .5 + .25 * Math.sin(i * .9));
   const P = xs.map((x, i) => [Math.round(W * x), top + dh + i * H]);
   const endY = P[9][1] + 150;
   const seg = (a, b) => ` C${a[0]} ${a[1] + H * .55} ${b[0]} ${b[1] - H * .55} ${b[0]} ${b[1]}`;
@@ -9348,7 +9374,7 @@ function renderPath() {
     ${cur > 1 ? `<path d="${done}" fill="none" stroke="#C99A3E" stroke-width="32" stroke-linecap="round"/><path d="${done}" fill="none" stroke="#8E1D42" stroke-width="25" stroke-linecap="round"/><path d="${done}" fill="none" stroke="#C7577D" stroke-width="2" stroke-dasharray="2 9" stroke-linecap="round"/>` : ''}
   </svg>`;
   FL.forEach((l, i) => {
-    const [x, y] = P[i], st = roomState(l.n), final = l.n === 10, side = x > W / 2 + 2 ? 'l' : 'r';
+    const [x, y] = P[i], st = l.n === next ? 'cur' : roomState(l.n) === 'cur' ? 'open' : roomState(l.n), final = l.n % 10 === 0, side = x > W / 2 + 2 ? 'l' : 'r';
     const inProg = lessonResume(l.n);
     if (i < 9) {
       const dx = x > W / 2 + 2 ? W * .12 : x < W / 2 - 2 ? W * .88 : (i % 2 ? W * .12 : W * .88);
@@ -9360,7 +9386,7 @@ function renderPath() {
       ${st === 'cur' ? '<div class="spill"></div>' : ''}
       <div class="door" data-l="${l.n}">${doorSVG(st, roomNo(l.n), final)}</div>
       <button type="button" class="lbl ${side}" data-l="${l.n}"${st === 'lock' ? ' disabled' : ''}><small>${roomLabel(l.n)}${st === 'done' ? ' · Terminée' : ''}</small><b>${typo(l.t)}</b>${sub}</button>
-      ${st === 'cur' && floorOf(curLesson()) === F ? `<div class="bub" data-go="${l.n}">${inProg ? 'Reprendre' : l.n === 1 && !DB.done.length ? 'Commencer' : 'Entrer'}</div>
+      ${l.n === next ? `<button class="bub" type="button" data-go="${l.n}">${inProg ? 'Reprendre' : l.n === 1 && !DB.done.length ? 'Commencer' : 'Entrer'}</button>
         <svg class="rding sticker sway" viewBox="0 0 120 120" style="${side === 'r' ? 'left:-96px' : 'left:44px'}"><use href="#sDing"/></svg>` : ''}
     </div>`;
   });
@@ -9401,13 +9427,24 @@ $('#ficheSearch').oninput = renderFiches;
 function renderHome() {
   $('#hXp').textContent = DB.xp;
   $('#hStreak').textContent = streak();
+  $('#chipStreak').setAttribute('aria-label', 'Série de ' + streak() + (streak() > 1 ? ' jours' : ' jour'));
+  $('#chipXp').setAttribute('aria-label', DB.xp + ' points d’expérience');
   renderPath();
   renderFiches();
   renderNotes();
-  [['auto', '#swAuto'], ['reduce', '#swReduce'], ['skip', '#swSkip'], ['sound', '#swSound']].forEach(([k, s]) => $(s).classList.toggle('on', DB.set[k]));
+  [['auto', '#swAuto'], ['reduce', '#swReduce'], ['skip', '#swSkip'], ['sound', '#swSound']].forEach(([k, s]) => {
+    $(s).classList.toggle('on', DB.set[k]);
+    const toggle = $(s).closest('button');
+    toggle.setAttribute('role', 'switch');
+    toggle.setAttribute('aria-checked', String(DB.set[k]));
+  });
   document.body.classList.toggle('rm', DB.set.reduce);
   document.body.classList.toggle('auto', DB.set.auto);
-  $$('#segPace button').forEach(b => b.classList.toggle('on', b.dataset.p === (DB.set.pace || 'normale')));
+  $$('#segPace button').forEach(b => {
+    const active = b.dataset.p === DB.set.pace;
+    b.classList.toggle('on', active);
+    b.setAttribute('aria-pressed', active);
+  });
 }
 $('#segPace').onclick = e => { const b = e.target.closest('[data-p]'); if (!b) return; DB.set.pace = b.dataset.p; save(); renderHome(); SND.tap(); };
 function pointsHTML() {
@@ -9450,9 +9487,10 @@ function lessonResume(n) {
   return !DB.done.includes(n) && LDEF[n] && res?.wb && res.i > 0 && res.i < LDEF[n].steps.length - 1 ? res : null;
 }
 function nextPathLesson() {
-  if (lessonResume(DB.lastLesson) && roomState(DB.lastLesson) !== 'lock') return DB.lastLesson;
-  const inProgress = LESSONS.find(l => lessonResume(l.n) && roomState(l.n) !== 'lock');
-  return inProgress?.n ?? curLesson();
+  const floor = floorNow();
+  const available = LESSONS.filter(l => floorOf(l.n) === floor && LDEF[l.n] && !DB.done.includes(l.n) && roomState(l.n) !== 'lock');
+  const recent = available.find(l => l.n === DB.lastLesson && lessonResume(l.n));
+  return (recent || available.find(l => lessonResume(l.n)) || available[0])?.n;
 }
 
 function xpLeft(n) { return LDEF[n].steps.filter(s => s.t === 'ask' || s.t === 'quiz').reduce((t, s) => t + (DB.best[s.id] === undefined ? XP_FIRST : DB.best[s.id] ? 0 : XP_FIRST - XP_LATER), 0) + (DB.done.includes(n) ? 0 : XP_BONUS); }
@@ -9468,7 +9506,7 @@ function openRoom(n) {
   const st = roomState(n), l = LESSONS[n - 1];
   if (st === 'lock') { toast(`Chambre ${roomNo(n)} : termine d’abord la chambre ${roomNo(curLesson())}`, IC.lock.replace('<svg', '<svg width="16" height="16"')); return; }
   const res = lessonResume(n);
-  const hero = `<div class="lsh-hero"><div class="grab"></div>${doorSVG(st === 'done' ? 'done' : 'cur', roomNo(n), n === 10)}<svg class="ding sticker" viewBox="0 0 120 120"><use href="#sDing"/></svg></div>`;
+  const hero = `<div class="lsh-hero"><div class="grab"></div><button class="room-close" aria-label="Fermer" data-a="x">×</button>${doorSVG(st === 'done' ? 'done' : 'cur', roomNo(n), n % 10 === 0)}<svg class="ding sticker" viewBox="0 0 120 120"><use href="#sDing"/></svg></div>`;
   const metas = `<div class="metas"><span>${IC.clock}${l.d}</span>${LDEF[n] ? `<span>${IC.target}${exosOf(n)} exercices</span><span><svg viewBox="0 0 24 24" fill="#E8A33A"><use href="#sBolt"/></svg>${xpLeft(n) ? `Jusqu’à ${xpLeft(n)} XP` : 'Tous les XP gagnés'}</span>` : ''}${st === 'done' ? `<span class="stars">${[1, 2, 3].map(k => starSVG(k <= (DB.stars[n] || 0))).join('')}</span>` : ''}</div>`;
   let btns;
   if (LDEF[n]) btns = st === 'done' ? `<button class="btn" data-a="restart">Rejouer la leçon</button><button class="btn gray" data-a="x">Fermer</button>`
@@ -9484,22 +9522,38 @@ function startOrResume(n) {
 }
 function floorsSheet() {
   SND.tap();
-  openSheet(`<div class="grab"></div><h4>Les étages du Grand Hôtel</h4><p class="sub">${typo(OPEN_ALL ? 'Choisis un étage parmi ceux disponibles. Ta progression est enregistrée pour chaque chambre.' : 'Chaque étage est un module. Termine ses 10 chambres pour débloquer l’étage suivant.')}</p>
-    <div class="groupx">${MODULES.map((m, i) => `<button class="floor${i + 1 === floorNow() ? ' on' : ''}" data-fl="${i + 1}"><span class="lb">${i + 1}</span><span class="rt"><b>${typo(m[0])}</b><small>${typo(m[1])}</small></span><span class="tr">${floorOpen(i + 1) ? IC.chev : IC.lock}</span></button>`).join('')}</div>
+  const available = [], upcoming = [];
+  MODULES.forEach(([title, subtitle], index) => {
+    const floor = index + 1;
+    const published = !!LDEF[index * 10 + 1], current = floor === floorNow();
+    const completed = DB.done.filter(n => floorOf(n) === floor).length;
+    const row = `<button class="floor${current ? ' on' : ''}" data-fl="${floor}" ${current ? 'aria-current="location"' : ''} ${published ? '' : 'disabled'}>
+      <span class="lb">${floor}</span><span class="rt"><b>${typo(title)}</b><small>${typo(subtitle)}</small>
+      ${published ? `<span class="floor-detail">${floorOpen(floor) ? (current ? 'Étage actuel · ' : '') + completed + '/10 terminées' : 'Étage précédent à terminer'}</span>` : ''}</span>
+      <span class="tr" aria-hidden="true">${current ? IC.check : floorOpen(floor) ? IC.chev : IC.lock}</span></button>`;
+    (published ? available : upcoming).push(row);
+  });
+  openSheet(`<div class="grab"></div><h4>Les étages du Grand Hôtel</h4>
+    <div class="groupx floor-group">${available.join('')}</div>
+    ${upcoming.length ? `<details class="future-floors"><summary>Étages à venir <span>${upcoming.length}</span></summary><div class="groupx floor-group">${upcoming.join('')}</div></details>` : ''}
     <div class="col" style="margin-top:14px"><button class="btn gray" data-a="x">Fermer</button></div>`);
   $('#modalPane').onclick = e => { const f = e.target.closest('[data-fl]'); if (f && !floorOpen(+f.dataset.fl)) { toast(!LDEF[(+f.dataset.fl - 1) * 10 + 1] ? `L’étage ${f.dataset.fl} n’est pas inclus dans cette version de l’application` : `Étage ${f.dataset.fl} : termine d’abord l’étage ${+f.dataset.fl - 1}`); return; } if (f) { closeSheet(); goFloor(+f.dataset.fl); return; } if (e.target.closest('[data-a]')) closeSheet(); };
 }
 $('#bFloors').onclick = floorsSheet;
 $('#dialBox').onclick = floorsSheet;
+const tabScroll = new Map();
 $$('.tabbar button').forEach(b => b.onclick = () => {
+  const scroll = $('#hscroll'), previous = $('.view.on').id;
+  tabScroll.set(previous, scroll.scrollTop);
   $$('.tabbar button').forEach(x => {
     x.classList.toggle('on', x === b);
     if (x === b) x.setAttribute('aria-current', 'page');
     else x.removeAttribute('aria-current');
   });
   $$('.view').forEach(v => v.classList.toggle('on', v.id === b.dataset.v));
-  $('#hscroll').scrollTop = 0; SND.tap();
   if (b.dataset.v === 'vPath') renderPath();
+  scroll.scrollTop = previous === b.dataset.v ? 0 : tabScroll.get(b.dataset.v) || 0;
+  SND.tap();
 });
 $$('[data-set]').forEach(b => b.onclick = () => { const k = b.dataset.set; DB.set[k] = !DB.set[k]; save(); renderHome(); SND.tap(); });
 $('#bPoints').onclick = () => {
@@ -9651,7 +9705,12 @@ function buildScene(v, fade) {
 }
 function render() {
   const st = STEPS[L.i];
-  $('#lBar').style.width = (L.i / (N - 1) * 100) + '%';
+  const progress = Math.round(L.i / (N - 1) * 100);
+  $('#lessonRoom').textContent = roomLabel(L.n);
+  $('#lessonPercent').textContent = progress + ' %';
+  $('#lessonProgress').setAttribute('aria-label', 'Progression · ' + roomLabel(L.n));
+  $('#lessonProgress').setAttribute('aria-valuenow', progress);
+  $('#lBar').style.width = progress + '%';
   setView(st.v);
   ['#noteCard', '#mbanner'].forEach(s => $(s).classList.remove('on'));
   if (!st.notif && st.t !== 'notif') $('#notif').classList.remove('on');
@@ -10267,6 +10326,8 @@ function rEnd() {
   FI.forEach(f => { if (!DB.fiches.includes(f.id)) DB.fiches.push(f.id); });
   DB.resume['l' + n] = {i: 0}; markDay(); save();
   $('#lBar').style.width = '100%';
+  $('#lessonPercent').textContent = '100 %';
+  $('#lessonProgress').setAttribute('aria-valuenow', 100);
   const bonus = firstTime ? XP_BONUS : 0;
   L.gain += bonus;
   const sk = streak(), record = !firstTime && stars > prevStars, need = Math.ceil(total * .85) - firsts;
