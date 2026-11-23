@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#F2F2F7">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2c1d2d">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Excel Quest</title>
@@ -81,45 +81,6 @@ svg{display:block}
 .ptrack i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#E9C56F,#FFE29A);transition:width .8s var(--spring)}
 .floorsbtn{position:absolute;right:14px;top:14px;z-index:2;height:30px;padding:0 11px;border-radius:15px;background:rgba(255,255,255,.14);color:#fff;font:600 13px var(--font);display:flex;align-items:center;gap:4px}
 .floorsbtn svg{width:14px;height:14px}
-
-/* couloir */
-.corridor{position:relative;margin:10px -16px 0}
-.corridor>svg.carpet{position:absolute;left:0;top:0;pointer-events:none}
-.room{position:absolute;width:0;height:0}
-.room .door{position:absolute;bottom:0;left:0;transform:translateX(-50%);width:70px;cursor:pointer;transition:transform .25s var(--spring)}
-.room.final .door{width:104px}
-.room .door:active{transform:translateX(-50%) scale(.95)}
-.room .door svg{width:100%;height:auto;overflow:visible}
-.room .spill{position:absolute;left:0;bottom:-26px;width:120px;height:46px;margin-left:-60px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,214,120,.75),rgba(255,214,120,0));pointer-events:none;animation:glow 3s ease-in-out infinite}
-@keyframes glow{50%{opacity:.6}}
-.room .lbl{position:absolute;bottom:10px;width:132px;text-align:left;cursor:pointer}
-.room .lbl.r{left:58px}
-.room .lbl.l{right:58px;text-align:right}
-.room.final .lbl.r{left:68px}
-.room.final .lbl.l{right:68px}
-.room .lbl small{display:block;font:600 12.5px var(--font);color:var(--label2)}
-.room .lbl b{display:block;margin-top:1px;font:600 16px/1.22 var(--font);letter-spacing:-.015em;color:var(--label)}
-.room .lbl span{display:flex;align-items:center;gap:4px;margin-top:3px;font:400 13px var(--font);color:var(--label2)}
-.room .lbl.l span{justify-content:flex-end}
-.room.lock .lbl b{color:#9A9AA0}
-.room.lock .lbl small{color:var(--label3)}
-.room.cur .lbl small{color:var(--wine)}
-.room .bub{position:absolute;left:0;bottom:142px;transform:translateX(-50%);white-space:nowrap;height:36px;padding:0 16px;border-radius:18px;background:var(--wine);color:#fff;font:700 15px/36px var(--font);
-  box-shadow:0 8px 18px -8px rgba(142,29,66,.7);animation:bob 2.4s ease-in-out infinite;cursor:pointer}
-.room.final .bub{bottom:140px}
-.room .bub::after{content:"";position:absolute;left:50%;bottom:-6px;width:12px;height:12px;margin-left:-6px;background:var(--wine);transform:rotate(45deg);border-radius:2px}
-@keyframes bob{50%{transform:translateX(-50%) translateY(-5px)}}
-.stars{display:inline-flex;gap:1px}
-.stars svg{width:13px;height:13px}
-.room .rding{position:absolute;bottom:-4px;width:46px;pointer-events:none}
-.deco{position:absolute;width:46px;transform:translate(-50%,-100%);pointer-events:none;opacity:.95}
-.deco svg{width:100%;height:auto}
-.liftend{position:absolute;left:50%;transform:translateX(-50%);width:230px;text-align:center;cursor:pointer}
-.liftend svg{width:104px;margin:0 auto}
-.liftend small{display:block;margin-top:8px;font:600 12.5px var(--font);color:var(--label2)}
-.liftend b{display:block;margin-top:1px;font:600 16px/1.25 var(--font);color:#9A9AA0}
-.liftend span{display:inline-flex;align-items:center;gap:4px;margin-top:4px;font:400 13px var(--font);color:var(--label3)}
-.liftend span svg{width:12px;margin:0}
 
 /* feuille « leçon » et étages */
 .lsh-hero{position:relative;height:178px;margin:0 -16px 14px;overflow:hidden;background:repeating-linear-gradient(90deg,#F4E7D2 0 20px,#EFDDC2 20px 22px)}
@@ -751,8 +712,6 @@ body.rm *,body.rm *::before,body.rm *::after{animation-duration:.01ms!important;
 .who svg{filter:drop-shadow(0 8px 14px rgba(45,18,10,.22))}
 
 /* portes et objets illustrés du parcours */
-.room.lock .door svg{filter:grayscale(.8) brightness(1.06) opacity(.66)}
-.room.lock .door{cursor:default}
 .liftend svg{filter:saturate(.7) opacity(.9)}
 .deco svg{display:block;width:100%;height:auto;overflow:visible}
 
@@ -1227,6 +1186,7 @@ body.rm .ribbon{transition:none}
 .appic svg{display:none}
 
 </style>
+<link rel="stylesheet" href="parcours.css">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1260,24 +1220,27 @@ body.rm .ribbon{transition:none}
 <div id="app">
   <!-- ===== ACCUEIL ===== -->
   <section class="screen on" id="home">
-    <div class="hscroll" id="hscroll">
-      <div class="topbar">
+    <header class="topbar">
         <div class="brand"><i>GH</i>Excel Quest</div>
         <span class="sp"></span>
         <button class="chip press" id="chipStreak"><svg viewBox="0 0 24 24"><path d="M12 2.5c.9 3.6-2.6 4.9-2.6 8.6a2.6 2.6 0 0 0 5.2 0c0-.9-.4-1.8-.9-2.6 2.6 1.7 4.4 4 4.4 7A6.1 6.1 0 0 1 12 21.6a6.1 6.1 0 0 1-6.1-6.1c0-5.6 6.1-7 6.1-13z" fill="#FF9500"/></svg><span id="hStreak">0</span></button>
         <button class="chip press" id="chipXp"><svg viewBox="0 0 24 24" fill="#E8A33A"><use href="#sBolt"/></svg><span id="hXp">0</span></button>
-      </div>
-
+    </header>
+    <main class="hscroll" id="hscroll">
       <div class="view on" id="vPath">
         <section class="liftc" id="liftCard">
           <button class="floorsbtn" id="bFloors">Étages<svg class="ic" viewBox="0 0 24 24"><path d="M8 10l4-4 4 4M8 14l4 4 4-4"/></svg></button>
           <div id="dialBox"></div>
-          <div class="cap" id="hCap">Étage 1 · Le Grand Hôtel</div>
-          <h2 id="hTitle">Premier jour au Grand Hôtel</h2>
-          <div class="sub" id="hSub">Les bases d’Excel, une chambre à la fois</div>
-          <div class="pline"><div class="ptrack"><i id="hBar" style="width:0"></i></div><span id="hCount">0 sur 10</span></div>
+          <div class="lift-copy">
+            <p class="cap" id="hCap">Étage 1 · Le Grand Hôtel</p>
+            <h1 id="hTitle">Premier jour au Grand Hôtel</h1>
+            <p class="sub" id="hSub">Les bases d’Excel, une chambre à la fois</p>
+          </div>
+          <div class="pline"><span id="hCount">0 chambre sur 10</span><div class="ptrack" aria-hidden="true"><i id="hBar" style="width:0"></i></div></div>
         </section>
-        <div class="corridor" id="corridor"></div>
+        <h2 class="rooms-title" id="rooms-title">Les chambres</h2>
+        <ol class="corridor" id="corridor" aria-labelledby="rooms-title"></ol>
+        <div id="nextFloor"></div>
       </div>
 
       <div class="view" id="vFiches">
@@ -1288,7 +1251,7 @@ body.rm .ribbon{transition:none}
 
       <div class="view" id="vNotes">
         <div class="ltrow"><h1 class="lt">Notes</h1><button class="addbtn press" id="bAddNote" aria-label="Nouvelle note"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div>
-        <label class="search"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><input id="nSearch" type="search" placeholder="Rechercher" autocomplete="off"></label>
+        <label class="search"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><input id="nSearch" type="search" aria-label="Rechercher dans les notes" placeholder="Rechercher" autocomplete="off"></label>
         <div id="nList"></div>
       </div>
 
@@ -1311,9 +1274,9 @@ body.rm .ribbon{transition:none}
           <button class="set" id="bReset"><div class="tx"><b class="red">Effacer ma progression</b></div></button>
         </div>
       </div>
-    </div>
-    <nav class="tabbar">
-      <button class="on" data-v="vPath"><svg class="ic" viewBox="0 0 24 24"><path d="M4 10.5L12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg>Parcours</button>
+    </main>
+    <nav class="tabbar" aria-label="Navigation principale">
+      <button class="on" aria-current="page" data-v="vPath"><svg class="ic" viewBox="0 0 24 24"><path d="M4 10.5L12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg>Parcours</button>
       <button data-v="vFiches"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="6.5" width="13" height="14" rx="2.5"/><path d="M8 3.5h9.5A2.5 2.5 0 0 1 20 6v11"/></svg>Fiches</button>
       <button data-v="vNotes"><svg class="ic" viewBox="0 0 24 24"><path d="M14.5 4.5H6.5a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-8"/><path d="M18.4 3.6a1.9 1.9 0 0 1 2.7 2.7L12.5 15l-3.6.9.9-3.6z"/></svg>Notes</button>
       <button data-v="vSet"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Réglages</button>
@@ -9212,13 +9175,8 @@ function doorSVG(st, num, final) {
   if (st === 'done') s += `<g transform="translate(${w - 26} 66)"><circle r="27" fill="#34C759" stroke="#fff" stroke-width="6"/><path d="M-12 1l8 8 16-17" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`;
   return s + '</svg>';
 }
-const DECOS = ['plant', 'trolley', 'cloche', 'chair'].map(k => { const [w, h] = SPR[k]; return `<svg viewBox="0 0 ${w} ${h + 12}"><ellipse cx="${w / 2}" cy="${h + 2}" rx="${w * .42}" ry="8" fill="rgba(60,30,20,.13)"/>${sprImg(k)}</svg>`; });
-const DECOW = [50, 46, 54, 58];
-const LIFTDOOR = (() => { const [w, h] = SPR.lift; return `<svg viewBox="0 0 ${w} ${h + 14}"><ellipse cx="${w / 2}" cy="${h + 3}" rx="${w / 2 + 4}" ry="9" fill="rgba(60,30,20,.15)"/>${sprImg('lift', 'lk2')}</svg>`; })();
-
-let needleSet = false;
 function renderPath() {
-  const F = floorNow(), f0 = (F - 1) * 10, FL = LESSONS.filter(l => floorOf(l.n) === F), cur = curLesson() - f0;
+  const F = floorNow(), FL = LESSONS.filter(l => floorOf(l.n) === F);
   $('#dialBox').innerHTML = dialSVG(F);
   requestAnimationFrame(() => requestAnimationFrame(() => { const nd = $('#needle'); if (nd) nd.style.transform = `rotate(${-180 + (F - 1) * 20}deg)`; }));
   const nd = DB.done.filter(n => floorOf(n) === F).length;
@@ -9226,46 +9184,39 @@ function renderPath() {
   $('#hCount').textContent = `${nd} chambre${nd > 1 ? 's' : ''} sur 10`;
   $('#hCap').textContent = `Étage ${F} · Le Grand Hôtel`; $('#hTitle').textContent = typo(MODULES[F - 1][0]);
   $('#hSub').textContent = ['Les bases d’Excel, une chambre à la fois', 'Formules et premiers résultats, une chambre à la fois', 'Trier, filtrer et analyser, une chambre à la fois'][F - 1] || '';
-  const box = $("#corridor"), W = box.clientWidth || 393, H = 184, top = 84, dh = 106;
-  const xs = LESSONS.map((l, i) => i === 9 ? .5 : .5 + .25 * Math.sin(i * .9));
-  const P = xs.map((x, i) => [Math.round(W * x), top + dh + i * H]);
-  const endY = P[9][1] + 150;
-  const seg = (a, b) => ` C${a[0]} ${a[1] + H * .55} ${b[0]} ${b[1] - H * .55} ${b[0]} ${b[1]}`;
-  let full = `M${P[0][0]} ${P[0][1] - 6}`, done = full;
-  for (let i = 1; i < 10; i++) { full += seg(P[i - 1], P[i]); if (i < cur) done += seg(P[i - 1], P[i]); }
-  full += seg(P[9], [W / 2, endY]);
-  if (cur >= 11) done += seg(P[9], [W / 2, endY]);
-  const totalH = endY + 150;
-  let h = `<svg class="carpet" width="${W}" height="${totalH}" viewBox="0 0 ${W} ${totalH}">
-    <path d="${full}" fill="none" stroke="#E7DED1" stroke-width="32" stroke-linecap="round"/><path d="${full}" fill="none" stroke="#F1EBE2" stroke-width="24" stroke-linecap="round"/>
-    <path d="${full}" fill="none" stroke="#E2D8CA" stroke-width="2" stroke-dasharray="2 9" stroke-linecap="round"/>
-    ${cur > 1 ? `<path d="${done}" fill="none" stroke="#C99A3E" stroke-width="32" stroke-linecap="round"/><path d="${done}" fill="none" stroke="#8E1D42" stroke-width="25" stroke-linecap="round"/><path d="${done}" fill="none" stroke="#C7577D" stroke-width="2" stroke-dasharray="2 9" stroke-linecap="round"/>` : ''}
-  </svg>`;
-  FL.forEach((l, i) => {
-    const [x, y] = P[i], st = roomState(l.n), final = l.n === 10, side = x > W / 2 + 2 ? 'l' : 'r';
-    const res = DB.resume['l' + l.n], inProg = !!LDEF[l.n] && st === 'cur' && res && res.i > 0;
-    if (i < 9) {
-      const dx = x > W / 2 + 2 ? W * .12 : x < W / 2 - 2 ? W * .88 : (i % 2 ? W * .12 : W * .88);
-      h += `<div class="deco" style="left:${Math.round(dx)}px;top:${y + 78}px;width:${DECOW[i % DECOS.length]}px">${DECOS[i % DECOS.length]}</div>`;
-    }
+  $('#corridor').innerHTML = FL.map(l => {
+    const state = roomState(l.n);
+    const current = state === 'cur';
+    const locked = state === 'lock';
     const stars = DB.stars[l.n] || 0;
-    const sub = st === 'done' ? `<span class="stars">${[1, 2, 3].map(k => starSVG(k <= stars)).join('')}</span>` : `<span>${st === 'lock' ? IC.lock.replace('<svg', '<svg width="12" height="12"') : ''}${l.d}</span>`;
-    h += `<div class="room ${st}${final ? ' final' : ''}" data-l="${l.n}" style="left:${x}px;top:${y}px">
-      ${st === 'cur' ? '<div class="spill"></div>' : ''}
-      <div class="door" data-l="${l.n}">${doorSVG(st, roomNo(l.n), final)}</div>
-      <div class="lbl ${side}" data-l="${l.n}"><small>${roomLabel(l.n)}</small><b>${typo(l.t)}</b>${sub}</div>
-      ${st === 'cur' && floorOf(curLesson()) === F ? `<div class="bub" data-go="${l.n}">${inProg ? 'Reprendre' : l.n === 1 && !DB.done.length ? 'Commencer' : 'Entrer'}</div>
-        <svg class="rding sticker sway" viewBox="0 0 120 120" style="${side === 'r' ? 'left:-96px' : 'left:44px'}"><use href="#sDing"/></svg>` : ''}
-    </div>`;
-  });
-  const fdone = [...Array(10)].every((_, k) => DB.done.includes(f0 + k + 1)), up = (fdone || OPEN_ALL) && LDEF[F * 10 + 1];
-  h += `<div class="liftend${up ? ' go' : ''}" id="liftEnd" style="top:${endY - 20}px">${LIFTDOOR}<small>Étage ${F + 1}</small><b>${typo(MODULES[F][0])}</b><span>${fdone ? `${IC.check}Étage ${F} terminé` : up ? `${IC.chev}Monter à l’étage ${F + 1}` : `${IC.lock}Termine l’étage ${F}`}</span></div>`;
-  box.style.height = totalH + 'px';
-  box.innerHTML = h;
+    const resume = DB.resume['l' + l.n];
+    const action = resume?.i > 0 ? 'Reprendre' : l.n === 1 ? 'Commencer' : 'Entrer';
+    const status = locked ? `<span class="room-status" role="img" aria-label="Verrouillée">${IC.lock}</span>`
+      : state === 'done' ? `<span class="stars" role="img" aria-label="Terminée, ${stars} étoiles sur 3">${[1, 2, 3].map(k => starSVG(k <= stars)).join('')}</span>`
+      : current ? `<button class="room-start" data-go="${l.n}">${action}${IC.chev}</button>`
+      : `<span class="room-available" aria-hidden="true">${IC.chev}</span>`;
+    return `<li class="room ${state}"${current ? ' aria-current="step"' : ''}>
+      <button class="room-details" data-l="${l.n}"${locked ? ' aria-describedby="room-lock-' + l.n + '"' : ''}>
+        <span class="room-door" aria-hidden="true">${doorSVG(state, roomNo(l.n), l.n === 10)}</span>
+        <span class="room-label"><small>${roomLabel(l.n)}</small><strong>${typo(l.t)}</strong></span>
+        <span class="room-duration">${IC.clock}${l.d}</span>
+      </button>
+      <div class="room-action"${locked ? ` id="room-lock-${l.n}"` : ''}>${status}</div>
+    </li>`;
+  }).join('');
+  const next = MODULES[F], available = floorOpen(F + 1);
+  const nextLabel = available ? 'Voir l’étage suivant' : LDEF[F * 10 + 1] ? 'Termine l’étage ' + F : 'À venir';
+  $('#nextFloor').innerHTML = next ? `<button class="liftend" id="liftEnd">
+    <span><small>Étage ${F + 1}</small><b>${typo(next[0])}</b></span>
+    <span class="liftend-status">${available ? IC.chev : IC.lock}<span>${nextLabel}</span></span>
+  </button>` : '';
 }
 function renderHome() {
-  $('#hXp').textContent = DB.xp;
-  $('#hStreak').textContent = streak();
+  $('#hXp').textContent = `${DB.xp} XP`;
+  const days = streak();
+  $('#hStreak').textContent = days;
+  $('#chipStreak').setAttribute('aria-label', `Série : ${days} jour${days > 1 ? 's' : ''}`);
+  $('#chipXp').setAttribute('aria-label', `Points d’expérience : ${DB.xp} XP`);
   renderPath();
   $('#hFiches').innerHTML = allFiches().map(([f, n, i, tot], k) => { const ok = DB.fiches.includes(f.id); return `<button class="fmini press${ok ? '' : ' locked'}" data-f="${k}"><div class="im">${f.img}</div><div class="t"><small>${ok ? `${n > 10 ? 'Chambre ' + roomNo(n) : 'Leçon ' + n} · ${i + 1} sur ${tot}` : n > 10 ? `Après la chambre ${roomNo(n)}` : `Après la leçon ${n}`}</small><b>${typo(f.t)}</b></div></button>`; }).join('');
   renderNotes();
@@ -9287,11 +9238,17 @@ $('#chipStreak').onclick = () => { SND.tap(); const s = streak();
 $('#chipXp').onclick = () => { SND.tap();
   openSheet(`<div class="grab"></div><h4>${DB.xp} XP</h4><p class="sub">${typo('Les XP sont tes points d’expérience. Une leçon se termine toujours : Ding est là pour t’aider, mais la précision est récompensée.')}</p>${pointsHTML()}<div class="col" style="margin-top:16px"><button class="btn" data-a="x">Compris</button></div>`);
   $('#modalPane').onclick = e => { if (e.target.closest('[data-a]')) closeSheet(); }; };
-window.addEventListener('resize', () => { if ($('#home').classList.contains('on')) renderPath(); else { if (L && L.view !== null && grid.children.length) { fitCols(); paintSel(); } fitStack($('#cstack'), 74, true); fitStack($('#dbody'), 50, true); } });
+window.addEventListener('resize', () => { if ($('#lesson').classList.contains('on')) { if (L && L.view !== null && grid.children.length) { fitCols(); paintSel(); } fitStack($('#cstack'), 74, true); fitStack($('#dbody'), 50, true); } });
 $('#corridor').addEventListener('click', e => {
   const g = e.target.closest('[data-go]'); if (g) { SND.tap(); return startOrResume(+g.dataset.go); }
-  if (e.target.closest('#liftEnd')) { SND.tap(); const F = floorNow(); if (LDEF[F * 10 + 1] && (floorDone(F) || OPEN_ALL)) return goFloor(F + 1); toast(LDEF[F * 10 + 1] ? `Étage ${F + 1} : termine d’abord les 10 chambres de l’étage ${F}` : `L’étage ${F + 1} n’est pas inclus dans cette version de l’application`, IC.lock.replace('<svg', '<svg width="16" height="16"')); return; }
   const r = e.target.closest('[data-l]'); if (r) openRoom(+r.dataset.l);
+});
+$('#nextFloor').addEventListener('click', e => {
+  if (!e.target.closest('#liftEnd')) return;
+  SND.tap();
+  const F = floorNow();
+  if (floorOpen(F + 1)) return goFloor(F + 1);
+  toast(LDEF[F * 10 + 1] ? `Étage ${F + 1} : termine d’abord les 10 chambres de l’étage ${F}` : `L’étage ${F + 1} n’est pas inclus dans cette version de l’application`, IC.lock);
 });
 function xpLeft(n) { return LDEF[n].steps.filter(s => s.t === 'ask' || s.t === 'quiz').reduce((t, s) => t + (DB.best[s.id] === undefined ? XP_FIRST : DB.best[s.id] ? 0 : XP_FIRST - XP_LATER), 0) + (DB.done.includes(n) ? 0 : XP_BONUS); }
 const allFiches = () => Object.values(LDEF).flatMap(d => (d.fiches || []).map((f, i, a) => [f, d.n, i, a.length]));
@@ -9323,7 +9280,7 @@ function startOrResume(n) {
 }
 function floorsSheet() {
   SND.tap();
-  openSheet(`<div class="grab"></div><h4>Les étages du Grand Hôtel</h4><p class="sub">${typo('Chaque étage est un module. Termine ses 10 chambres pour débloquer l’étage suivant.')}</p>
+  openSheet(`<div class="grab"></div><h4>Les étages du Grand Hôtel</h4><p class="sub">${typo(OPEN_ALL ? 'Choisis un étage pour voir ses chambres et les leçons disponibles.' : 'Chaque étage est un module. Termine ses 10 chambres pour débloquer l’étage suivant.')}</p>
     <div class="groupx">${MODULES.map((m, i) => `<button class="floor${i + 1 === floorNow() ? ' on' : ''}" data-fl="${i + 1}"><span class="lb">${i + 1}</span><span class="rt"><b>${typo(m[0])}</b><small>${typo(m[1])}</small></span><span class="tr">${floorOpen(i + 1) ? IC.chev : IC.lock}</span></button>`).join('')}</div>
     <div class="col" style="margin-top:14px"><button class="btn gray" data-a="x">Fermer</button></div>`);
   $('#modalPane').onclick = e => { const f = e.target.closest('[data-fl]'); if (f && !floorOpen(+f.dataset.fl)) { toast(!LDEF[(+f.dataset.fl - 1) * 10 + 1] ? `L’étage ${f.dataset.fl} n’est pas inclus dans cette version de l’application` : `Étage ${f.dataset.fl} : termine d’abord l’étage ${+f.dataset.fl - 1}`); return; } if (f) { closeSheet(); goFloor(+f.dataset.fl); return; } if (e.target.closest('[data-a]')) closeSheet(); };
@@ -9331,7 +9288,11 @@ function floorsSheet() {
 $('#bFloors').onclick = floorsSheet;
 $('#dialBox').onclick = floorsSheet;
 $$('.tabbar button').forEach(b => b.onclick = () => {
-  $$('.tabbar button').forEach(x => x.classList.toggle('on', x === b));
+  $$('.tabbar button').forEach(x => {
+    x.classList.toggle('on', x === b);
+    if (x === b) x.setAttribute('aria-current', 'page');
+    else x.removeAttribute('aria-current');
+  });
   $$('.view').forEach(v => v.classList.toggle('on', v.id === b.dataset.v));
   $('#hscroll').scrollTop = 0; SND.tap();
   if (b.dataset.v === 'vPath') renderPath();
@@ -9363,8 +9324,8 @@ $('#lClose').onclick = () => { SND.tap(); quitLesson(); };
 $('#lNote').onclick = () => { SND.tap(); noteComposer(null, true); };
 function quitLesson() {
   autoStop(); L = null; clearInterval(callTimerT); ringStop(); $('#lesson').classList.remove('incall'); showScreen('home'); renderHome();
-  const r = $(`.room[data-l="${Math.min(curLesson(), 10)}"]`), sc = $('#hscroll');
-  if (r && curLesson() > 1) sc.scrollTo({top: Math.max(0, r.offsetTop + $('#corridor').offsetTop - sc.clientHeight * .55), behavior: DB.set.reduce ? 'auto' : 'smooth'});
+  const room = $('#corridor .room.cur');
+  if (room && curLesson() > 1) room.scrollIntoView({block: 'nearest', behavior: DB.set.reduce ? 'auto' : 'smooth'});
 }
 
 /* ================= moteur ================= */
