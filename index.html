@@ -1108,6 +1108,20 @@ body.rm .ribbon{transition:none}
 @media (max-height:600px){.recap.cmp{display:none}}
 @media (max-height:700px){.recap.cmp{display:none}}
 .sheetm.on:not(.vis){pointer-events:none}
+.grid .c.spill{overflow:visible;position:relative;z-index:1}
+/* alerte d'erreur : style Informations */
+.valert i.info{background:#007AFF;font:italic 700 30px Georgia,'Times New Roman',serif}
+/* ruban : libellés officiels d'Excel, sur deux lignes au besoin */
+.rb{height:auto;min-height:50px;padding:4px 5px;font-size:10.5px}
+.rb span{display:block;max-width:74px;white-space:normal;text-align:center;line-height:1.12}
+#Lsheet.rib .ribbon{max-height:66px}
+@media (max-width:360px){.rb span{max-width:64px}}
+/* onglet déplacé par glisser */
+.tab.lift{opacity:.35}
+.tabghost{position:fixed;z-index:60;pointer-events:none;padding:0 16px;height:32px;display:flex;align-items:center;border-radius:9px;background:#fff;box-shadow:0 8px 24px -6px rgba(0,0,0,.35),0 0 0 .5px rgba(0,0,0,.1);font:600 14px var(--font);color:var(--label);transform:scale(1.06)}
+.tabdrop{position:absolute;top:6px;bottom:6px;width:3px;border-radius:2px;background:var(--xl);pointer-events:none;z-index:5}
+@media (max-height:600px){.rb{min-height:40px;padding:3px 4px}.rb span{display:none}#Lsheet.rib .ribbon{max-height:50px}}
+@media (max-height:600px){#ccard .rcard{display:none}}
 
 .appic{background:#2B4C7E url(data:image/webp;base64,UklGRkINAABXRUJQVlA4IDYNAACQSwCdASrYANgAPjEYi0OiIaKTvBRMKAMEsqX/u8uPdXaNVIF3iWOVm7YOXfoX6L8buoK5S8XfKjjj9uZnfQn+p+8j5f/sR7XfMA/Ub9auxP+2vqK/Zb9lfeW9L30AfI9/Y/8p1u3oAeXF7P/7cfsp7Ul8I+0nMK+yPVaapfp+MHah+GbM0f7TugMeVjv9Dz6V9G30f/yPcT/lv9T/5XAtCpv8PQnJAlTvSpubiI4gMMmv9eLOiYHmOw3tXkJ63jN1E8volEvbFC8gOm9kO0/YmwuSYo5rzNPLG+zuYNYGakZpSiEsUSUGAoTeNWtNuBTEKN5OjZe4YfXZx3be0DmV1l8sCpoRCSz3J8sVtmuhDAywvbdbxzL8fnkUrt9b6MXgTHd5yIsyZalrHyXXAJ2GGzRwVpjJqwO9xE4KdfRBskyWpI7hg4kwJ2JO1ybKqGCCbU/knw3EfgYkrTr7DnFEJ9mYeG/xAzNFEpu0g/CY024dBF5ewjdQBqBHBoLVhh8cHolgVAhrkYP3mcLH6nsNna15YdbFY6AKz4R1kthy4VMktfcLA+dssKS/aldGhhtamEHKgitipLkFulNjzKD6eNEe6CKLqDOPfy2lCtObmAePV2vnLZpYlnO0zXuGerhANhaKNTGz5ibpZaze7InPB75b7IUw94ZfzDPjpe7o4mMNu/DkuN9ZUIY2I3bLDHeJcWcg1cUqPo1Ae5TafRrdT8/wLhlZAXQmCDsQhe47ZnB0P5gvRNlBr9b3HEXLSO+VmG8kkJKhe/NLs4PfTS7ZPqg3m8kePfKwOASE256MyjvjGPIAAP76XIeQ/+0bP1Gz9Rsy6v+am5lZMgAmOfBLgGqeWA9sezq8LBoJDJy1FEa0LedJkgrEZZ+H3R89cwhX5Jvdrc2AxbbLyEba6iskDzF33+M5KhD8A/yhgd6GHaoUy04h5Yo1tDmVyo+s9O9RY143xhNe2r5KKhZrqoEwCBWhBmRzK/hgCKy4ZYvrWD3Q9WEs/oumWQAPOK0aFlvLbxqhKUxLJbTPA/uqfezujb8MtkoU0VA+BT+hYCP0vft4rzTnpKsvXlOm1eulYB7L/9nIWahmqtY4vlEmeyImz43xYnD/7kH6nRM4IfjpdSBYS36ILTYbwzBAUMrsW6tnl3Z+1UALcx9rs2DD4y7OAevyvYXduna+glR3jk6vhOg+7NNKoLGPHh4b9k6EbR+9GItMG3uxnWXb5Sh/0IIeinPZeHsXWHUtkMcqqCuobsejiQck1OO8LQWq1qrlZhpy9P1a63VUbwHFuBqqNiImT+/qdCgM6Imr8wu8+W0o+SE3Hm5radb7bOTq+ITsauf9nelLuPRVcO7AQqeAWdaFOLUkTbQw73XPS+MfZEbJt5vO64kobKZskQPp68tx7KbHzenWOY/IutzPuJCekpVo65qQAFu5j80sOShHgW4hL+s7oAZwuMvW6uRsonsyFmCPBHdHHk0kbn1q3okPkHakCv5AKlp93mqjgpyz9UyTIn514QgSVzMjYBz4OG1qSpOlrw7D6vh/x3XC8Gv2w1E+jQO2E/FDgFNgKvuNqg5x1sF2rcwLHfSapHqVXYOZ64ltgejkbRLim7OT+LH0GtAB8XgT5436ajNY/+t15okWO2H/TehsnN7YcwlWdkd2NWFc6bwKdwxdLolCsK+DGN/lJ47easneip6SyudU57ACNd5kvZ91aQu4nRSH7qpSHjwBrtalGKxvNs95lcrkFIvp3AO8lD90CCZ//EN/xMRQTIpTFt/T85vjXG4FSEU6w/s9FvT4wIyXfxJnEp6TSEycdN3lz/1AG20dVL1RhGzogZi5z0Z4P5WOMFLmaEBdT5NYCuNgEdfgWvTynphZJS6m5F/gIZJrfNbWHNeabBUqQ059mNI8/GeHN5XxhBWNlveEZbCwsM5LlCTRUzT6PsuW2BMWamiSz8S/RCfZuhZlv8r0boy3ZHXF3LGv+kU4eKIwRambcghRxZTbRyaCjfnH8oUgKGN9RrqPJL1r8njmywR9g9x0Cz8yvYNuV5XOWV6CBEtS3tnKyAjXWELRisfvnpQFBiRW1w2X/OP/pU6tDxaeRs2OCWXy6BYQWobumJfME0b1vBCShiji//LP90xtqpPnCOs3OsPxB3mpUXqoy+yEN32He53dSHsYmkx7eqrJrA57ueuitOgf4DH1abjgdubI7dvQtLMTM3f+oaOWR2IHzZFJzUQc6KtF9qiGD+ki+vUavA3m9d0jafnOAH5xOIpNDfb7ZwbN9dUGw5ZohB0e8YkOnFHGVd9pAd588boFqfsHS2eDsZSl7UWLujrCR9tYyms69+eCCwPx0xzDeGvgiDUA9A7Ja7BGBq471Nysi8k+qnYSo/9QZZtFP0JXszoQ+f4VrlLwoC4D4cbeQtpGK6NS5XhISTbeUJmi+sL9k8ZokLdpq+WLIysZ/r73E+qmsbreXnVG//43wYAvpgRSrbz2MG5L98xks2Cy8KQVzq+M/uXYE+SRTpj3S3Ui96YdTxWLL+bpy8wTIYVRrUSldtYtiTemwMjbaG4qt4dKoJskB075mtMvK7awytELxrVRvcmSNZ/AQP7p0Uzd/12Q5pItZ4rMr3wQPJ6yJ4pAj2vgIcJ6j2WOIXCd/tH05E68Ko+YAIf9c7vuDQ5OB4t5zXKxVSOADI+OQCGxeIgpG4ZUnzEvC39h7ygBQA5cqtaXE+dIAhiXbLoaztULEeLZV4J8BvLMT6oGb3SnM+9g9tShFCgRCAFlYUWgDOSTVx+IeSt1AiNJBvLf8f1dqYZXbCsA3C43psToW2sA7H8c84XYninh2ixzqC4xnS3xKBkD9reSTNteopb8nkixPKyRAYizMb0NWVFjYJmnbLeKCmhyeGZBjYebuQ/4IRnoI593p1sU7D6KkoW6h7H+/1E6ozCEgq1u9mZzEvmpop704qs3c7o/T8UzFYZUOfZsLredjNFp+fOaOXZslnQGLJ7TJEhd0cyuVxSu1rS36bpwEbmNjK8X85M6uODI+Y7vFnRotUl4Gh8gE5ClftN3so4+OXeGTekVL4p8Ckxh2FtL749QVFBj7TzXh5J8IwGyJvRCXyF6bOGia+58oTHQpIiWGgSaUBbI6s6y2+Qip8/Gk9k8wT4DBretJyH56ncz6BbZBiv06wm962dEr1oN9M3wCRwqd65TvblS3EJXHRZej33rreaSWv8Swqkuhsdt5IXztVGBRnBJp9DCa2qjDmuv4gIG7QK/hRuelZed7tBP7PtAbqxpoH35x/3o6yyeGbiUZ7YwIgAoqkVLOcqFSx10GAFzZYJiG+YdNBidkMjqfJ9wTX+GvpsXaORID1cVF+IrYxBL9fUq3PU2Lje1j0AZp+oPaLDEG6sAVBs4xOisKVL3mWyybAAlG4rhh0EpRqnp83YW/AGbxaQr+FD9gpkqoDGDlGSV6DD5i5aRdyQNarb0VidHHCjzzzsWpgnVaWB0JspbQNn2xYi0L+xEUGW8ECGEjf855bz1ythMecd8bWHtYDM/lLk7ghbAf3wXlHk4gN0uGTjsQQr1IJuXP15nMcPW3l1fk7sBdSONB0STojG/YSN39eoPVQaPlt1fLGvehOjdbk4f+Km9+O5redwkEqmghT3u0ytc30BG2sxMyAV12EBg633VJqh9chveWF/Ylk4j25qX0M0N5ecbApalny1RRQrhZa4M0egHL4Z/56KNHmJU5gi/kHfIUg/pX251nvPyFERMwSbVYAJTfH29mlG6n49hUJ+FnvtZIF4mJJuuF7gXZPI2rsewv714/9IyfezAA/cvN7olDBLEfqM9PpycSmUeZ9RlmR5C2xVgW6QxmqRyp+xWzNJtEV5/ZyyCvv9H2+jMq9OIeoQotUMHEQelije70cdLLOnfgPI/fLli4CSuws6Bl5A3QY18EvOxV8Lv18e6BGWjkP6NKRarGLnU/YH810DYeU+C8S4kEDs15g64egC738GBjqj6SFwlyxk/8rAqIN3MbyOo+eGKfYvUQOhkTDYtgypcT6Rp6UvBKSirfVc8Gf5T5XNVmEoa6D8nDKXENWPmt9pB8QHNgTa+5jG+ldjghgSjxdaR5isDUyZ8LqUDQb0RfUaosysvmY+YRcgI1XZSztR7h3JPyAe6ZjdiSIqRwoBrfOp1RQGQO9fUYM1QDR26ZdEyYe5almvfxF9iqeSlr9Hx155LrkJR6Gg18VCh311SbtA4WXKGZF2MWdwi33X+654Iu7CZUDplRyIVWaPkCGCTRl6QVEMaMry4wwbibRJqkTl/1GQTr+T12e7QJPKP6OvaM6GoDYlz/aRoKeAkbeRaKMHZRLA/KFAGEWVG8N0ZyHa6IshK1A1vFMJ6uxPP3z1TIQcUyS3nB7c/JtmhZzIBT8I7hBqgBhGh/+JwuepLRLamvRoPOpnFl2PNq3RLEk0uxk4yQaYAw5Y26AhKUyHoYDZyGQmQayRbWqdtjRsgpPXRwUcD937/Qwq9dUKgGkAWH0u0AAAA) center/cover no-repeat}
 .appic svg{display:none}
@@ -1770,14 +1784,29 @@ function fitCols(instant) {
     empty.forEach(k => { ws[k] = each; });
   }
   const tpl = `${HEAD}px ` + ws.map(w => (Math.floor(w * 10) / 10) + 'px').join(' ');
-  if (grid.style.gridTemplateColumns === tpl) return;
+  if (grid.style.gridTemplateColumns === tpl) { updateSpill(); return; }
   grid.classList.toggle('anim', !instant && !DB.set.reduce);
   grid.style.gridTemplateColumns = tpl;
-  if (!instant) setTimeout(() => { paintSel(); paintClip(); paintEd(); }, 330);
+  if (instant) updateSpill(); else setTimeout(() => { paintSel(); paintClip(); paintEd(); updateSpill(); }, 330);
+}
+/* comme dans Excel : un texte trop long déborde sur la cellule de droite si elle est vide ; sinon il est masqué */
+function updateSpill() {
+  const sh = SHEET();
+  grid.querySelectorAll('.c').forEach(el => {
+    const ref = el.dataset.ref, c = sh.cells[ref];
+    el.classList.remove('spill'); el.style.clipPath = '';
+    if (!c || c.v === undefined || c.v === '' || isNum(c) || c.t === 'd' || (c.al && c.al !== 'left') || validFor(ref, 'list')) return;
+    if (el.scrollWidth <= el.clientWidth + 1) return;
+    // le texte s'étend sur les cellules vides de droite et s'arrête à la première cellule remplie
+    const p = P(ref); let room = 0;
+    for (let k = p.ci + 1; k < COLS.length; k++) { const nb = sh.cells[colL(k) + p.r]; if (nb && nb.v !== undefined && nb.v !== '') break; const ne = cellEl(colL(k) + p.r); room += ne ? ne.offsetWidth : 0; }
+    if (!room) return;
+    el.classList.add('spill'); el.style.clipPath = `inset(-2px -${room}px -2px 0)`;
+  });
 }
 /* contrôle : cellules dont le texte dépasse de sa colonne */
 function cutCells() {
-  return [...grid.querySelectorAll('.c, .h')].filter(c => c.textContent && c.scrollWidth > c.clientWidth + 1).map(c => (c.dataset.ref || c.dataset.col || c.dataset.row) + ' « ' + c.textContent + ' »');
+  return [...grid.querySelectorAll('.c:not(.spill), .h')].filter(c => c.textContent && c.scrollWidth > c.clientWidth + 1).map(c => (c.dataset.ref || c.dataset.col || c.dataset.row) + ' « ' + c.textContent + ' »');
 }
 function renderTabs() {
   const t = $('#tabs'), act = L.wb.act;
@@ -2007,12 +2036,12 @@ $('#nbox').onclick = () => {
 };
 // zone Nom : taper une référence ou une plage pour la sélectionner (alternative au glisser)
 function gotoDialog() {
-  openSheet(`<div class="grab"></div><div class="navrow"><button class="l" data-a="x">Annuler</button><b>Aller à</b><button class="r" data-a="ok">OK</button></div>
+  openSheet(`<div class="grab"></div><div class="navrow"><button class="l" data-a="x">Annuler</button><b>Zone Nom</b><button class="r" data-a="ok">OK</button></div>
     <p class="sub" style="margin:8px 4px">${typo('Écris une référence de cellule ou une plage, par exemple B2 ou B2:B20.')}</p>
     <div class="group fld"><input id="gotoRef" placeholder="B2:B20" autocomplete="off" autocapitalize="characters" spellcheck="false"></div><p class="sub err" id="gotoErr"></p>`, () => { const i = $('#gotoRef'); if (i) i.focus(); });
   const ok = () => {
     const v = $('#gotoRef').value.trim().toUpperCase().replace(/\s/g, ''), m = /^([A-Z])(\d{1,2})(?::([A-Z])(\d{1,2}))?$/.exec(v);
-    if (!m || +m[2] < 1 || +m[2] > NROWS || (m[4] && (+m[4] < 1 || +m[4] > NROWS)) || colI(m[1]) >= COLS.length || (m[3] && colI(m[3]) >= COLS.length)) { $('#gotoErr').textContent = typo('Cette référence n’existe pas dans ce tableau.'); return; }
+    if (!m || +m[2] < 1 || +m[2] > NROWS || (m[4] && (+m[4] < 1 || +m[4] > NROWS)) || colI(m[1]) >= COLS.length || (m[3] && colI(m[3]) >= COLS.length)) { $('#gotoErr').textContent = typo('Cette référence n’est pas disponible ici. Écris par exemple B2 ou B2:B20.'); return; }
     closeSheet(); const a = m[1] + m[2], b = m[3] ? m[3] + m[4] : a;
     selRange(RR(a, b), a); scrollToRef(a); SND.tap(); persist();
     if (applyPainter()) return;
@@ -2111,18 +2140,18 @@ const RIB = {
   bold: ['Gras', '<path d="M17 7.5A3.5 3.5 0 0 0 13.5 4H8v16h6a3.6 3.6 0 0 0 1-7.1"/><path d="M8 12h5.5"/>', 'G'],
   italic: ['Italique', '<path d="M10 4h8M6 20h8M14 4l-4 16"/>'],
   underline: ['Souligné', '<path d="M7 4v7a5 5 0 0 0 10 0V4M5 20.5h14"/>'],
-  fill: ['Remplissage', '<path d="M5.5 11.5L12 5l6.5 6.5-5 5a2.1 2.1 0 0 1-3 0z"/><path d="M9 3l3 2M19.5 13.5s1.5 2 1.5 3a1.5 1.5 0 0 1-3 0c0-1 1.5-3 1.5-3z"/><rect class="sw" x="3" y="20" width="18" height="3" rx="1" stroke="none"/>'],
-  font: ['Police', '<path d="M6.5 17L12 4l5.5 13M8.5 12.5h7"/><rect class="sw" x="3" y="20" width="18" height="3" rx="1" stroke="none"/>'],
-  align: ['Aligner', '<path d="M4 6h16M7 10h10M4 14h16M7 18h10"/>'],
+  fill: ['Couleur de remplissage', '<path d="M5.5 11.5L12 5l6.5 6.5-5 5a2.1 2.1 0 0 1-3 0z"/><path d="M9 3l3 2M19.5 13.5s1.5 2 1.5 3a1.5 1.5 0 0 1-3 0c0-1 1.5-3 1.5-3z"/><rect class="sw" x="3" y="20" width="18" height="3" rx="1" stroke="none"/>'],
+  font: ['Couleur de police', '<path d="M6.5 17L12 4l5.5 13M8.5 12.5h7"/><rect class="sw" x="3" y="20" width="18" height="3" rx="1" stroke="none"/>'],
+  align: ['Alignement', '<path d="M4 6h16M7 10h10M4 14h16M7 18h10"/>'],
   border: ['Bordures', '<rect x="4" y="4" width="16" height="16" rx="1"/><path d="M12 4v16M4 12h16"/>'],
-  paint: ['Pinceau', '<path d="M5 4h11a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M17 6.5h2.5v5H11v3"/><rect x="9.5" y="14.5" width="3" height="6" rx="1"/>'],
-  valid: ['Validation', '<path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.9-7.5-9.5V6z"/><path d="M8.8 12.2l2.3 2.3 4.3-4.6"/>'],
-  format: ['Format', '<rect x="4" y="5.5" width="16" height="14.5" rx="2"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4M8 14h2M12 14h2M8 17h2"/>'],
+  paint: ['Reproduire la mise en forme', '<path d="M5 4h11a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M17 6.5h2.5v5H11v3"/><rect x="9.5" y="14.5" width="3" height="6" rx="1"/>'],
+  valid: ['Validation des données', '<path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.9-7.5-9.5V6z"/><path d="M8.8 12.2l2.3 2.3 4.3-4.6"/>'],
+  format: ['Format de cellule', '<rect x="4" y="5.5" width="16" height="14.5" rx="2"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4M8 14h2M12 14h2M8 17h2"/>'],
 };
 const ribIcon = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${RIB[k][1]}</svg>`;
 function renderRibbon() {
   const t = (L && L.tools.rib) || [];
-  const html = t.map(k => `<button class="rb${k === 'bold' ? ' gras' : ''}" data-t="${k}">${RIB[k][2] ? `<b class="gl">${RIB[k][2]}</b>` : ribIcon(k)}<span>${RIB[k][0]}</span></button>`).join('');
+  const html = t.map(k => `<button class="rb${k === 'bold' ? ' gras' : ''}" data-t="${k}" aria-label="${RIB[k][0]}">${RIB[k][2] ? `<b class="gl">${RIB[k][2]}</b>` : ribIcon(k)}<span>${RIB[k][0]}</span></button>`).join('');
   const r = $('#ribbon'); if (r.dataset.k !== t.join()) { r.dataset.k = t.join(); r.innerHTML = html; }
   $('#Lsheet').classList.toggle('rib', t.length > 0);
 }
@@ -2168,7 +2197,7 @@ function cmd(k, node) {
       flashCells(rcells(dest));
     }, {type: 'cmd', name: 'paste', range: rstr(dest), src: rstr(src.rect), op: src.op, srcSheet: src.sheet, clip: clipBefore});
   }
-  if (k === 'clear') return popMenu(node, [['clear', 'Effacer le contenu'], ['delcell', 'Supprimer la cellule']], cmd2);
+  if (k === 'clear') return popMenu(node, [['clear', 'Effacer le contenu'], ['delcell', 'Supprimer les cellules']], cmd2);
   if (!r) return;
   const cells = rcells(r), rs = rstr(r);
   if (k === 'bold' || k === 'italic' || k === 'underline') {
@@ -2179,8 +2208,8 @@ function cmd(k, node) {
     const pal = k === 'fill' ? FILLS : FONTS;
     return popMenu(node, pal.map(([c, t]) => [c, t, c]), c => mutate(() => cells.forEach(ref => cset(ref, {[k === 'fill' ? 'fill' : 'fc']: c === 'none' ? undefined : c})), {type: 'fmt', name: k, range: rs, value: c}));
   }
-  if (k === 'align') return popMenu(node, [['left', 'Aligner à gauche'], ['center', 'Centrer'], ['right', 'Aligner à droite'], ['vcenter', 'Centrer verticalement']], a => mutate(() => { if (a !== 'vcenter') cells.forEach(ref => cset(ref, {al: a})); }, {type: 'fmt', name: a === 'vcenter' ? 'valign' : 'align', range: rs, value: a}));
-  if (k === 'border') return popMenu(node, [['all', 'Toutes les bordures'], ['out', 'Bordure extérieure'], ['none', 'Aucune bordure']], b => mutate(() => cells.forEach(ref => { const p = P(ref); cset(ref, {bd: b === 'all' || undefined, bdo: b === 'out' ? (p.r === r.r1 ? 't' : '') + (p.r === r.r2 ? 'b' : '') + (p.ci === r.c1 ? 'l' : '') + (p.ci === r.c2 ? 'r' : '') || undefined : undefined}); }), {type: 'fmt', name: 'border', kind: b, range: rs}));
+  if (k === 'align') return popMenu(node, [['left', 'Aligner à gauche'], ['center', 'Centrer'], ['right', 'Aligner à droite'], ['vcenter', 'Aligner au centre']], a => mutate(() => { if (a !== 'vcenter') cells.forEach(ref => cset(ref, {al: a})); }, {type: 'fmt', name: a === 'vcenter' ? 'valign' : 'align', range: rs, value: a}));
+  if (k === 'border') return popMenu(node, [['all', 'Toutes les bordures'], ['out', 'Bordures extérieures'], ['none', 'Aucune bordure']], b => mutate(() => cells.forEach(ref => { const p = P(ref); cset(ref, {bd: b === 'all' || undefined, bdo: b === 'out' ? (p.r === r.r1 ? 't' : '') + (p.r === r.r2 ? 'b' : '') + (p.ci === r.c1 ? 'l' : '') + (p.ci === r.c2 ? 'r' : '') || undefined : undefined}); }), {type: 'fmt', name: 'border', kind: b, range: rs}));
   if (k === 'paint') {
     if (L.painter) { L.painter = null; paintPainter(); return; }
     const c = cget(L.sheet.a || 'A1') || {};
@@ -2201,7 +2230,7 @@ function applyPainter() {
   mutate(() => { cells.forEach(ref => cset(ref, {...p.st})); flashCells(cells); }, {type: 'paint', src: p.src, dst: rstr(r)});
   return true;
 }
-const DFMT = [['short', 'Date courte'], ['yy', 'Année sur deux chiffres'], ['abbr', 'Mois abrégé'], ['long', 'Date longue', 'jj mmmm aaaa'], ['my', 'Mois et année']];
+const DFMT = [['short', 'Date courte'], ['yy', 'Année sur deux chiffres'], ['abbr', 'Mois abrégé'], ['long', 'Mois en toutes lettres', 'j mmmm aaaa'], ['my', 'Mois et année']];
 function formatDialog(r) {
   const cells = rcells(r), c0 = cells.map(r0 => cget(r0)).find(c => c && c.t === 'd') || {v: '2026-11-28', t: 'd'};
   const cur = c0.f || 'short';
@@ -2335,7 +2364,7 @@ grid.addEventListener('click', e => {
   }
   const s = L.sheet;
   if (h && h.classList.contains('corner')) { s.all = true; s.r = s.col = s.row = null; s.a = 'A1'; paintSel(); SND.tap(); emit({type: 'all'}); return; }
-  if (h && h.dataset.col && s.col === h.dataset.col && L.tools.colw) { const c = h.dataset.col; return popMenu(h, [['auto', 'Ajuster automatiquement la largeur']], () => mutate(() => { delete SHEET().colW[c]; }, {type: 'colw', c, auto: true})); }
+  if (h && h.dataset.col && s.col === h.dataset.col && L.tools.colw) { const c = h.dataset.col; return popMenu(h, [['auto', 'Ajuster la largeur de colonne']], () => mutate(() => { delete SHEET().colW[c]; }, {type: 'colw', c, auto: true})); }
   if (h && h.dataset.col) { s.r = s.row = null; s.all = false; s.col = h.dataset.col; s.a = h.dataset.col + '1'; paintSel(); SND.tap(); emit({type: 'col', c: h.dataset.col}); return; }
   if (h && h.dataset.row) { s.r = s.col = null; s.all = false; s.row = +h.dataset.row; s.a = 'A' + h.dataset.row; paintSel(); SND.tap(); emit({type: 'row', r: +h.dataset.row}); return; }
   if (!c) return;
@@ -2346,6 +2375,61 @@ grid.addEventListener('click', e => {
   if (applyPainter()) return;
   emit({type: 'sel', ref, range: ref, how: 'tap'});
 });
+/* comme dans Excel : on déplace une feuille en faisant glisser son onglet (appui long au doigt, glisser à la souris) */
+(() => {
+  const T = $('#tabs'); let d = null, ghost = null, mark = null, suppress = false;
+  T.style.touchAction = 'none'; T.style.position = 'relative';
+  const tabsOf = () => [...T.querySelectorAll('.tab')];
+  const dropIndex = x => { const others = tabsOf().filter(t => t !== d.t); let k = 0; others.forEach((t, i) => { const r = t.getBoundingClientRect(); if (x > r.left + r.width / 2) k = i + 1; }); return k; };
+  const showMark = k => {
+    const others = tabsOf().filter(t => t !== d.t), tb = T.getBoundingClientRect();
+    const x = k < others.length ? others[k].getBoundingClientRect().left - 3 : others[others.length - 1].getBoundingClientRect().right + 1;
+    if (!mark) { mark = document.createElement('i'); mark.className = 'tabdrop'; T.appendChild(mark); }
+    mark.style.left = (x - tb.left + T.scrollLeft) + 'px';
+  };
+  const start = () => {
+    if (!d || d.drag) return;
+    if (!L.ask) { fb('Écoute d’abord Ding : la consigne arrive.', 'hint'); d = null; return; }
+    if (L.ed && !commitEd('tap')) { d = null; return; }
+    d.drag = true; suppress = true; d.t.classList.add('lift'); SND.tap(); try { navigator.vibrate && navigator.vibrate(8); } catch (e) {}
+    ghost = document.createElement('div'); ghost.className = 'tabghost'; ghost.textContent = d.t.textContent; document.body.appendChild(ghost);
+    try { T.setPointerCapture(d.pid); } catch (e) {}
+  };
+  const stop = () => { if (d && d.timer) clearTimeout(d.timer); if (d && d.t) d.t.classList.remove('lift'); if (ghost) ghost.remove(); if (mark) mark.remove(); ghost = mark = null; d = null; };
+  T.addEventListener('pointerdown', e => {
+    if (!L || (e.button && e.button > 0)) return;
+    const t = e.target.closest('.tab');
+    d = {x: e.clientX, sl: T.scrollLeft, t, pid: e.pointerId, mouse: e.pointerType === 'mouse', drag: false, pan: false};
+    if (t && L.tools.sheets && !d.mouse) d.timer = setTimeout(() => { if (d && !d.pan) start(); }, 380);
+  });
+  T.addEventListener('pointermove', e => {
+    if (!d || e.pointerId !== d.pid) return;
+    const dx = e.clientX - d.x;
+    if (!d.drag && !d.pan && Math.abs(dx) > 6) {
+      if (d.mouse && d.t && L.tools.sheets) start(); else { d.pan = true; suppress = true; clearTimeout(d.timer); }
+    }
+    if (d && d.pan) { T.scrollLeft = d.sl - dx; return; }
+    if (d && d.drag && ghost) {
+      ghost.style.left = (e.clientX - ghost.offsetWidth / 2) + 'px'; ghost.style.top = (d.t.getBoundingClientRect().top - 4) + 'px';
+      const tb = T.getBoundingClientRect(); if (e.clientX < tb.left + 28) T.scrollLeft -= 8; else if (e.clientX > tb.right - 28) T.scrollLeft += 8;
+      showMark(dropIndex(e.clientX));
+    }
+  });
+  const up = e => {
+    if (!d || e.pointerId !== d.pid) return;
+    if (d.drag) {
+      const id = d.t.dataset.s, k = dropIndex(e.clientX), a = L.wb.sheets, j = a.findIndex(x => x.id === id);
+      const order = a.map(x => x.id).filter(x => x !== id); order.splice(k, 0, id);
+      stop();
+      if (order.join() !== a.map(x => x.id).join()) mutate(() => { L.wb.sheets = order.map(x => a.find(y => y.id === x)); }, {type: 'move', id, order});
+      return;
+    }
+    stop();
+  };
+  T.addEventListener('pointerup', up); T.addEventListener('pointercancel', e => { if (d && e.pointerId === d.pid) stop(); });
+  T.addEventListener('click', e => { if (suppress) { suppress = false; e.stopPropagation(); e.preventDefault(); } }, true);
+  T.addEventListener('pointerdown', () => { suppress = false; }, true);
+})();
 $('#tabs').addEventListener('click', e => {
   if (!L) return;
   const t = e.target.closest('[data-s]'), a = L.ask && L.ask.st;
@@ -2355,7 +2439,7 @@ $('#tabs').addEventListener('click', e => {
     if (L.ed && !commitEd('tap')) return;
     const id = (LDEF[L.n].newId && !sheetOf(LDEF[L.n].newId)) ? LDEF[L.n].newId : 's' + Date.now().toString(36);
     let k = L.wb.sheets.length + 1; while (L.wb.sheets.some(x => x.name === 'Feuil' + k)) k++;
-    return mutate(() => { L.wb.sheets.push(mkSheet(id, 'Feuil' + k, {})); L.wb.act = id; L.sheet = {a: 'A1', r: null, col: null, row: null}; }, {type: 'plus', id});
+    return mutate(() => { L.wb.sheets.splice(L.wb.sheets.findIndex(x => x.id === L.wb.act) + 1, 0, mkSheet(id, 'Feuil' + k, {})); L.wb.act = id; L.sheet = {a: 'A1', r: null, col: null, row: null}; }, {type: 'plus', id});
   }
   if (!t) return;
   SND.tap(); t.classList.remove('pulse');
@@ -2377,7 +2461,7 @@ const order = () => L.wb.sheets.map(x => x.id);
 function tabMenu(node, id) {
   emit({type: 'tabmenu', id});
   const i = L.wb.sheets.findIndex(x => x.id === id), n = L.wb.sheets.length;
-  const items = [['rename', 'Renommer'], ['color', 'Couleur d’onglet'], ...(i > 0 ? [['left', 'Déplacer vers la gauche']] : []), ...(i < n - 1 ? [['right', 'Déplacer vers la droite']] : []), ['movecopy', 'Déplacer ou copier…'], ['delete', 'Supprimer']];
+  const items = [['rename', 'Renommer'], ['color', 'Couleur d’onglet'], ['movecopy', 'Déplacer ou copier…'], ['delete', 'Supprimer']];
   popMenu(node, items, k => {
     if (!L.ask) { fb('Écoute d’abord Ding : la consigne arrive.', 'hint'); return; }
     if (k === 'rename') return renameDialog(id);
@@ -2429,13 +2513,14 @@ function moveCopyDialog(id) {
 }
 function deleteDialog(id) {
   const sh = sheetOf(id);
-  openSheet(`<div class="grab"></div><h4>${typo(`Supprimer la feuille « ${esc(sh.name)} » ?`)}</h4><p class="sub">${typo('La feuille et toutes les données qu’elle contient seront supprimées du classeur.')}</p>
+  openSheet(`<div class="grab"></div><h4>${typo(`Supprimer la feuille « ${esc(sh.name)} » ?`)}</h4><p class="sub">${typo('La feuille et toutes ses données seront supprimées définitivement. Cette action ne peut pas être annulée.')}</p>
     <div class="col"><button class="btn" data-a="del" style="background:var(--red)">Supprimer</button><button class="btn gray" data-a="x">Annuler</button></div>`);
   $('#modalPane').onclick = e => {
     const b = e.target.closest('[data-a]'); if (!b) return; closeSheet();
     if (b.dataset.a !== 'del') return emit({type: 'delcancel', id});
     if (L.wb.sheets.length < 2) return;
     mutate(() => { const a = L.wb.sheets, j = a.findIndex(x => x.id === id); a.splice(j, 1); if (L.wb.act === id) { L.wb.act = a[Math.max(0, j - 1)].id; L.sheet = {a: 'A1', r: null, col: null, row: null}; } if (L.clip && L.clip.sheet === id) L.clip = null; }, {type: 'delsheet', id, name: sh.name});
+    if (!sheetOf(id)) { L.hist = []; L.redo = []; } // comme dans Excel, une feuille supprimée ne se récupère pas avec Annuler
   };
 }
 
@@ -2487,8 +2572,8 @@ function validOk(rule, val) {
 function validAlert(rule, onClose) {
   const a = rule.alert || {}, stop = (a.style || 'stop') === 'stop';
   const title = a.on !== false && a.title ? a.title : 'Valeur non autorisée', text = a.on !== false && a.text ? a.text : 'Cette valeur ne correspond pas aux restrictions de validation des données définies pour cette cellule.';
-  openSheet(`<div class="grab"></div><div class="valert"><i class="${stop ? 'stop' : 'warn'}">${stop ? '<svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg>' : '!'}</i><h4>${typo(title)}</h4><p class="sub">${typo(text)}</p></div>
-    <div class="col">${stop ? '<button class="btn" data-a="retry">Réessayer</button><button class="btn gray" data-a="cancel">Annuler</button>' : '<button class="btn" data-a="keep">Continuer</button><button class="btn gray" data-a="cancel">Annuler</button>'}</div>`);
+  openSheet(`<div class="grab"></div><div class="valert"><i class="${stop ? 'stop' : a.style === 'info' ? 'info' : 'warn'}">${stop ? '<svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg>' : a.style === 'info' ? 'i' : '!'}</i><h4>${typo(title)}</h4><p class="sub">${typo(text)}${a.style === 'warn' ? '<br><b>' + typo('Voulez-vous continuer ?') + '</b>' : ''}</p></div>
+    <div class="col">${stop ? '<button class="btn" data-a="retry">Réessayer</button><button class="btn gray" data-a="cancel">Annuler</button>' : (a.style === 'info' ? '<button class="btn" data-a="keep">OK</button>' : '<button class="btn" data-a="keep">Oui</button><button class="btn gray" data-a="retry">Non</button>') + '<button class="btn gray" data-a="cancel">Annuler</button>'}</div>`);
   SND.bad();
   $('#modalPane').onclick = e => { const b = e.target.closest('[data-a]'); if (!b) return; closeSheet(); onClose(b.dataset.a); };
 }
@@ -2524,7 +2609,7 @@ function validDialog(r) {
           <div class="group vgrp">${st.op !== 'lt' ? field('min', d ? 'Date de début' : 'Minimum', d ? 'jj/mm/aaaa' : '', st.min) : ''}${st.op !== 'gt' ? field('max', d ? 'Date de fin' : 'Maximum', d ? 'jj/mm/aaaa' : '', st.max) : ''}</div>` : ''}
         ${st.type === 'list' ? `<p class="vh">Source</p><div class="group vgrp">${field('list', 'Choix', 'séparés par des points-virgules', st.list)}</div><button class="tgl${st.dd ? ' on' : ''}" data-tg="dd"><span>Liste déroulante dans la cellule</span><i></i></button>` : ''}`
       : tab === 'msg' ? `<button class="tgl${st.msg.on ? ' on' : ''}" data-tg="msg"><span>Afficher le message quand la cellule est sélectionnée</span><i></i></button><div class="group vgrp" style="margin-top:12px">${field('msg.title', 'Titre', '', st.msg.title)}${field('msg.text', 'Message', '', st.msg.text)}</div>`
-      : `<button class="tgl${st.alert.on ? ' on' : ''}" data-tg="alert"><span>Afficher une alerte après une saisie incorrecte</span><i></i></button><p class="vh">Style</p><div class="seg fmtseg">${[['stop', 'Arrêt'], ['warn', 'Avertissement'], ['info', 'Information']].map(([k, t]) => `<button data-al="${k}" class="${st.alert.style === k ? 'on' : ''}">${t}</button>`).join('')}</div><div class="group vgrp">${field('alert.title', 'Titre', '', st.alert.title)}${field('alert.text', 'Message', '', st.alert.text)}</div>`}`;
+      : `<button class="tgl${st.alert.on ? ' on' : ''}" data-tg="alert"><span>Afficher une alerte après une saisie incorrecte</span><i></i></button><p class="vh">Style</p><div class="seg fmtseg">${[['stop', 'Arrêt'], ['warn', 'Avertissement'], ['info', 'Informations']].map(([k, t]) => `<button data-al="${k}" class="${st.alert.style === k ? 'on' : ''}">${t}</button>`).join('')}</div><div class="group vgrp">${field('alert.title', 'Titre', '', st.alert.title)}${field('alert.text', 'Message', '', st.alert.text)}</div>`}`;
   };
   openSheet('', null, 'vdlg'); draw();
   $('#modalPane').onclick = e => {
@@ -2540,7 +2625,7 @@ function validDialog(r) {
     const rule = {range: rs, type: st.type, op: st.op};
     if (['whole', 'decimal', 'len'].includes(st.type)) { rule.min = num(st.min); rule.max = num(st.max); }
     if (st.type === 'date') { rule.min = isoOf(st.min); rule.max = isoOf(st.max); }
-    if (st.type === 'list') { rule.list = st.list.split(/[;,]/).map(x => x.trim()).filter(Boolean); rule.dd = st.dd; }
+    if (st.type === 'list') { rule.list = st.list.split(';').map(x => x.trim()).filter(Boolean); rule.dd = st.dd; }
     rule.msg = {on: !!st.msg.on, title: st.msg.title.trim(), text: st.msg.text.trim()};
     rule.alert = {on: !!st.alert.on, style: st.alert.style, title: st.alert.title.trim(), text: st.alert.text.trim()};
     mutate(() => {
@@ -2558,9 +2643,9 @@ function ddPick() {
   popMenu($('#ddbtn'), rule.list.map(v => [v, v]), v => mutate(() => { cset(ref, {v}); flashCells([ref]); }, {type: 'pick', ref, value: v}));
 }
 
-Object.assign(FICHES[0], {t: 'Classeur et feuilles', pts: ['Un <b>classeur</b> est un fichier Excel.', 'Il peut contenir plusieurs <b>feuilles</b>.', 'On passe d’une feuille à l’autre avec les <b>onglets</b>, en bas du tableau.']});
-Object.assign(FICHES[1], {t: 'Lignes et colonnes', pts: ['Les <b>colonnes</b> sont verticales et repérées par des lettres.', 'Les <b>lignes</b> sont horizontales et repérées par des numéros.']});
-Object.assign(FICHES[2], {t: 'Référence de cellule', pts: ['Une <b>référence de cellule</b> indique sa position dans la feuille.', 'Exemple : <code>B2</code> correspond à la colonne B et à la ligne 2.', 'La <b>zone Nom</b>, en haut à gauche, affiche la référence de la cellule sélectionnée.']});
+Object.assign(FICHES[0], {t: 'Classeur et feuilles', pts: ['Un <b>classeur</b> est un fichier Excel.', 'Il peut contenir plusieurs <b>feuilles</b>.', 'On passe d’une feuille à l’autre avec les <b>onglets de feuille</b>, en bas du tableau.']});
+Object.assign(FICHES[1], {t: 'Lignes et colonnes', pts: ['Les <b>colonnes</b> sont verticales et repérées par des lettres, dans les <b>en-têtes de colonne</b>.', 'Les <b>lignes</b> sont horizontales et repérées par des numéros, dans les <b>en-têtes de ligne</b>.']});
+Object.assign(FICHES[2], {t: 'Référence de cellule', pts: ['Une <b>référence de cellule</b> indique la position d’une cellule dans la feuille.', 'Exemple : <code>B2</code> correspond à la colonne B et à la ligne 2.', 'La <b>zone Nom</b>, en haut à gauche, affiche la référence de la cellule sélectionnée.']});
 Object.assign(FICHES[3], {t: 'Retrouver une information', pts: ['Dans un tableau bien organisé, les informations d’un même élément sont généralement regroupées sur une ligne.']});
 function ficheHTML(f, i, n = 1, tot = 4) {
   return `<article class="fiche"><div class="im">${f.img}</div><div class="bd"><small>Leçon ${n} · Fiche ${i + 1} sur ${tot}</small><h5>${typo(f.t)}</h5>
@@ -2610,7 +2695,7 @@ lesson(1, {wb: () => ({sheets: [SH_PDJ(), SH_RES()], act: 'pdj'}), fiches: FICHE
 S.push({t: 'title', v: 'facade', over: 'Paris · Lundi, 8 h 30', title: 'Premier jour'});
 line('facade', 'ding', 'Ding ! Bienvenue au Grand Hôtel !', {ring: true});
 line('facade', 'ding', 'Après six mois de travaux, l’hôtel rouvre samedi. Et aujourd’hui, c’est ton premier jour !', {focus: 'sign'});
-line('facade', 'ding', 'Tu as été recruté pour aider l’équipe à préparer cette réouverture.');
+line('facade', 'ding', 'Tu rejoins l’équipe pour aider à préparer cette réouverture.');
 line('facade', 'ding', 'Allez, entrons ! On nous attend.');
 S.push({t: 'action', v: 'facade', tap: 'door', act: 'Entre dans l’hôtel : touche les portes.', anim: 'enter'});
 // Scène 2 — le hall
@@ -2655,7 +2740,7 @@ coach('Et comme un cahier, il peut contenir plusieurs <b>feuilles</b>.', {hl: 't
 // Notion 2 : les feuilles
 coach('Chaque feuille est un espace dans lequel on peut organiser des informations.', {hl: 'tabs'});
 coach('Ici, notre classeur contient deux feuilles : « Petit-déj » et « Réservations ».', {hl: 'tabs'});
-coach('Pour passer de l’une à l’autre, on utilise les <b>onglets</b> situés en bas du tableau.', {hl: 'tabs'});
+coach('Pour passer de l’une à l’autre, on utilise les <b>onglets de feuille</b>, situés en bas du tableau.', {hl: 'tabs'});
 coach('Tiens, le fichier s’est ouvert sur la liste du petit-déjeuner. Retrouvons ensemble les réservations.');
 ask({kind: 'tab', hl: 'tabs', act: 'Touche l’onglet « Réservations ».', text: 'Exercice 1 · Touche l’onglet « Réservations ».',
   hints: ['Regarde en bas du tableau : tu vois deux onglets.', 'L’onglet « Réservations » se trouve à droite de « Petit-déj ».', 'Touche l’onglet qui clignote.'],
@@ -2665,7 +2750,7 @@ S.push({t: 'xpinfo', v: 'sheet', once: 'xp'});
 coach('Regarde ton tableau. Il est composé de cases organisées en lignes et en colonnes.', {sel: 'A1'});
 coach('Une <b>colonne</b>, c’est un ensemble de cases placées les unes sous les autres.', {hl: {col: 'A'}});
 coach('Les colonnes vont donc du haut vers le bas.', {hl: {col: 'A'}});
-coach('Chaque colonne est repérée par une lettre, visible tout en haut du tableau.', {hl: 'colheads'});
+coach('Chaque colonne est repérée par une lettre, affichée tout en haut dans l’<b>en-tête de colonne</b>.', {hl: 'colheads'});
 coach('Ici, la colonne A contient les noms des clients.', {hl: {col: 'A'}});
 ask({kind: 'col', target: 'A', hl: 'colheads', act: 'Touche la lettre A pour sélectionner toute la colonne.', text: 'Exercice 2 · Touche la lettre A pour sélectionner toute la colonne.',
   hints: ['Les lettres se trouvent tout en haut du tableau.', 'La lettre A est juste au-dessus du mot « Client ».', 'Touche la lettre qui clignote.'],
@@ -2673,7 +2758,7 @@ ask({kind: 'col', target: 'A', hl: 'colheads', act: 'Touche la lettre A pour sé
 coach('Tu remarques ? Tous les noms des clients sont dans cette colonne.');
 // Notion 4 : les lignes
 coach('Maintenant, regarde les numéros sur la gauche du tableau.', {sel: 'A1', hl: 'rowheads'});
-coach('Ils servent à repérer les lignes.', {hl: 'rowheads'});
+coach('Ce sont les <b>en-têtes de ligne</b> : ils servent à repérer les lignes.', {hl: 'rowheads'});
 coach('Une <b>ligne</b>, c’est un ensemble de cases placées côte à côte, de gauche à droite.', {hl: {rowb: 2}});
 coach('Dans notre tableau, chaque ligne à partir de la ligne 2 correspond à un client.', {hl: {rowb: 2}});
 coach('Par exemple, la ligne 2 contient les informations de Lina Moreau.', {hl: {rowb: 2}});
@@ -2696,7 +2781,7 @@ coach('Par exemple, <code>C4</code> désigne la cellule située à l’intersect
 coach('On écrit toujours la lettre avant le numéro.', {sel: 'C4', eq: 3});
 ask({kind: 'cell', target: 'B2', act: 'Sélectionne la cellule dont la référence est <code>B2</code>.', text: 'Exercice 4 · Sélectionne la cellule dont la référence est <code>B2</code>.',
   hints: ['B2 signifie colonne B, ligne 2.', 'Repère la colonne B, puis descends jusqu’à la ligne 2.', 'Touche la cellule qui clignote.'],
-  errs: {A2: 'Tu es sur la bonne ligne ! Mais nous cherchons la colonne B, juste à droite.', B3: 'Bonne colonne ! Remonte d’une ligne pour atteindre la ligne 2.', C2: 'Bonne ligne, mais tu es dans la colonne C. Déplace-toi d’une case vers la gauche.'},
+  errs: {A2: 'Tu es sur la bonne ligne ! Mais nous cherchons la colonne B, juste à droite.', B3: 'Bonne colonne ! Remonte d’une ligne pour atteindre la ligne 2.', C2: 'Bonne ligne, mais tu es dans la colonne C. Déplace-toi d’une cellule vers la gauche.'},
   done: 'Bravo ! Tu viens de retrouver la cellule <code>B2</code> grâce à sa référence.'});
 // La zone Nom
 coach('Regarde maintenant en haut à gauche du tableur.', {sel: 'B2', hl: 'namebox'});
@@ -2709,7 +2794,7 @@ coach('Juste à côté se trouve la <b>barre de formule</b>.', {sel: 'B2', hl: '
 coach('Elle affiche le contenu de la cellule sélectionnée.', {sel: 'B2', hl: 'fx'});
 coach('Ici, la cellule <code>B2</code> contient le nombre 204.', {sel: 'B2', hl: 'fx'});
 coach('C’est le numéro de chambre de Lina Moreau.', {sel: 'B2', hl: {cells: ['A2', 'B2']}});
-coach('Plus tard, tu verras que cette barre permet aussi de consulter et de modifier des formules.', {sel: 'B2', hl: 'fx'});
+coach('Plus tard, tu verras que cette barre permet aussi de modifier ce contenu.', {sel: 'B2', hl: 'fx'});
 // Exercice 5
 coach('On essaie avec une autre cellule ?', {sel: 'A1'});
 ask({kind: 'cell', target: 'C3', act: 'Sélectionne la cellule dont la référence est <code>C3</code>.', text: 'Exercice 5 · Sélectionne la cellule dont la référence est <code>C3</code>.',
@@ -2718,7 +2803,7 @@ ask({kind: 'cell', target: 'C3', act: 'Sélectionne la cellule dont la référen
   done: 'Exactement ! <code>C3</code> contient le nombre 2.'});
 coach('Adam Petit a réservé deux nuits.', {hl: {cells: ['A3', 'C3']}});
 // Exercice 6
-coach('Cette fois, je te laisse chercher un peu plus seul !', {sel: 'A1'});
+coach('Cette fois, je te laisse chercher un peu plus par toi-même !', {sel: 'A1'});
 ask({kind: 'cell', target: 'A4', act: 'Sélectionne la cellule dont la référence est <code>A4</code>.', text: 'Exercice 6 · Sélectionne la cellule dont la référence est <code>A4</code>.',
   hints: ['A4 correspond à la colonne A et à la ligne 4.', 'Cherche la première colonne, puis la quatrième ligne.', 'Touche la cellule qui clignote.'],
   done: 'Bien joué ! La cellule <code>A4</code> contient le nom Nora Haddad.'});
@@ -2794,8 +2879,8 @@ const norm = s => String(s == null ? '' : s).replace(/\s+/g, ' ').trim();
 function exSel(target, o) {
   return Object.assign({hh: [{colh: P(target).c}, {cross: target, soft: true}, {marker: target}], scroll: target}, o, {target, on(ev) {
     if (ev.type === 'sel') { if (ev.ref === target && ev.range === target) return true; if (ev.ref === target) return {info: 'Touche une seule cellule : ' + target + '.'}; return (o.errs && o.errs[ev.ref]) || genMiss(target, ev.ref); }
-    if (ev.type === 'col' || ev.type === 'row') return 'Touche une cellule du tableau, pas un en-tête.';
-    if (ev.type === 'namebox') return 'La zone Nom affiche la référence de la cellule active. Touche directement la cellule dans le tableau.';
+    if (ev.type === 'col' || ev.type === 'row') return 'Touche une cellule du tableau, pas un en-tête de colonne ou de ligne.';
+    if (ev.type === 'namebox') return 'La zone Nom affiche la référence de la cellule sélectionnée. Touche directement la cellule dans le tableau.';
   }});
 }
 // exercice : saisir une valeur dans une cellule, puis valider
@@ -2857,12 +2942,12 @@ lesson(2, {
     done: 'Parfait ! Tu as sélectionné <code>A5</code>, la première cellule vide de la colonne Client.'}));
   // 4. le mode édition
   coach('Une cellule sélectionnée est appelée la <b>cellule active</b>.', {sel: 'A5', hl: {pulse: 'A5'}});
-  coach('C’est celle dans laquelle tu peux travailler.', {hl: 'namebox'});
+  coach('C’est celle dans laquelle tu vas écrire. La zone Nom affiche sa référence.', {hl: 'namebox'});
   coach('Pour ajouter une information, il faut entrer en <b>mode édition</b>.');
-  coach('Sur ordinateur, on peut commencer à taper directement ou double-cliquer pour modifier une cellule.');
+  coach('Sur ordinateur, on peut commencer à taper directement ou double-cliquer sur la cellule. Sur iPhone, on la touche deux fois.');
   coach('Ici, touche la cellule sélectionnée une deuxième fois pour faire apparaître le clavier.', {hl: {pulse: 'A5'}});
   ask({act: 'Touche de nouveau <code>A5</code> pour commencer à écrire.', text: 'Exercice 2 · mode édition', sel: 'A5', edit: true, hl: {pulse: 'A5'},
-    hints: ['A5 est déjà sélectionnée. Il faut maintenant ouvrir son contenu pour l’éditer.', 'Touche une deuxième fois la cellule entourée.', 'Touche la cellule qui clignote.'], hh: [{pulse: 'A5'}, {pulse: 'A5'}, {marker: 'A5'}],
+    hints: ['A5 est déjà sélectionnée. Il faut maintenant passer en mode édition.', 'Touche une deuxième fois la cellule entourée.', 'Touche la cellule qui clignote.'], hh: [{pulse: 'A5'}, {pulse: 'A5'}, {marker: 'A5'}],
     on(ev) {
       if (ev.type === 'edit') return ev.ref === 'A5' ? true : {miss: 'Tu as changé de cellule. Reviens sur A5 pour écrire le nom.', closeEd: true};
       if (ev.type === 'sel' && ev.ref !== 'A5') return 'Tu as changé de cellule. Reviens sur A5 pour écrire le nom.';
@@ -2881,7 +2966,7 @@ lesson(2, {
       if (ev.type === 'cancel') return 'Le clavier s’est fermé. Touche A5 pour reprendre la saisie.';
       if (ev.type === 'sel' && ev.ref !== 'A5') return 'Vérifie la cellule active : le nom doit être saisi en A5.';
     }, done: 'Très bien ! Le nom est écrit.'});
-  coach('Il reste une petite étape : confirmer la saisie.', {keepEd: true});
+  coach('Il reste une petite étape : valider la saisie.', {keepEd: true});
   // 6. valider
   coach('Tant que tu es en train d’écrire, Excel est en mode édition.', {keepEd: true, hl: {key: 'enter'}});
   coach('Pour terminer, tu peux valider avec Entrée ou avec la coche de la barre de formule.', {keepEd: true, hl: [{key: 'enter'}, 'fxok']});
@@ -2891,10 +2976,10 @@ lesson(2, {
     on(ev) {
       if (ev.type === 'commit') {
         if (norm(ev.text) !== 'Sarah Bernard') return {block: true, miss: norm(ev.text) ? 'Le nom ne correspond plus. Réécris « Sarah Bernard », puis valide.' : 'Le nom a disparu. Réécris « Sarah Bernard », puis valide.'};
-        if (ev.via === 'tap') return {block: true, miss: 'Pour cet exercice, utilise la touche Entrée afin de découvrir comment confirmer une saisie.'};
+        if (ev.via === 'tap') return {block: true, miss: 'Pour cet exercice, utilise la touche Entrée afin de découvrir comment valider une saisie.'};
         return true;
       }
-      if (ev.type === 'cancel') return 'Reprends la saisie, puis confirme avec Entrée.';
+      if (ev.type === 'cancel') return 'Reprends la saisie, puis valide avec Entrée.';
       if (ev.type === 'key' && !norm(ev.text)) return {info: 'Le nom a disparu. Réécris « Sarah Bernard », puis valide.'};
     }, okHl: {pulse: 'A5'}, done: 'Bravo ! Sarah Bernard apparaît maintenant dans le tableau.'});
   coach('Tu viens d’ajouter ta première information dans Excel !', {ok: true, hl: {cells: ['A5']}});
@@ -2909,7 +2994,7 @@ lesson(2, {
     cellErrs: {A5: 'A5 contient déjà le nom de Sarah. Le numéro de chambre va dans la colonne B.', C5: 'Cette colonne sert au nombre de nuits. Cherche « Chambre ».', B6: 'Tu es sur la ligne suivante. Reviens sur la ligne 5.'},
     wrong: {'280': 'Vérifie l’ordre des chiffres. La chambre est la 208.', '28': 'Il manque un zéro entre le 2 et le 8.'},
     done: 'Bien joué ! Sarah a maintenant une chambre : la 208.'}));
-  coach('Tu as saisi un nombre. Excel peut conserver cette valeur comme une donnée numérique.', {hl: {cells: ['B5']}});
+  coach('Tu as saisi un nombre. Excel l’enregistre comme une valeur numérique et, par défaut, l’aligne à droite dans la cellule.', {hl: {cells: ['B5']}});
   // 8. la durée du séjour
   coach('Il manque une dernière information.', {hl: {col: 'C', to: 5}});
   coach('Combien de nuits Sarah va-t-elle rester ?', {extra: refCard(SARAH).replace('<b>3 nuits</b>', '<b class="hlv">3 nuits</b>')});
@@ -2959,7 +3044,7 @@ lesson(3, {
     {id: 'l3f3', t: 'Effacer le contenu', img: mg({t: {A1: 'Client', D1: '', A2: 'Sarah', B2: 208, C2: 2}, cols: 4, rows: 3, w: 32, sel: 'D2', fill: {D2: '#FBF1DC'}}), pts: ['<b>Effacer le contenu</b> vide une cellule sans déplacer les autres cellules.', 'Ce n’est pas la même chose que <b>supprimer</b> la cellule.']},
     {id: 'l3f4', t: 'Annuler une action', img: `<svg viewBox="0 0 170 70" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}" fill="none" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(38 14)" stroke="#8E1D42" stroke-width="3"><path d="M14 24L5 15 14 6"/><path d="M5 15h19a10 10 0 0 1 0 20h-6"/></g><g transform="translate(100 14)" stroke="#AEAEB2" stroke-width="3"><path d="M24 24l9-9-9-9"/><path d="M33 15H14a10 10 0 0 0 0 20h6"/></g></svg>`, pts: ['<b>Annuler</b> permet de revenir sur une action récente, lorsqu’elle est réversible.', '<b>Rétablir</b> permet de refaire une action annulée.']},
   ],
-  end: {title: 'Oups… erreur corrigée !', talk: ['Bravo ! Tu viens de découvrir une compétence essentielle dans Excel : savoir corriger ses erreurs.', 'Une réservation change ? Tu peux modifier sa cellule.', 'Une faute de frappe ? Tu peux la corriger.', 'Une note inutile ? Tu peux l’effacer.', 'Et une mauvaise manipulation ? Tu peux essayer de l’annuler !'],
+  end: {title: 'Oups… erreur corrigée !', talk: ['Bravo ! Tu viens de découvrir une compétence essentielle dans Excel : savoir corriger ses erreurs.', 'Une réservation change ? Tu peux modifier sa cellule.', 'Une faute de frappe ? Tu peux la corriger.', 'Une mention inutile ? Tu peux l’effacer.', 'Et une mauvaise manipulation ? Tu peux essayer de l’annuler !'],
     teaser: {from: 'thomas', text: '« Encore merci ! J’ai une autre petite mission pour toi. Nous préparons les chambres pour samedi, mais je dois recopier les mêmes informations sur plusieurs lignes… Je sens que je vais y passer la matinée ! »'},
     dsay: ['Recopier les mêmes informations encore et encore ?', 'Heureusement, Excel possède des outils pour éviter ça !'],
     next: 'Chambre 104 — Les chambres manquantes', nextSub: 'Copier, coller, couper et recopier des informations dans Excel.'},
@@ -2993,17 +3078,17 @@ lesson(3, {
   coach('Ici, Adam ne reste plus deux nuits, mais quatre.', {extra: `<span class="chg"><b>2</b><i>→</i><b>4</b></span>`});
   coach('Nous allons donc remplacer 2 par 4. Touche la cellule une deuxième fois pour la modifier.', {hl: {pulse: 'C3'}});
   ask(exPut('C3', 4, {act: 'Remplace le nombre 2 par 4 dans <code>C3</code>, puis valide.', text: 'Exercice 2 · modifier un nombre', sel: 'C3',
-    hints: ['La cellule C3 est déjà sélectionnée. Ouvre son contenu pour le modifier.', 'Efface l’ancienne valeur 2, puis écris 4.', 'Saisis 4 dans la cellule qui clignote, puis appuie sur Entrée.'], hh: [{pulse: 'C3'}, {key: 'back'}, {key: 'enter', marker: 'C3'}],
+    hints: ['La cellule C3 est déjà sélectionnée. Touche-la une deuxième fois pour passer en mode édition.', 'Efface l’ancienne valeur 2, puis écris 4.', 'Saisis 4 dans la cellule qui clignote, puis appuie sur Entrée.'], hh: [{pulse: 'C3'}, {key: 'back'}, {key: 'enter', marker: 'C3'}],
     cellErrs: {B3: 'Attention, tu modifies le numéro de chambre. La durée du séjour se trouve dans C3.'},
     wrong: {'24': 'Tu as ajouté 4 à côté de 2. Il faut remplacer l’ancienne valeur, pas ajouter un chiffre.', '42': 'Il reste deux chiffres. La nouvelle durée doit être simplement 4.', 'quatre': 'C’est bien la nouvelle durée, mais saisis-la sous forme numérique : 4.', 'Quatre': 'C’est bien la nouvelle durée, mais saisis-la sous forme numérique : 4.'},
-    typed: 'C’est la bonne valeur ! Il reste à confirmer la saisie.',
+    typed: 'C’est la bonne valeur ! Il reste à valider la saisie.',
     done: 'Parfait ! Adam Petit reste désormais quatre nuits.'}));
   coach('Tu viens de modifier une information sans toucher aux autres cellules.', {ok: true, hl: {goodrow: 3}});
   coach('Le nom d’Adam et son numéro de chambre sont restés exactement les mêmes.', {ok: true, hl: {goodrow: 3}});
   // 5. la barre de formule
   coach('Il existe aussi un autre endroit pour consulter et modifier le contenu d’une cellule.', {sel: 'C3', hl: 'fx'});
   coach('Tu reconnais cette zone ? C’est la <b>barre de formule</b>.', {hl: 'fx'});
-  coach('Elle affiche le contenu de la cellule sélectionnée.', {hl: 'fx'});
+  coach('Elle affiche le contenu de la cellule active.', {hl: 'fx'});
   coach('Et tu peux aussi l’utiliser pour modifier ce contenu.', {hl: 'fx'});
   coach('On va essayer avec une autre réservation.');
   msg('thomas', 'Encore une petite correction ! Sarah Bernard ne reste finalement que deux nuits au lieu de trois.', 'Décidément, les clients changent souvent d’avis !');
@@ -3014,22 +3099,22 @@ lesson(3, {
   coach('Cette fois, nous allons modifier la valeur depuis la barre de formule.', {sel: 'C5', hl: 'fx'});
   coach('Sarah reste deux nuits. Il faut donc remplacer 3 par 2.', {hl: 'fx'});
   ask({act: 'Touche la barre de formule, remplace 3 par 2, puis valide.', text: 'Exercice 4 · la barre de formule', sel: 'C5', edit: true, num: true, hl: 'fx',
-    hints: ['Regarde en haut du tableau, à droite de la zone Nom.', 'La barre de formule affiche actuellement 3. Touche cette valeur pour la modifier.', 'Remplace 3 par 2 dans la zone qui clignote, puis confirme.'], hh: ['fx', 'fx', [{key: 'back'}, {key: 'enter'}]],
+    hints: ['Regarde en haut du tableau, à droite de la zone Nom.', 'La barre de formule affiche actuellement 3. Touche cette valeur pour la modifier.', 'Remplace 3 par 2 dans la zone qui clignote, puis valide.'], hh: ['fx', 'fx', [{key: 'back'}, {key: 'enter'}]],
     on(ev) {
       if (ev.type === 'namebox') return 'Tu as touché la zone Nom. Elle affiche la référence C5. La barre de formule est juste à côté.';
       if (ev.type === 'edit' && ev.via !== 'fx') return {miss: 'Tu as trouvé une autre façon de modifier la cellule ! Pour cet exercice, essaie la barre de formule.', closeEd: true};
-      if (ev.type === 'key' && norm(ev.text) === '2') return {info: 'La valeur est correcte. Confirme maintenant la modification.'};
+      if (ev.type === 'key' && norm(ev.text) === '2') return {info: 'La valeur est correcte. Valide maintenant la saisie.'};
       if (ev.type === 'commit') {
         if (ev.ref !== 'C5') return {cancel: true, miss: 'La durée de Sarah se trouve en C5.'};
         if (ev.val === 2) return true;
         if (norm(ev.text) === '32' || norm(ev.text) === '23') return {block: true, miss: 'L’ancien chiffre est encore présent. Efface 3 avant d’écrire 2.'};
         return {block: true, miss: 'Sarah reste deux nuits : la valeur attendue est 2.'};
       }
-    }, done: 'Bravo ! Tu sais maintenant modifier une cellule de deux façons : directement dans la grille ou avec la barre de formule.'});
+    }, done: 'Bravo ! Tu sais maintenant modifier une cellule de deux façons : directement dans la cellule ou dans la barre de formule.'});
   // 6. une faute dans un nom
   msg('camille', ['Je viens de comparer notre liste avec les confirmations envoyées aux clients.', 'Le nom de Nora Haddad est mal orthographié sur une fiche. Peux-tu vérifier qu’il est correct dans notre tableau ?'], 'Voyons ça. Les noms sont importants : une lettre oubliée peut créer une confusion.', {ok: false});
   coach('Dans Excel, on peut aussi corriger du texte.');
-  coach('Ah, la faute s’est aussi glissée dans notre fichier ! La fiche synchronisée affiche « Nora Hadad ».', {do: X => { if (X.v('A4') === 'Nora Haddad') { X.set('A4', 'Nora Hadad'); return ['A4']; } }, hl: {cells: ['A4']}, sel: 'A4'});
+  coach('Ah, la faute s’est aussi glissée dans notre fichier ! La cellule <code>A4</code> affiche « Nora Hadad ».', {do: X => { if (X.v('A4') === 'Nora Haddad') { X.set('A4', 'Nora Hadad'); return ['A4']; } }, hl: {cells: ['A4']}, sel: 'A4'});
   coach('Il manque une lettre dans le nom de Nora.', {hl: {cells: ['A4']}});
   coach('Astuce : quand tu écris, touche une lettre dans la barre de formule pour placer le curseur à cet endroit.', {hl: 'fx'});
   ask(exPut('A4', 'Nora Haddad', {act: 'Corrige le nom de la cliente dans <code>A4</code> pour obtenir <b>Nora Haddad</b>.', text: 'Exercice 5 · corriger une faute',
@@ -3039,20 +3124,20 @@ lesson(3, {
     empty: 'Le nom a disparu. Tu peux le ressaisir : Nora Haddad.',
     done: 'Exactement ! Le nom est maintenant correctement orthographié.'}));
   coach('Tu viens de corriger du texte, comme tu avais corrigé des nombres.', {ok: true, hl: {cells: ['A4']}});
-  // 7. effacer une note
-  msg('thomas', ['Merci pour toutes ces corrections !', 'J’avais aussi ajouté une note provisoire à côté de la réservation de Sarah. Elle n’est plus utile. Tu peux l’enlever ?'], 'Cette fois, Thomas ne veut pas remplacer une information.', {ok: false, do: X => { if (!X.v('D5')) { X.set('D5', 'À rappeler'); return ['D5']; } }, hl: {cells: ['D5']}});
-  coach('Il veut simplement supprimer le contenu d’une cellule.', {hl: {cells: ['D5']}, tools: {rib: ['clear']}});
+  // 7. effacer une mention
+  msg('thomas', ['Merci pour toutes ces corrections !', 'J’avais aussi ajouté une mention provisoire à côté de la réservation de Sarah. Elle n’est plus utile. Tu peux l’enlever ?'], 'Cette fois, Thomas ne veut pas remplacer une information.', {ok: false, do: X => { if (!X.v('D5')) { X.set('D5', 'À rappeler'); return ['D5']; } }, hl: {cells: ['D5']}});
+  coach('Il veut simplement effacer le contenu d’une cellule.', {hl: {cells: ['D5']}, tools: {rib: ['clear']}});
   coach('Attention : <b>effacer le contenu</b> et <b>supprimer une cellule</b> ne sont pas la même chose.');
-  coach('Si tu effaces le contenu, la cellule reste à sa place. Elle devient simplement vide.', {hl: {btn: 'clear'}});
+  coach('Si tu effaces le contenu, la cellule reste à sa place. Elle devient simplement vide. Si tu supprimes la cellule, les cellules voisines se décalent pour combler le vide.', {hl: {btn: 'clear'}});
   ask({act: 'Sélectionne <code>D5</code> et utilise la commande « Effacer le contenu ».', text: 'Exercice 6 · effacer', edit: true, hl: {cells: ['D5']}, scroll: 'D5',
-    hints: ['La note « À rappeler » se trouve à droite du nombre de nuits de Sarah.', 'Sélectionne D5, puis ouvre les commandes de modification.', 'Choisis « Effacer le contenu » pour vider la cellule qui clignote.'], hh: [{cells: ['D5']}, {btn: 'clear'}, {marker: 'D5', btn: 'clear'}],
+    hints: ['La mention « À rappeler » se trouve à droite du nombre de nuits de Sarah.', 'Sélectionne D5, puis touche le bouton « Effacer » du ruban, sous la barre de formule.', 'Choisis « Effacer le contenu » pour vider la cellule qui clignote.'], hh: [{cells: ['D5']}, {btn: 'clear'}, {marker: 'D5', btn: 'clear'}],
     on(ev, X) {
-      if (ev.type === 'sel') return ev.ref === 'C5' ? 'Cette cellule contient le nombre de nuits de Sarah. La note est juste à droite.' : ev.ref === 'D4' ? 'Tu es dans la bonne colonne, mais la note est sur la ligne 5.' : null;
+      if (ev.type === 'sel') return ev.ref === 'C5' ? 'Cette cellule contient le nombre de nuits de Sarah. La mention est juste à droite.' : ev.ref === 'D4' ? 'Tu es dans la bonne colonne, mais la mention est sur la ligne 5.' : null;
       if (ev.type === 'cmd' && ev.name === 'delcell') return {miss: 'Attention ! Cette commande peut déplacer d’autres cellules. Nous voulons seulement vider D5. Choisis « Effacer le contenu ».', revert: true};
-      if (ev.type === 'cmd' && ev.name === 'clear') return ev.range === 'D5' ? true : {miss: 'Cette cellule ne contient pas la note de Thomas. Reviens sur D5.', revert: true};
+      if (ev.type === 'cmd' && ev.name === 'clear') return ev.range === 'D5' ? true : {miss: 'Cette cellule ne contient pas la mention de Thomas. Reviens sur D5.', revert: true};
       if (ev.type === 'commit' && ev.ref === 'D5') return {cancel: true, miss: ev.text && !ev.text.trim() ? 'La cellule semble vide, mais elle contient encore un espace. Utilise la commande « Effacer le contenu ».' : 'Pour cet exercice, utilise la commande « Effacer le contenu ».'};
-      if (ev.type === 'commit') return {cancel: true, miss: 'Cette cellule ne contient pas la note de Thomas. Reviens sur D5.'};
-    }, done: 'Parfait ! La note a disparu, mais le tableau n’a pas bougé.'});
+      if (ev.type === 'commit') return {cancel: true, miss: 'Cette cellule ne contient pas la mention de Thomas. Reviens sur D5.'};
+    }, done: 'Parfait ! La mention a disparu, mais le tableau n’a pas bougé.'});
   coach('C’est exactement ce qu’on voulait.', {ok: true});
   // 8. annuler
   coach('Il nous reste une dernière chose importante à découvrir.', {tools: {rib: ['undo', 'redo', 'clear']}});
@@ -3070,10 +3155,10 @@ lesson(3, {
       if (ev.type === 'commit' && ev.ref === 'B2' && ev.val === 204) return {cancel: true, miss: 'Tu as retrouvé le bon numéro ! Mais pour cet exercice, nous allons utiliser la commande Annuler. L’erreur reste en place pour que tu puisses essayer.'};
       if (ev.type === 'commit') return {cancel: true, miss: 'Nous voulons retrouver l’ancienne valeur avec Annuler, sans retaper.'};
       if (ev.type === 'cmd' && ev.name === 'clear') return {miss: 'Attention, tu as vidé la cellule. Nous voulons retrouver son ancienne valeur avec Annuler.', revert: true};
-      if (ev.type === 'sel' && ev.ref !== 'B2') return 'Le numéro de Lina est toujours incorrect. Cherche la flèche Annuler dans la barre d’outils.';
+      if (ev.type === 'sel' && ev.ref !== 'B2') return 'Le numéro de Lina est toujours incorrect. Cherche la flèche Annuler dans le ruban.';
     }, done: 'Bien joué ! Le numéro 204 est revenu.'});
   coach('Tu viens d’annuler une modification. C’est une commande très utile lorsque tu te trompes.', {ok: true, hl: {cells: ['B2']}});
-  coach('Et si tu annules une action par erreur, la commande <b>Rétablir</b> permet souvent de la refaire.', {hl: {btn: ['undo', 'redo']}});
+  coach('Et si tu annules une action par erreur, la commande <b>Rétablir</b> permet de la refaire, tant que tu n’as rien modifié entre-temps.', {hl: {btn: ['undo', 'redo']}});
   coach('Pour l’instant, retiens surtout ceci : Annuler te permet de revenir en arrière.', {hl: {btn: 'undo'}});
   // 9. contrôle final
   msg('thomas', 'Merci pour ton aide ! Tu peux vérifier une dernière fois les modifications avant que je confirme les réservations ?', 'Bonne idée. Quand plusieurs informations ont changé, mieux vaut faire un dernier contrôle.', {ok: false});
@@ -3083,13 +3168,13 @@ lesson(3, {
       ['Adam Petit', '4 nuits', X => X.v('C3') === 4 || 'Adam a prolongé son séjour. Il doit rester quatre nuits.'],
       ['Sarah Bernard', '2 nuits', X => X.v('C5') === 2 || 'Sarah a raccourci son séjour. Elle reste désormais deux nuits.'],
       ['Nom de Nora', 'Nora Haddad', X => X.v('A4') === 'Nora Haddad' || 'Vérifie le nom de Nora. Il doit s’écrire Haddad.'],
-      ['Note de Sarah', 'Effacée', X => X.v('D5') === undefined || 'La note provisoire est encore présente. Efface son contenu.'],
+      ['Mention de Sarah', 'Effacée', X => X.v('D5') === undefined || 'La mention provisoire est encore présente. Efface son contenu.'],
       ['Chambre de Lina', '204', X => X.v('B2') === 204 || 'La chambre de Lina doit être la 204. Vérifie que la mauvaise manipulation a bien été annulée.']]},
-    hints: ['Vérifie d’abord les deux durées de séjour : Adam et Sarah.', 'Contrôle ensuite l’orthographe de Nora, la note de Sarah et le numéro de chambre de Lina.', 'Le tableau doit contenir Adam = 4 nuits, Sarah = 2 nuits, Nora Haddad, D5 vide et Lina = chambre 204.'], hh: [{cells: ['C3', 'C5']}, {cells: ['A4', 'D5', 'B2']}, {pbtn: true}],
+    hints: ['Vérifie d’abord les deux durées de séjour : Adam et Sarah.', 'Contrôle ensuite l’orthographe de Nora, la mention de Sarah et le numéro de chambre de Lina.', 'Le tableau doit contenir Adam = 4 nuits, Sarah = 2 nuits, Nora Haddad, D5 vide et Lina = chambre 204.'], hh: [{cells: ['C3', 'C5']}, {cells: ['A4', 'D5', 'B2']}, {pbtn: true}],
     on() {}, done: 'Tout est correct ! Les réservations sont à jour.'});
   coach('Tu as corrigé plusieurs informations sans avoir à recréer le tableau.', {ok: true});
   msg('thomas', ['Impeccable ! Adam reste quatre nuits, Sarah deux, et les autres informations sont correctes.', 'Je peux maintenant confirmer les réservations aux clients. Merci, tu m’as bien aidé !'], 'Ding ! Encore une mission réussie !');
-  coach('Tu sais maintenant corriger des nombres, modifier du texte, effacer une cellule et annuler une mauvaise manipulation.', {ok: true});
+  coach('Tu sais maintenant corriger des nombres, modifier du texte, effacer le contenu d’une cellule et annuler une mauvaise manipulation.', {ok: true});
   coach('Et surtout, tu sais vérifier ton travail avant de le transmettre.', {ok: true});
   S.push({t: 'end', v: 'end'});
 });
@@ -3104,9 +3189,9 @@ lesson(4, {
   tools: {edit: true},
   vocab: ['Thomas', 'préparer'],
   fiches: [
-    {id: 'l4f1', t: 'Copier et Coller', img: mg({t: {A1: 'Statut', A2: 'À prép.', A3: 'À prép.'}, cols: 2, rows: 3, w: 44, dash: 'A2', sel: 'A3'}), pts: ['<b>Copier</b> prépare une reproduction d’une information sans supprimer l’original.', '<b>Coller</b> place cette information dans une autre cellule.']},
+    {id: 'l4f1', t: 'Copier et Coller', img: mg({t: {A1: 'Statut', A2: 'À prép.', A3: 'À prép.'}, cols: 2, rows: 3, w: 44, dash: 'A2', sel: 'A3'}), pts: ['<b>Copier</b> garde l’information en mémoire, dans le <b>Presse-papiers</b>, sans la retirer de sa cellule.', '<b>Coller</b> place cette information dans une autre cellule.']},
     {id: 'l4f2', t: 'Couper et Coller', img: mg({t: {B1: 'Resp.', B4: 'Thomas'}, cols: 2, rows: 4, w: 44, dash: 'B2', sel: 'B4', extra: ''}), pts: ['<b>Couper</b> puis <b>Coller</b> permet de déplacer une information.', 'Après le déplacement, elle ne se trouve plus dans la cellule source.']},
-    {id: 'l4f3', t: 'La poignée de recopie', img: mg({t: {A1: 'Statut', A2: 'À prép.', A3: 'À prép.', A4: 'À prép.'}, cols: 2, rows: 4, w: 44, sel: 'A2:A4', handle: true}), pts: ['Le petit carré au coin de la sélection est la <b>poignée de recopie</b>.', 'Fais-la glisser pour remplir rapidement des cellules voisines.']},
+    {id: 'l4f3', t: 'La poignée de recopie', img: mg({t: {A1: 'Statut', A2: 'À prép.', A3: 'À prép.', A4: 'À prép.'}, cols: 2, rows: 4, w: 44, sel: 'A2:A4', handle: true}), pts: ['Le petit carré en bas à droite de la sélection est la <b>poignée de recopie</b>.', 'Fais-la glisser pour remplir rapidement des cellules voisines.']},
     {id: 'l4f4', t: 'Compléter une série', img: mg({t: {A1: 'Ch.', A2: 201, A3: 202, A4: 203, A5: 204}, cols: 2, rows: 5, w: 40, sel: 'A2:A3', handle: true, fill: {A4: '#FBF1DC', A5: '#FBF1DC'}}), pts: ['Sélectionne plusieurs valeurs qui suivent une progression, comme 201 et 202.', 'La poignée de recopie continue la suite : 203, 204, 205…']},
   ],
   end: {title: 'Tu as gagné du temps !', talk: ['Bravo ! Tu viens de découvrir plusieurs commandes très utiles dans Excel.', 'Tu sais maintenant copier une information pour la reproduire ailleurs.', 'Tu sais aussi la coller dans une ou plusieurs cellules.', 'Tu as utilisé la poignée de recopie pour répéter du texte et continuer une suite de nombres.', 'Et tu as appris à déplacer une information avec Couper et Coller.'],
@@ -3122,7 +3207,7 @@ lesson(4, {
   line('office', 'ding', 'Thomas a l’air débordé ! Allons voir ce qu’il se passe.', {notif: N4});
   S.push({t: 'notif', v: 'office', ...N4, zoom: false, act: 'Touche « Aller à la réception ».', miss: 'Thomas nous attend à la réception. Touche le bouton pour le rejoindre.'});
   // 2. à la réception
-  line('reception', 'thomas', 'Ah, te voilà ! Merci d’être venu.', {expr: 'wave'});
+  line('reception', 'thomas', 'Ah, te voilà ! Merci d’être là.', {expr: 'wave'});
   line('reception', 'thomas', 'Samedi, nous accueillons nos premiers clients, mais il faut encore vérifier plusieurs chambres.', {expr: 'think'});
   line('reception', 'thomas', 'Pour chacune, je dois noter qu’elle est à préparer, puis suivre son avancement.', {expr: 'present'});
   line('reception', 'thomas', 'J’ai commencé un fichier Excel, mais je suis en train d’écrire « À préparer » sur chaque ligne.', {expr: 'think'});
@@ -3151,7 +3236,7 @@ lesson(4, {
   // 4. copier
   coach('Tu connais déjà la sélection d’une cellule.');
   coach('Maintenant, tu vas découvrir une nouvelle commande : <b>Copier</b>.');
-  coach('Copier permet de préparer une reproduction du contenu d’une cellule, sans supprimer l’original.');
+  coach('Copier garde le contenu d’une cellule en mémoire, dans le <b>Presse-papiers</b>, sans le retirer de la cellule.');
   coach('Pour commencer, il faut sélectionner la cellule contenant l’information que tu veux copier.');
   ask(exSel('B2', {act: 'Sélectionne la cellule qui contient « À préparer ».', text: 'Exercice 1 · la cellule source',
     hints: ['Cherche le texte « À préparer » dans le tableau.', 'Il se trouve dans la colonne Statut, sur la ligne de la chambre 101.', 'Sélectionne B2, la cellule qui clignote.'],
@@ -3193,7 +3278,7 @@ lesson(4, {
   // 7. coller sur une plage
   msg('thomas', 'Super ! Les chambres 103 et 104 doivent aussi être préparées. Tu peux leur mettre le même statut ?', 'Bien sûr !', {ok: false});
   coach('Cette fois, nous allons sélectionner plusieurs cellules de destination.');
-  coach('Une <b>plage</b> est un ensemble de cellules. Par exemple, <code>B4:B5</code> représente les cellules B4 et B5.', {hl: {range: 'B4:B5'}});
+  coach('Une <b>plage de cellules</b> est un groupe de cellules voisines. Par exemple, <code>B4:B5</code> désigne toutes les cellules de B4 à B5 : les deux-points se lisent « jusqu’à ».', {hl: {range: 'B4:B5'}});
   coach('Pour sélectionner une plage, touche d’abord B4. Pose ensuite ton doigt sur B4 et fais-le glisser jusqu’à B5.', {hl: {range: 'B4:B5'}});
   coach('En sélectionnant une plage, on peut coller la même information dans plusieurs cellules d’un seul coup.', {hl: {range: 'B4:B5'}});
   ask({act: 'Copie <code>B2</code>, puis colle « À préparer » dans la plage <code>B4:B5</code>.', text: 'Exercice 4 · coller sur une plage', edit: true,
@@ -3207,7 +3292,7 @@ lesson(4, {
       if (ev.type === 'cmd' && ev.name === 'paste') {
         if (ev.src !== 'B2') return {miss: ev.src === 'C2' ? 'Tu as copié le responsable au lieu du statut. Reviens sur B2 pour copier « À préparer ».' : 'Reviens sur B2 pour copier « À préparer ».', revert: true};
         if (X.v('B4') === 'À préparer' && X.v('B5') === 'À préparer') return true;
-        if (ev.range === 'B4') return 'La chambre 103 est prête dans le tableau, mais il manque encore la chambre 104. Sélectionne les deux cellules ensemble.';
+        if (ev.range === 'B4') return 'Le statut de la chambre 103 est rempli, mais il manque encore celui de la chambre 104. Sélectionne les deux cellules ensemble.';
         return {miss: 'Le statut doit aller dans B4 et B5.', revert: true};
       }
       if (ev.type === 'commit') return {cancel: true, miss: 'Pas besoin d’écrire : copie B2, puis colle.'};
@@ -3215,18 +3300,18 @@ lesson(4, {
   coach('Quand une même information doit être répétée, c’est beaucoup plus rapide.', {ok: true});
   // 8. la poignée de recopie
   coach('Il ne reste plus que la chambre 105.', {hl: {cells: ['B6']}});
-  coach('Nous pourrions encore utiliser Copier et Coller. Mais Excel possède une autre fonction très pratique : la <b>recopie</b>.');
+  coach('Nous pourrions encore utiliser Copier et Coller. Mais Excel possède un autre outil très pratique : la <b>recopie</b>.');
   coach('Quand tu sélectionnes une cellule, un petit carré apparaît dans son coin inférieur droit.', {sel: 'B5', tools: {fill: true}, hl: {fill: true}});
   coach('Ce petit carré s’appelle la <b>poignée de recopie</b>.', {sel: 'B5', hl: {fill: true}});
   coach('En la faisant glisser, tu peux reproduire une valeur dans les cellules voisines.', {sel: 'B5', hl: {fill: true}});
-  coach('Ici, nous allons recopier le statut de la chambre 104 vers celle de la chambre 105.', {sel: 'B5', hl: {cells: ['B6']}});
+  coach('Ici, nous allons recopier le statut de la chambre 104 sur la ligne de la chambre 105.', {sel: 'B5', hl: {cells: ['B6']}});
   ask({act: 'Sélectionne <code>B5</code>, puis fais glisser la poignée de recopie jusqu’à <code>B6</code>.', text: 'Exercice 5 · poignée de recopie', sel: 'B5',
     hints: ['La cellule B5 contient déjà le texte que nous voulons reproduire.', 'Sélectionne B5, puis cherche le petit carré au coin inférieur droit de la sélection.', 'Fais glisser la poignée qui clignote vers le bas, jusqu’à B6.'], hh: [{pulse: 'B5'}, {fill: true}, {fill: true, marker: 'B6'}],
     on(ev, X) {
       if (ev.type === 'fill') {
         if (ev.src !== 'B5') return {miss: 'Commence par sélectionner B5, puis fais glisser sa poignée.', revert: true};
         if (ev.dst === 'B5:B6') return true;
-        return {miss: P(ev.dst.split(':')[1]).r > 6 ? 'Tu es allé un peu trop loin. Arrête la recopie sur la ligne 6.' : 'La recopie doit aller de B5 jusqu’à B6.', revert: true};
+        return {miss: P(ev.dst.split(':')[1]).r > 6 ? 'C’est un peu trop loin. Arrête la recopie sur la ligne 6.' : 'La recopie doit aller de B5 jusqu’à B6.', revert: true};
       }
       if (ev.type === 'sel' && ev.how === 'drag' && ev.range === 'B5:B6') return 'Tu as étendu la sélection au lieu de recopier. Attrape plutôt le petit carré situé dans son coin.';
       if (ev.type === 'sel' && ev.ref === 'B6') return {info: 'Tu as sélectionné la destination. Pour cet exercice, nous allons utiliser la poignée de recopie de B5.'};
@@ -3239,11 +3324,11 @@ lesson(4, {
   // 9. une suite de numéros
   msg('thomas', ['Merci ! J’ai aussi une seconde liste. Les chambres du deuxième étage vont de 201 à 205.', 'J’ai déjà écrit les deux premiers numéros. Tu peux compléter la suite ?'], 'Regarde les numéros de chambre : 201, puis 202.', {ok: false,
     do: X => { if (X.v('E1') === undefined) { ['E1', 'F1', 'E2', 'E3', 'F2'].forEach((r, i) => X.set(r, ['Chambre', 'Responsable', 201, 202, 'Thomas'][i])); return ['E1', 'F1', 'E2', 'E3', 'F2']; } }, hl: {cells: ['E2', 'E3'], scroll: 'E2'}});
-  coach('Selon les valeurs sélectionnées, Excel peut reconnaître une suite numérique.', {hl: {cells: ['E2', 'E3'], scroll: 'E2'}});
+  coach('Quand les valeurs sélectionnées suivent une progression régulière, la poignée de recopie peut prolonger cette <b>série</b>.', {hl: {cells: ['E2', 'E3'], scroll: 'E2'}});
   coach('Ici, les numéros augmentent de 1 à chaque ligne.', {hl: {cells: ['E2', 'E3']}});
   coach('Si on sélectionne ces deux nombres avant de recopier, Excel peut continuer la suite. Essayons !', {hl: {range: 'E2:E3'}});
   ask({act: 'Sélectionne <code>E2:E3</code>, puis utilise la poignée de recopie jusqu’à <code>E6</code>.', text: 'Exercice 6 · compléter une série', edit: true, scroll: 'E2',
-    hints: ['Pour montrer la suite à Excel, sélectionne les deux premiers nombres : 201 et 202.', 'Ils se trouvent dans la plage E2:E3. La liste doit se terminer sur la ligne 6.', 'Sélectionne E2:E3, puis fais glisser la poignée jusqu’à E6.'], hh: [{cells: ['E2', 'E3']}, {range: 'E2:E3'}, {range: 'E2:E3', fill: true, marker: 'E6'}],
+    hints: ['Pour indiquer la progression, sélectionne les deux premiers nombres : 201 et 202.', 'Ils se trouvent dans la plage E2:E3. La liste doit se terminer sur la ligne 6.', 'Sélectionne E2:E3, puis fais glisser la poignée jusqu’à E6.'], hh: [{cells: ['E2', 'E3']}, {range: 'E2:E3'}, {range: 'E2:E3', fill: true, marker: 'E6'}],
     on(ev, X) {
       if (ev.type === 'fill') {
         if (ev.src === 'E2' || ev.src === 'E3') return {miss: 'Avec un seul nombre, Excel peut simplement le recopier. Sélectionne 201 et 202 ensemble pour indiquer la progression.', revert: true};
@@ -3273,7 +3358,7 @@ lesson(4, {
         if (ev.op !== 'cut') return {miss: 'Pour déplacer, utilise Couper sur F2, puis Coller.', revert: true};
         return {miss: ev.range === 'F5' ? 'Tu es dans la bonne colonne, mais la destination est la ligne 6.' : 'Le nom de Thomas doit aller en F6, à côté de la chambre 205.', revert: true};
       }
-      if (ev.type === 'cmd' && ev.name === 'clear' && ev.range === 'F2') return 'Tu as supprimé le texte avant de le déplacer. Utilise Annuler, puis essaie Couper.';
+      if (ev.type === 'cmd' && ev.name === 'clear' && ev.range === 'F2') return 'Tu as effacé le texte avant de le déplacer. Utilise Annuler, puis essaie Couper.';
       if (ev.type === 'commit') return {cancel: true, miss: norm(ev.text) === 'Thomas' ? 'Le nom serait au bon endroit, mais il resterait aussi en F2. Essaie Couper et Coller pour effectuer un véritable déplacement.' : 'Pas besoin d’écrire : utilise Couper et Coller.'};
     }, okHl: {cells: ['F6']}, done: 'Parfait ! Tu viens de déplacer une information.'});
   coach('Elle n’est plus dans la cellule d’origine, contrairement à une copie.', {ok: true, hl: {cells: ['F2', 'F6']}});
@@ -3289,7 +3374,7 @@ lesson(4, {
     hints: ['Commence par vérifier les statuts des chambres du premier étage.', 'Vérifie ensuite que les numéros du deuxième étage se suivent sans trou.', 'B2:B6 doit afficher « À préparer », E2:E6 doit aller de 201 à 205, et Thomas doit être en F6.'], hh: [{range: 'B2:B6'}, {range: 'E2:E6'}, {pbtn: true}],
     on() {}, done: 'Tout est correct !'});
   coach('Tu as préparé deux listes sans avoir à saisir chaque information une par une.', {ok: true});
-  coach('Et tu as appris à déplacer une donnée sans la recopier.', {ok: true});
+  coach('Et tu as appris à déplacer une donnée au lieu de la copier.', {ok: true});
   // 12. Thomas découvre le résultat
   line('reception', 'thomas', 'Attends… tu as déjà terminé ?', {expr: 'think'});
   line('reception', 'thomas', 'Les cinq premières chambres ont leur statut, la suite des numéros est complète et le responsable est au bon endroit.', {expr: 'present'});
@@ -3319,10 +3404,10 @@ lesson(5, {
   fiches: [
     {id: 'l5f1', t: 'Le gras', img: mg({t: {A1: 'Chambre', B1: 'Statut', A2: 101, B2: 'À prép.'}, cols: 2, rows: 3, w: 44, bold: ['A1', 'B1']}), pts: ['Le <b>gras</b> fait ressortir du texte, notamment les titres d’un tableau.', 'Il ne change pas le contenu des cellules.']},
     {id: 'l5f2', t: 'Les couleurs', img: mg({t: {A1: 'Chambre', B1: 'Statut', A2: 101, B2: 'À prép.'}, cols: 2, rows: 3, w: 44, bold: ['A1', 'B1'], fill: {A1: '#713B4D', B1: '#713B4D'}, fc: {A1: '#fff', B1: '#fff'}}), pts: ['La <b>couleur de remplissage</b> modifie le fond d’une cellule.', 'La <b>couleur de police</b> modifie la couleur du texte.', 'Un contraste suffisant facilite la lecture.']},
-    {id: 'l5f3', t: 'Ajuster une colonne', img: mg({t: {A1: 'Responsable', A2: 'Thomas'}, cols: 2, rows: 3, w: 62, sel: 'A1', extra: '<path d="M88 4v14M84 11h8M90 8l3 3-3 3" stroke="#107C41" stroke-width="1.6" fill="none"/>'}), pts: ['Élargir une colonne permet d’afficher davantage de texte.', 'La valeur contenue dans les cellules ne change pas.']},
+    {id: 'l5f3', t: 'Ajuster une colonne', img: mg({t: {A1: 'Responsable', A2: 'Thomas'}, cols: 2, rows: 3, w: 62, sel: 'A1', extra: '<path d="M88 4v14M84 11h8M90 8l3 3-3 3" stroke="#107C41" stroke-width="1.6" fill="none"/>'}), pts: ['Un texte trop long déborde sur la cellule de droite si elle est vide. Sinon, une partie est masquée.', 'Élargir la colonne règle le problème : la valeur contenue dans les cellules ne change pas.']},
     {id: 'l5f4', t: 'L’alignement', img: mg({t: {A1: 'Ch.', A2: '   101', A3: '   102', A4: '   103'}, cols: 2, rows: 4, w: 44, fill: {A2: '#FBF1DC', A3: '#FBF1DC', A4: '#FBF1DC'}}), pts: ['L’alignement horizontal place le contenu à gauche, au centre ou à droite.', 'Il ne modifie pas la valeur.']},
     {id: 'l5f5', t: 'Les bordures', img: mg({t: {A1: 'Ch.', B1: 'Statut', A2: 101, B2: 'À prép.', A3: 102, B3: 'À prép.'}, cols: 2, rows: 3, w: 44, extra: '<g stroke="#3A3A3C" stroke-width="1.6" fill="none"><rect x="24" y="20" width="88" height="66"/><path d="M68 20v66M24 42h88M24 64h88"/></g>'}), pts: ['Les <b>bordures</b> délimitent les cellules et facilitent la lecture d’un tableau.', 'On peut les appliquer à une cellule ou à une plage.']},
-    {id: 'l5f6', t: 'Reproduire la mise en forme', img: mg({t: {A1: 'Chambre', C1: 'Chambre'}, cols: 3, rows: 2, w: 44, bold: ['A1', 'C1'], fill: {A1: '#713B4D', C1: '#713B4D'}, fc: {A1: '#fff', C1: '#fff'}, sel: 'C1'}), pts: ['Le <b>pinceau</b> copie l’apparence d’une cellule vers une autre.', 'Le contenu de la cellule de destination n’est pas remplacé.']},
+    {id: 'l5f6', t: 'Reproduire la mise en forme', img: mg({t: {A1: 'Chambre', C1: 'Chambre'}, cols: 3, rows: 2, w: 44, bold: ['A1', 'C1'], fill: {A1: '#713B4D', C1: '#713B4D'}, fc: {A1: '#fff', C1: '#fff'}, sel: 'C1'}), pts: ['Le bouton <b>Reproduire la mise en forme</b> (le pinceau) copie l’apparence d’une cellule vers une autre.', 'Le contenu de la cellule de destination n’est pas remplacé.']},
   ],
   end: {title: 'Un tableau digne du Grand Hôtel !', talk: ['Bravo ! Tu viens d’apprendre à mettre en forme un tableau Excel.', 'Tu sais mettre du texte en gras, changer les couleurs, ajuster une colonne et aligner des valeurs.', 'Tu sais aussi ajouter des bordures et reproduire une mise en forme.', 'Et surtout, tu as compris qu’on peut modifier l’apparence d’une cellule sans changer ce qu’elle contient.'],
     teaser: {from: 'thomas', text: '« Merci pour le tableau ! Plusieurs clients arrivent ce week-end, mais notre fichier indique seulement leur chambre et le nombre de nuits. Il nous manque les dates d’arrivée. Tu pourrais les ajouter ? »'},
@@ -3337,7 +3422,7 @@ lesson(5, {
   line('office', 'ding', 'Mais je crois que Camille a encore besoin de nous…', {notif: N5});
   line('office', 'ding', 'Allons voir ce que Camille a en tête !', {notif: N5});
   S.push({t: 'notif', v: 'office', ...N5, zoom: false, act: 'Touche « Rejoindre Camille ».', miss: 'Camille nous attend. Touche le bouton pour aller la voir.'});
-  line('staff', 'camille', 'Ah, te voilà ! Merci d’être venu.', {expr: 'wave'});
+  line('staff', 'camille', 'Ah, te voilà ! Merci d’être là.', {expr: 'wave'});
   line('staff', 'camille', 'Thomas m’a envoyé sa liste de préparation. Les informations sont correctes, mais regarde…', {expr: 'present'});
   line('staff', 'camille', 'Ce n’est pas très facile à lire, tu ne trouves pas ?', {expr: 'think'});
   line('staff', 'camille', 'L’équipe d’étage va devoir consulter cette liste plusieurs fois dans la journée.', {expr: 'present'});
@@ -3365,7 +3450,7 @@ lesson(5, {
     selErrs: {A1: 'Tu as sélectionné le premier titre. Il faut aussi inclure Statut et Responsable.', 'A1:B1': 'Il manque encore le titre Responsable. Étends la sélection jusqu’à C1.'},
     check(ev, X) {
       if (ev.type === 'fmt' && ev.name === 'italic') return {miss: 'Tu as changé le style du texte, mais nous cherchons le gras. Regarde le bouton Gras.', revert: true};
-      if (ev.type === 'fmt' && ev.name === 'underline') return {miss: 'Le soulignement ajoute une ligne sous le texte. Pour cet exercice, utilise Gras.', revert: true};
+      if (ev.type === 'fmt' && ev.name === 'underline') return {miss: 'Le soulignement ajoute un trait sous le texte. Pour cet exercice, utilise Gras.', revert: true};
       if (ev.type === 'fmt' && ev.name === 'bold') {
         if (ev.range === 'A2:C2') return {miss: 'Tu as sélectionné la première ligne de données. Les titres sont juste au-dessus.', revert: true};
         if (T3.every(r => (X.c(r) || {}).b)) return ev.range === 'A1:C1' ? true : {info: 'Les titres sont bien en gras ! La prochaine fois, sélectionne-les ensemble pour tout faire en une seule fois.'};
@@ -3382,7 +3467,7 @@ lesson(5, {
   coach('Dans Excel, cette couleur s’appelle la <b>couleur de remplissage</b>. Elle colore l’arrière-plan d’une cellule.', {hl: {btn: 'fill'}});
   coach('Camille a choisi un bordeaux qui rappelle les couleurs du Grand Hôtel. Appliquons-le aux titres.', {extra: '<span class="chg"><i class="swc" style="display:inline-block;width:26px;height:26px;border-radius:8px;background:#713B4D"></i>Bordeaux</span>'});
   ask(exFmt({act: 'Applique le remplissage <b>Bordeaux</b> aux cellules <code>A1:C1</code>.', text: 'Exercice 2 · remplissage',
-    hints: ['Cherche l’outil qui permet de changer la couleur de fond d’une cellule.', 'Il est représenté par un pot de peinture.', 'Sélectionne A1:C1, ouvre « Remplissage » et choisis Bordeaux.'], hh: [{btn: 'fill'}, {btn: 'fill', range: 'A1:C1'}, {range: 'A1:C1', btn: 'fill'}],
+    hints: ['Cherche l’outil qui permet de changer la couleur de fond d’une cellule.', 'Il est représenté par un pot de peinture.', 'Sélectionne A1:C1, ouvre « Couleur de remplissage » et choisis Bordeaux.'], hh: [{btn: 'fill'}, {btn: 'fill', range: 'A1:C1'}, {range: 'A1:C1', btn: 'fill'}],
     check(ev, X) {
       if (ev.type === 'fmt' && ev.name === 'font') return {miss: 'Tu as modifié la couleur des lettres. Nous voulons colorer le fond des cellules.', revert: true};
       if (ev.type === 'fmt' && ev.name === 'bold' && !ev.value) return {miss: 'Les titres doivent rester en gras. Vérifie que cette mise en forme est toujours active.', revert: true};
@@ -3399,9 +3484,9 @@ lesson(5, {
   coach('Excel permet de changer la couleur du texte indépendamment de la couleur de remplissage.');
   coach('Pour que les titres soient bien lisibles sur le fond bordeaux, nous allons les mettre en blanc.');
   coach('Attention à ne pas confondre : le pot de peinture change le fond…', {hl: {btn: 'fill'}});
-  coach('… et la <b>couleur de police</b>, la lettre A, change les lettres.', {hl: {btn: 'font'}});
+  coach('… et la <b>couleur de police</b>, la lettre A, change la couleur du texte.', {hl: {btn: 'font'}});
   ask(exFmt({act: 'Change la couleur du texte de <code>A1:C1</code> en <b>blanc</b>.', text: 'Exercice 3 · couleur de police',
-    hints: ['Nous voulons changer la couleur des lettres, pas celle du fond.', 'Cherche l’outil « Police », représenté par une lettre A avec un trait coloré.', 'Sélectionne A1:C1, ouvre la couleur de police et choisis Blanc.'], hh: [{btn: 'font'}, {btn: 'font', range: 'A1:C1'}, {range: 'A1:C1', btn: 'font'}],
+    hints: ['Nous voulons changer la couleur des lettres, pas celle du fond.', 'Cherche le bouton Couleur de police, représenté par une lettre A soulignée d’un trait coloré.', 'Sélectionne A1:C1, ouvre la couleur de police et choisis Blanc.'], hh: [{btn: 'font'}, {btn: 'font', range: 'A1:C1'}, {range: 'A1:C1', btn: 'font'}],
     check(ev, X) {
       if (ev.type === 'fmt' && ev.name === 'fill') return {miss: ev.value === '#FFFFFF' ? 'Tu as changé le fond des cellules. Nous voulons conserver le bordeaux et mettre seulement les lettres en blanc.' : 'Le fond doit rester bordeaux. Change seulement la couleur des lettres.', revert: true};
       if (ev.type === 'fmt' && ev.name === 'bold' && !ev.value) return {miss: 'Les titres doivent rester en gras. Nous changeons uniquement leur couleur.', revert: true};
@@ -3415,21 +3500,21 @@ lesson(5, {
   coach('Tu viens de découvrir une règle importante : choisir des couleurs qui distinguent bien le texte du fond.', {ok: true, hl: {range: 'A1:C1'}});
   coach('Une belle présentation, c’est aussi une présentation facile à lire.', {ok: true});
   // 7. largeur de colonne
-  msg('camille', 'C’est déjà beaucoup mieux ! Mais sur mon écran, le titre « Responsable » est coupé. Tu peux arranger ça ?', 'Ah, voilà un autre problème courant dans Excel.', {ok: false, do: X => { const s = X.sheet('prep'); if (!s.colW.C) { s.colW.C = 58; return ['C1']; } }, hl: {cells: ['C1']}, tools: {colw: true}});
-  coach('Quand une colonne est trop étroite, une partie du texte peut ne pas être visible.', {sel: 'C1', hl: {cells: ['C1']}});
+  msg('camille', 'C’est déjà beaucoup mieux ! Mais le titre « Responsable » ne tient pas dans sa colonne : il déborde et se retrouve coupé. Tu peux arranger ça ?', 'Ah, voilà un autre problème courant dans Excel.', {ok: false, do: X => { const s = X.sheet('prep'); if (!s.colW.C) { s.colW.C = 58; return ['C1']; } }, hl: {cells: ['C1']}, tools: {colw: true}});
+  coach('Quand une colonne est trop étroite, le texte déborde sur la cellule voisine si elle est vide. Sinon, une partie du texte est masquée.', {sel: 'C1', hl: {cells: ['C1']}});
   coach('Regarde la barre de formule : le mot complet « Responsable » est toujours là.', {sel: 'C1', hl: 'fx'});
   coach('Nous n’avons donc pas besoin de réécrire le texte. Il suffit d’ajuster la largeur de la colonne.', {hl: {colh: 'C'}});
-  coach('Pour élargir une colonne, fais glisser la petite barre à droite de sa lettre, en haut du tableau.', {hl: {colh: 'C'}});
-  ask(exFmt({act: 'Élargis la colonne C pour afficher entièrement « Responsable ».', text: 'Exercice 4 · largeur de colonne',
-    hints: ['Le problème vient de la largeur de la colonne, pas du texte.', 'Regarde en haut du tableau, entre les lettres C et D.', 'Fais glisser la limite droite de la colonne C vers la droite, ou touche deux fois la lettre C et choisis « Ajuster automatiquement la largeur ».'], hh: [{colh: 'C'}, {colh: 'C'}, {colh: 'C', marker: 'C'}],
+  coach('Pour élargir une colonne, fais glisser la limite droite de son en-tête, là où se trouve la lettre C.', {hl: {colh: 'C'}});
+  ask(exFmt({act: 'Élargis la colonne C pour que « Responsable » tienne dans sa cellule.', text: 'Exercice 4 · largeur de colonne',
+    hints: ['Le problème vient de la largeur de la colonne, pas du texte.', 'Regarde en haut du tableau, entre les lettres C et D.', 'Fais glisser la limite droite de la colonne C vers la droite, ou touche deux fois l’en-tête de la colonne C et choisis « Ajuster la largeur de colonne ».'], hh: [{colh: 'C'}, {colh: 'C'}, {colh: 'C', marker: 'C'}],
     typed: 'Le mot est correct. C’est la colonne qui manque de place.',
     check(ev, X) {
       if (ev.type !== 'colw') return;
       if (ev.c === 'B') return {miss: 'Tu as agrandi la colonne Statut. Celle à ajuster est la colonne C.', revert: true};
       if (ev.c !== 'C') return {miss: 'C’est la colonne C qu’il faut élargir.', revert: true};
       if (X.fits('C1')) return true;
-      return ev.auto || ev.grew ? 'Encore un peu ! Le mot « Responsable » n’est pas encore entièrement visible.' : 'La colonne devient plus étroite. Fais glisser sa limite vers la droite.';
-    }, done: 'Parfait ! Le titre est maintenant affiché en entier.'}));
+      return ev.auto || ev.grew ? 'Encore un peu ! Le mot « Responsable » dépasse encore de la colonne C.' : 'La colonne devient plus étroite. Fais glisser sa limite vers la droite.';
+    }, done: 'Parfait ! Le titre tient maintenant dans sa colonne.'}));
   coach('Et tu n’as pas modifié son contenu. Tu as simplement donné plus de place à la colonne.', {ok: true, hl: {cells: ['C1']}});
   // 8. centrer
   coach('Regarde maintenant les numéros de chambre, dans la colonne A.', {hl: {range: 'A2:A6'}});
@@ -3437,7 +3522,7 @@ lesson(5, {
   coach('Excel permet de choisir l’alignement du contenu : à gauche, au centre ou à droite.', {hl: {btn: 'align'}});
   coach('Attention : centrer un nombre ne change pas sa valeur. Cela change seulement sa position dans la cellule.');
   ask(exFmt({act: 'Sélectionne <code>A2:A6</code> et applique l’alignement horizontal <b>Centrer</b>.', text: 'Exercice 5 · centrer',
-    hints: ['Les numéros de chambre se trouvent dans la première colonne.', 'Sélectionne les cellules A2 à A6, sans inclure le titre.', 'Sélectionne A2:A6, puis touche Aligner et choisis Centrer.'], hh: [{range: 'A2:A6'}, {range: 'A2:A6', btn: 'align'}, {range: 'A2:A6', btn: 'align', marker: 'A2'}],
+    hints: ['Les numéros de chambre se trouvent dans la première colonne.', 'Sélectionne les cellules A2 à A6, sans inclure le titre.', 'Sélectionne A2:A6, puis touche Alignement et choisis Centrer.'], hh: [{range: 'A2:A6'}, {range: 'A2:A6', btn: 'align'}, {range: 'A2:A6', btn: 'align', marker: 'A2'}],
     typed: 'Pas besoin d’ajouter des espaces ! Excel possède une commande d’alignement qui ne modifie pas les valeurs.',
     check(ev, X) {
       if (ev.type === 'fmt' && ev.name === 'valign') return 'Tu as modifié leur position verticale. Nous voulons les centrer horizontalement.';
@@ -3451,7 +3536,7 @@ lesson(5, {
     }, done: 'Bien joué ! Les numéros sont maintenant alignés de façon régulière.'}));
   coach('Tu as changé leur présentation, pas leur valeur.', {ok: true, hl: {range: 'A2:A6'}});
   // 9. bordures
-  msg('camille', 'Les titres sont parfaits ! Il reste une chose : pourrais-tu ajouter des lignes pour qu’on distingue mieux chaque chambre ?', 'Bien sûr ! Dans Excel, on peut ajouter des bordures autour des cellules.', {ok: false});
+  msg('camille', 'Les titres sont parfaits ! Il reste une chose : pourrais-tu ajouter des traits pour qu’on distingue mieux chaque chambre ?', 'Bien sûr ! Dans Excel, on peut ajouter des bordures autour des cellules.', {ok: false});
   coach('Elles permettent de mieux séparer les informations.', {hl: {btn: 'border'}});
   coach('Ici, nous allons ajouter des bordures à tout le tableau du premier étage : la plage <code>A1:C6</code>.', {hl: {range: 'A1:C6'}});
   ask(exFmt({act: 'Sélectionne <code>A1:C6</code>, puis applique « Toutes les bordures ».', text: 'Exercice 6 · bordures',
@@ -3472,19 +3557,19 @@ lesson(5, {
   coach('Nous avons terminé la présentation des chambres du premier étage.', {sel: 'A1'});
   coach('Mais regarde la liste du deuxième étage, juste à droite. Ses titres sont encore tout simples.', {hl: {range: 'E1:F1', scroll: 'F1'}});
   coach('Nous pourrions recommencer les mêmes manipulations une par une…');
-  coach('Mais Excel permet aussi de reproduire uniquement la mise en forme d’une cellule : c’est le <b>pinceau</b>.', {hl: {btn: 'paint'}});
-  coach('Il récupère l’apparence d’une cellule sans copier son contenu. Nous allons reprendre le style de A1 et l’appliquer à E1.', {hl: {cells: ['A1', 'E1']}});
-  ask(exFmt({act: 'Utilise le pinceau « Reproduire la mise en forme » pour appliquer le style de <code>A1</code> à <code>E1</code>.', text: 'Exercice 7 · pinceau',
-    hints: ['La cellule A1 possède déjà le style que nous voulons réutiliser.', 'Sélectionne A1, puis cherche l’outil représenté par un pinceau.', 'Sélectionne A1, touche Pinceau, puis touche E1.'], hh: [{cells: ['A1']}, {cells: ['A1'], btn: 'paint'}, {btn: 'paint', marker: 'E1'}],
+  coach('Mais Excel permet aussi de reproduire uniquement la mise en forme d’une cellule : c’est le bouton <b>Reproduire la mise en forme</b>, représenté par un pinceau.', {hl: {btn: 'paint'}});
+  coach('Il récupère l’apparence d’une cellule sans copier son contenu. Nous allons reprendre la mise en forme de A1 et l’appliquer à E1.', {hl: {cells: ['A1', 'E1']}});
+  ask(exFmt({act: 'Utilise le pinceau « Reproduire la mise en forme » pour appliquer la mise en forme de <code>A1</code> à <code>E1</code>.', text: 'Exercice 7 · pinceau',
+    hints: ['La cellule A1 possède déjà la mise en forme que nous voulons réutiliser.', 'Sélectionne A1, puis cherche l’outil représenté par un pinceau.', 'Sélectionne A1, touche « Reproduire la mise en forme », puis touche E1.'], hh: [{cells: ['A1']}, {cells: ['A1'], btn: 'paint'}, {btn: 'paint', marker: 'E1'}],
     typed: 'La mise en forme doit être copiée sans modifier le contenu de la cellule de destination.',
     check(ev, X) {
-      if (ev.type === 'cmd' && ev.name === 'paint') return ev.src === 'A2' ? (L.painter = null, paintPainter(), 'Cette cellule contient un numéro de chambre. Le style des titres se trouve en A1.') : ev.src !== 'A1' ? (L.painter = null, paintPainter(), 'Commence par sélectionner A1, qui possède le style des titres.') : null;
+      if (ev.type === 'cmd' && ev.name === 'paint') return ev.src === 'A2' ? (L.painter = null, paintPainter(), 'Cette cellule contient un numéro de chambre. La mise en forme des titres se trouve en A1.') : ev.src !== 'A1' ? (L.painter = null, paintPainter(), 'Commence par sélectionner A1, qui possède le style des titres.') : null;
       if (ev.type === 'cmd' && ev.name === 'paste') return {miss: 'Tu risques de copier aussi le contenu. Ici, nous voulons reproduire uniquement l’apparence.', revert: true};
       if (ev.type === 'cmd' && ev.name === 'copy') return {info: 'Copier reprendrait aussi le contenu. Essaie plutôt le pinceau.'};
-      if (ev.type === 'fmt' && ev.name === 'bold' && ev.range === 'E1') return {miss: 'Le titre est en gras, mais il manque encore le fond bordeaux et le texte blanc. Essaie le pinceau de mise en forme.', revert: true};
+      if (ev.type === 'fmt' && ev.name === 'bold' && ev.range === 'E1') return {miss: 'Le titre est en gras, mais il manque encore le fond bordeaux et le texte blanc. Essaie le bouton « Reproduire la mise en forme ».', revert: true};
       if (ev.type === 'paint') {
-        if (ev.dst === 'E1') return X.v('E1') === 'Chambre' && (X.c('E1') || {}).fill === '#713B4D' ? true : {miss: 'Le style doit venir de A1.', revert: true};
-        return {miss: ev.dst === 'E2' ? 'Tu as modifié une cellule de données. Nous voulons mettre en forme le titre, sur la ligne 1.' : 'Applique le style au titre E1.', revert: true};
+        if (ev.dst === 'E1') return X.v('E1') === 'Chambre' && (X.c('E1') || {}).fill === '#713B4D' ? true : {miss: 'La mise en forme doit venir de A1.', revert: true};
+        return {miss: ev.dst === 'E2' ? 'Tu as modifié une cellule de données. Nous voulons mettre en forme le titre, sur la ligne 1.' : 'Applique la mise en forme au titre E1.', revert: true};
       }
     }, done: 'Bravo ! Tu viens de reproduire une mise en forme.'}));
   coach('Tu n’as pas eu besoin de choisir à nouveau le gras, la couleur de fond et la couleur du texte.', {ok: true, hl: {cells: ['E1'], scroll: 'E1'}});
@@ -3497,8 +3582,8 @@ lesson(5, {
       ['Colonne Responsable', 'assez large', X => X.fits('C1') || 'La colonne C est encore trop étroite. Ajuste sa largeur.'],
       ['Numéros', 'centrés', X => [2, 3, 4, 5, 6].every(r => (X.c('A' + r) || {}).al === 'center') || 'Vérifie l’alignement des numéros dans A2:A6.'],
       ['Bordures', 'A1:C6', X => rcells(RR('A1', 'C6')).every(r => (X.c(r) || {}).bd) || 'Certaines cellules ne sont pas encore délimitées. Réapplique « Toutes les bordures » sur A1:C6.'],
-      ['Titre E1', 'même style que A1', X => ((X.c('E1') || {}).fill === '#713B4D' && (X.c('E1') || {}).fc === '#FFFFFF') || 'Le titre du deuxième étage doit reprendre la présentation du titre A1.'],
-      ['Données', 'inchangées', X => PREP_DATA(X) || 'Attention, une information a changé. Rétablis sa valeur d’origine avant de confirmer.']]},
+      ['Titre E1', 'même mise en forme que A1', X => ((X.c('E1') || {}).fill === '#713B4D' && (X.c('E1') || {}).fc === '#FFFFFF') || 'Le titre du deuxième étage doit reprendre la présentation du titre A1.'],
+      ['Données', 'inchangées', X => PREP_DATA(X) || 'Attention, une information a changé. Remets sa valeur d’origine avant de confirmer.']]},
     hints: ['Vérifie d’abord la première ligne : les titres doivent être en gras, blancs sur fond bordeaux.', 'Vérifie ensuite la largeur de la colonne C, l’alignement des numéros et les bordures du tableau.', 'Contrôle A1:C1, A2:A6, A1:C6 et E1. Toutes les données doivent être conservées.'], hh: [{range: 'A1:C1'}, {range: 'A1:C6'}, {pbtn: true}],
     on() {}, done: 'Parfait ! Ton tableau correspond au modèle de Camille.'});
   coach('Les informations sont intactes, et leur présentation est beaucoup plus claire.', {ok: true});
@@ -3527,7 +3612,7 @@ function exDate(target, day, o) {
   const iso = ISO(day);
   return Object.assign({edit: true, num: true, hh: [{colh: P(target).c}, {cross: target, soft: true}, {marker: target}], scroll: target}, o, {target, on(ev) {
     if (ev.type === 'sel' && ev.ref !== target && o.selErrs && o.selErrs[ev.ref]) return o.selErrs[ev.ref];
-    if (ev.type === 'key' && ev.ref === target && parseIn(norm(ev.text) || ' ').v === iso) return {info: 'La date est correcte ! Il reste à confirmer la saisie.'};
+    if (ev.type === 'key' && ev.ref === target && parseIn(norm(ev.text) || ' ').v === iso) return {info: 'La date est correcte ! Il reste à valider la saisie.'};
     if (ev.type === 'fmt') return o.fmtMiss ? {miss: o.fmtMiss, revert: true} : null;
     if (ev.type !== 'commit') return;
     if (ev.ref !== target) return {cancel: true, miss: (o.cellErrs && o.cellErrs[ev.ref]) || genMiss(target, ev.ref)};
@@ -3539,16 +3624,17 @@ function dateMiss(ev, day, wrong = {}) {
   const t = norm(ev.text), m = /^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?$/.exec(t);
   if (wrong[t]) return wrong[t];
   if (!t) return 'La date a disparu. Saisis-la au format jour/mois/année.';
-  if (m && !m[3]) return 'Le jour et le mois sont corrects ? Pour éviter toute ambiguïté, ajoute aussi l’année 2026.';
+  if (m && !m[3]) return 'Ajoute aussi l’année : écris la date complète au format jour/mois/année, avec 2026.';
   if (m && +m[1] === 11 && +m[2] === day) return 'Tu as inversé le jour et le mois. Ici, nous utilisons le format français : jour/mois/année.';
+  if (m && m[3] && m[3].length === 2) return 'Pour cet exercice, écris l’année sur quatre chiffres : 2026.';
   if (m && ev.typ !== 'd') return `Cette date n’existe pas : ${+m[2] === 11 ? 'novembre compte 30 jours' : 'vérifie le jour et le mois'}. Vérifie la date demandée.`;
   if (ev.typ === 'd') {
     const [y, mo, d] = ev.val.split('-').map(Number);
     if (y !== 2026) return 'Vérifie l’année. Nous préparons la réouverture de 2026.';
-    if (mo !== 11) return `Le jour est correct ? Attention au mois : la réouverture a lieu en novembre.`;
+    if (mo !== 11) return `Attention au mois : la réouverture a lieu en novembre.`;
     if (d !== day) return `Le jour ne correspond pas : la date attendue est le ${day} novembre 2026.`;
   }
-  if (/novembre/i.test(t)) return 'Tu as trouvé le bon jour et le bon mois. Pour cet exercice, écris la date complète en chiffres : jour/mois/année.';
+  if (/novembre/i.test(t)) return 'Pour cet exercice, écris la date en chiffres, au format jour/mois/année.';
   return `Écris la date au format jour/mois/année, par exemple ${day}/11/2026.`;
 }
 const D_OK = (X, r, d) => { const c = X.c(r); return !!c && c.t === 'd' && c.v === ISO(d); };
@@ -3556,11 +3642,11 @@ lesson(6, {
   wb: () => ({sheets: [SH_PDJ(), RES3(), PREP5()], act: 'res'}),
   tools: {edit: true, range: true, rib: ['undo', 'format', 'bold', 'fill', 'font', 'align', 'border']},
   fiches: [
-    {id: 'l6f1', t: 'Saisir une date', img: `<svg viewBox="0 0 170 70" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}">${[['28', 'Jour', 20], ['11', 'Mois', 70], ['2026', 'Année', 124]].map(([v, l, x]) => `<rect x="${x - 18}" y="10" width="${v.length > 2 ? 52 : 36}" height="30" rx="7" fill="#F1F1F4"/><text x="${x + (v.length > 2 ? 8 : 0)}" y="31" font-size="17" font-weight="700" text-anchor="middle" fill="#1C1C1E">${v}</text><text x="${x + (v.length > 2 ? 8 : 0)}" y="56" font-size="10" text-anchor="middle" fill="#8E8E93">${l}</text>`).join('')}<text x="45" y="31" font-size="18" fill="#8E1D42">/</text><text x="95" y="31" font-size="18" fill="#8E1D42">/</text></svg>`, pts: ['Avec les paramètres français, une date se saisit au format <b>jour/mois/année</b>, par exemple 28/11/2026.', 'Excel la reconnaît alors comme une valeur de date.']},
+    {id: 'l6f1', t: 'Saisir une date', img: `<svg viewBox="0 0 170 70" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}">${[['28', 'Jour', 20], ['11', 'Mois', 70], ['2026', 'Année', 124]].map(([v, l, x]) => `<rect x="${x - 18}" y="10" width="${v.length > 2 ? 52 : 36}" height="30" rx="7" fill="#F1F1F4"/><text x="${x + (v.length > 2 ? 8 : 0)}" y="31" font-size="17" font-weight="700" text-anchor="middle" fill="#1C1C1E">${v}</text><text x="${x + (v.length > 2 ? 8 : 0)}" y="56" font-size="10" text-anchor="middle" fill="#8E8E93">${l}</text>`).join('')}<text x="45" y="31" font-size="18" fill="#8E1D42">/</text><text x="95" y="31" font-size="18" fill="#8E1D42">/</text></svg>`, pts: ['Avec les paramètres régionaux français, une date se saisit au format <b>jour/mois/année</b>, par exemple 28/11/2026.', 'Excel l’enregistre alors comme une date.']},
     {id: 'l6f2', t: 'Le format de date', img: mg({t: {A1: 'Arrivée', A2: '28/11/2026', A3: '28 nov. 2026'}, cols: 1, rows: 3, w: 96, fill: {A3: '#FBF1DC'}}), pts: ['Le <b>format</b> détermine comment une date s’affiche.', 'Une même date peut apparaître sous la forme « 28/11/2026 » ou « 28 novembre 2026 ».']},
     {id: 'l6f3', t: 'Uniformiser les dates', img: mg({t: {A1: 'Arrivée', A2: '28 nov. 2026', A3: '29 nov. 2026', A4: '30 nov. 2026'}, cols: 1, rows: 4, w: 96, sel: 'A2:A4'}), pts: ['Sélectionner plusieurs cellules permet de leur appliquer un même format.', 'La présentation reste cohérente.']},
     {id: 'l6f4', t: 'Corriger une date', img: mg({t: {A1: 'Arrivée', A2: '30 nov. 2026'}, cols: 1, rows: 2, w: 96, sel: 'A2', fill: {A2: '#FBF1DC'}}), pts: ['Pour changer réellement le jour, le mois ou l’année, il faut modifier la <b>valeur</b> de la cellule.', 'Changer uniquement le format ne modifie pas la date enregistrée.']},
-    {id: 'l6f5', t: 'La zone Nom et la barre de formule', img: `<svg viewBox="0 0 170 70" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}"><rect x="4" y="18" width="40" height="30" rx="5" fill="#FFF1C2" stroke="#F5C04A" stroke-width="2"/><text x="24" y="38" font-size="12" font-weight="700" text-anchor="middle">D2</text><rect x="50" y="18" width="116" height="30" rx="5" fill="#fff" stroke="#D1D1D6"/><text x="60" y="38" font-size="12" fill="#8E8E93" font-style="italic">fx</text><text x="78" y="38" font-size="12.5">28/11/2026</text></svg>`, pts: ['La <b>zone Nom</b> affiche la référence de la cellule sélectionnée.', 'La <b>barre de formule</b> permet de consulter et de modifier son contenu.']},
+    {id: 'l6f5', t: 'La zone Nom et la barre de formule', img: `<svg viewBox="0 0 170 70" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}"><rect x="4" y="18" width="40" height="30" rx="5" fill="#FFF1C2" stroke="#F5C04A" stroke-width="2"/><text x="24" y="38" font-size="12" font-weight="700" text-anchor="middle">D2</text><rect x="50" y="18" width="116" height="30" rx="5" fill="#fff" stroke="#D1D1D6"/><text x="60" y="38" font-size="12" fill="#8E8E93" font-style="italic">fx</text><text x="78" y="38" font-size="12.5">28/11/2026</text></svg>`, pts: ['La <b>zone Nom</b> affiche la référence de la cellule active.', 'La <b>barre de formule</b> permet de consulter et de modifier son contenu.']},
   ],
   end: {title: 'Les arrivées sont confirmées !', talk: ['Bravo ! Tu viens d’apprendre à travailler avec des dates dans Excel.', 'Tu sais saisir une date, la valider et choisir comment elle s’affiche.', 'Tu sais aussi appliquer le même format à plusieurs cellules.', 'Et surtout, tu as compris la différence entre la date enregistrée et sa présentation.'],
     teaser: {from: 'camille', text: '« Merci pour le planning des arrivées ! Notre classeur commence à contenir plusieurs feuilles : les réservations, les petits-déjeuners, la préparation des chambres… J’aimerais qu’on organise tout ça pour que chacun retrouve facilement ses informations. »'},
@@ -3569,7 +3655,7 @@ lesson(6, {
 }, () => {
   title('office', 'Chambre 106 · Le bureau', 'Une date importante');
   line('office', 'ding', 'Ding ! Camille était ravie de notre tableau.', {ring: true});
-  line('office', 'ding', 'Les titres sont visibles, les colonnes sont bien alignées et les chambres sont faciles à repérer.');
+  line('office', 'ding', 'Les titres sont visibles, les numéros sont bien centrés et les chambres sont faciles à repérer.');
   line('office', 'ding', 'Mais dans un hôtel, préparer les chambres ne suffit pas.');
   const N6 = {from: 'thomas', text: 'Tu peux passer à la réception ? J’ai besoin de préparer les arrivées de samedi.', btn: 'Aller à la réception'};
   line('office', 'ding', 'Il faut aussi savoir quand les clients arrivent !', {notif: N6});
@@ -3582,9 +3668,9 @@ lesson(6, {
   line('reception', 'ding', 'Ah oui ! Sans les dates, difficile de savoir qui arrive samedi et qui arrive plus tard.');
   line('reception', 'thomas', 'Exactement. Lina et Adam arrivent samedi 28 novembre. Nora arrive dimanche 29, et Sarah lundi 30.', {expr: 'present'});
   line('reception', 'thomas', 'Tu pourrais ajouter ces dates dans notre fichier Excel ?', {expr: 'smile'});
-  S.push({t: 'choice', v: 'reception', key: 'c6', q: 'Que réponds-tu ?', opts: ['Bien sûr, je vais les ajouter !', 'Excel sait reconnaître les dates ?']});
+  S.push({t: 'choice', v: 'reception', key: 'c6', q: 'Que réponds-tu ?', opts: ['Bien sûr, je vais les ajouter !', 'Excel peut enregistrer des dates ?']});
   line('reception', 'thomas', 'Super ! Je t’envoie les confirmations.', {expr: 'smile', if: ['c6', 0]});
-  line('reception', 'ding', 'Oui ! Excel peut reconnaître les dates et les utiliser comme de véritables valeurs.', {if: ['c6', 1]});
+  line('reception', 'ding', 'Oui ! Excel enregistre les dates comme de véritables valeurs, pas comme du simple texte.', {if: ['c6', 1]});
   line('reception', 'thomas', 'Je t’envoie toutes les informations sur Concierge. Tu pourras travailler depuis le bureau.', {expr: 'wave'});
   const N6b = {from: 'thomas', text: 'Voici les arrivées confirmées.', btn: 'Ouvre le message'};
   S.push({t: 'notif', v: 'office', ...N6b, act: 'Ouvre le message de Thomas.', miss: 'Regarde la notification en haut : Thomas nous a écrit.'});
@@ -3599,8 +3685,8 @@ lesson(6, {
   ask(exPut('D1', 'Arrivée', {act: 'Sélectionne <code>D1</code>, écris <b>Arrivée</b>, puis valide.', text: 'Exercice 1 · titre de colonne', num: false,
     hints: ['Les titres se trouvent sur la première ligne.', 'La nouvelle colonne est la colonne D. Le titre doit donc aller sur la ligne 1 de cette colonne.', 'Sélectionne D1, écris « Arrivée », puis appuie sur Entrée.'],
     cellErrs: {C1: 'Cette cellule contient déjà le titre « Nuits ». Notre nouvelle colonne est juste à droite.', D2: 'Tu es dans la bonne colonne, mais la ligne 2 est réservée à Lina. Le titre doit être sur la ligne 1.'},
-    wrong: {'Date': 'Ce titre pourrait convenir, mais Thomas souhaite qu’on précise qu’il s’agit de la date d’arrivée.', 'Arriver': 'Presque ! Ici, nous avons besoin du nom « Arrivée », avec un é à la fin.', 'Arrive': 'Presque ! Ici, nous avons besoin du nom « Arrivée », avec un é à la fin.', 'Arrivé': 'Presque ! Il manque le e final : « Arrivée ».'},
-    typed: 'Le titre est correct ! Il reste à confirmer la saisie.',
+    wrong: {'Date': 'Ce titre pourrait convenir, mais Thomas souhaite qu’on précise qu’il s’agit de la date d’arrivée.', 'Arriver': 'Presque ! Ici, nous avons besoin du nom « Arrivée », qui se termine par « ée ».', 'Arrive': 'Presque ! Ici, nous avons besoin du nom « Arrivée », qui se termine par « ée ».', 'Arrivé': 'Presque ! Il manque le e final : « Arrivée ».'},
+    typed: 'Le titre est correct ! Il reste à valider la saisie.',
     okDo: X => { X.set('D1', {v: 'Arrivée', b: true}); return []; },
     done: 'Parfait ! Notre tableau possède maintenant une colonne pour les dates.'}));
   coach('Nous allons pouvoir y enregistrer les arrivées des clients.', {ok: true, hl: {col: 'D', to: 5}});
@@ -3608,16 +3694,16 @@ lesson(6, {
   coach('Lina est sur la ligne 2, et les dates d’arrivée se trouvent dans la colonne D. Nous allons donc utiliser D2.', {hl: {cross: 'D2'}});
   coach('Pour saisir une date, écris le jour, le mois et l’année séparés par des barres obliques.', {extra: DP});
   ask(exDate('D2', 28, {act: 'Saisis <b>28/11/2026</b> dans <code>D2</code>, puis valide.', text: 'Exercice 2 · saisir une date',
-    hints: ['Lina arrive le 28 novembre 2026.', 'Dans notre fichier français, écris le jour, puis le mois, puis l’année.', 'Sélectionne D2 et saisis 28/11/2026, puis valide.'],
+    hints: ['Lina arrive le 28 novembre 2026.', 'Avec les paramètres régionaux français, écris le jour, puis le mois, puis l’année.', 'Sélectionne D2 et saisis 28/11/2026, puis valide.'],
     cellErrs: {C2: 'Cette colonne contient le nombre de nuits. La date d’arrivée doit être dans D2.'},
     wrong: {'28/10/2026': 'Le jour est correct, mais le mois est novembre, pas octobre.'},
     done: 'Bravo ! Tu viens de saisir ta première date dans Excel.'}));
-  coach('Et cette fois, Excel l’a reconnue comme une date, pas comme un simple texte.', {ok: true, sel: 'D2'});
-  coach('Nous pourrons plus tard utiliser ces dates pour organiser les arrivées ou effectuer des calculs.', {ok: true});
+  coach('Et cette fois, Excel l’a enregistrée comme une date, pas comme un simple texte.', {ok: true, sel: 'D2'});
+  coach('Grâce à ces dates, Thomas pourra préparer les arrivées.', {ok: true});
   // 6. valeur et affichage
   coach('Regarde ce qui se passe lorsque D2 est sélectionnée.', {sel: 'D2', hl: ['namebox', 'fx']});
   coach('La zone Nom affiche la référence D2, et la barre de formule montre la date enregistrée.', {sel: 'D2', hl: 'fx'});
-  coach('Excel enregistre une date comme une valeur numérique interne. Cela lui permet de calculer le nombre de jours entre deux dates.');
+  coach('Excel enregistre une date sous la forme d’un nombre, puis l’affiche comme une date.');
   coach('Tu n’as pas besoin de connaître ce nombre pour le moment. Retiens qu’une même date peut être affichée de plusieurs façons.', {extra: '<div class="recap"><div class="ri"><span>28/11/2026</span></div><div class="ri"><span>28 nov. 2026</span></div><div class="ri"><span>28 novembre 2026</span></div></div>'});
   coach('La date ne change pas. C’est seulement la manière de la présenter qui est différente.');
   // 7. format
@@ -3625,13 +3711,13 @@ lesson(6, {
   coach('Pour une date, le <b>format</b> permet de choisir comment le jour, le mois et l’année s’affichent.', {hl: {btn: 'format'}});
   coach('Nous allons afficher la date de Lina sous la forme « 28 novembre 2026 ».', {hl: {btn: 'format'}});
   ask({act: 'Sélectionne <code>D2</code> et applique le format de date « 28 novembre 2026 ».', text: 'Exercice 3 · format de date',
-    hints: ['Nous voulons changer l’apparence de la date, pas sa valeur.', 'Sélectionne D2, puis touche « Format » et la catégorie Date.', 'Choisis le format qui affiche « 28 novembre 2026 », puis touche OK.'], hh: [{cells: ['D2']}, {cells: ['D2'], btn: 'format'}, {btn: 'format', marker: 'D2'}],
+    hints: ['Nous voulons changer l’apparence de la date, pas sa valeur.', 'Sélectionne D2, puis touche « Format de cellule » et la catégorie Date.', 'Choisis le format qui affiche « 28 novembre 2026 », puis touche OK.'], hh: [{cells: ['D2']}, {cells: ['D2'], btn: 'format'}, {btn: 'format', marker: 'D2'}],
     on(ev, X) {
       if (ev.type === 'commit') return {cancel: true, miss: 'Pour cet exercice, nous voulons utiliser le format de cellule sans modifier la date enregistrée.'};
       if (ev.type === 'fmt' && ev.name === 'font') return {miss: 'Tu as modifié l’apparence du texte, mais pas son format de date. Cherche « Format ».', revert: true};
       if (ev.type === 'fmt' && ev.name === 'date') {
         if (ev.range !== 'D2') return {miss: ev.range === 'D3' ? 'Tu es dans la bonne colonne, mais nous travaillons d’abord sur la date de Lina, en D2.' : 'Nous travaillons sur la date de Lina, en D2.', revert: true};
-        const m = {yy: 'Ce format affiche l’année sur deux chiffres. Thomas souhaite voir le mois en lettres et l’année complète.', my: 'Il manque le jour. Nous voulons afficher le jour, le mois et l’année.', abbr: 'Le mois est abrégé. Thomas souhaite le mois en toutes lettres.', short: 'C’est le format numérique. Thomas souhaite voir le mois en lettres.'};
+        const m = {yy: 'Ce format affiche l’année sur deux chiffres. Thomas souhaite voir le mois en lettres et l’année complète.', my: 'Il manque le jour. Nous voulons afficher le jour, le mois et l’année.', abbr: 'Le mois est abrégé. Thomas souhaite le mois en toutes lettres.', short: 'C’est la date courte, avec le mois en chiffres. Thomas souhaite voir le mois en lettres.'};
         if (ev.f === 'long') return true;
         return {miss: m[ev.f] || 'Choisis la catégorie Date, puis le format « 28 novembre 2026 ».', revert: true};
       }
@@ -3653,7 +3739,7 @@ lesson(6, {
   ask({act: 'Ajoute les dates d’arrivée de Nora Haddad et Sarah Bernard.', text: 'Exercice 5 · deux dates', edit: true, num: true, scroll: 'D4',
     hints: ['Nora arrive dimanche, et Sarah arrive le lendemain.', 'Nora se trouve sur la ligne 4 et Sarah sur la ligne 5. Les dates vont dans la colonne D.', 'Saisis 29/11/2026 en D4 et 30/11/2026 en D5.'], hh: [{cells: ['D4', 'D5']}, {cross: 'D4', soft: true}, {marker: ['D4', 'D5']}],
     on(ev, X) {
-      if (ev.type === 'key' && (ev.ref === 'D4' || ev.ref === 'D5') && parseIn(norm(ev.text) || ' ').v === ISO(ev.ref === 'D4' ? 29 : 30)) return {info: 'La date est correcte. Il reste à confirmer la saisie.'};
+      if (ev.type === 'key' && (ev.ref === 'D4' || ev.ref === 'D5') && parseIn(norm(ev.text) || ' ').v === ISO(ev.ref === 'D4' ? 29 : 30)) return {info: 'La date est correcte. Il reste à valider la saisie.'};
       if (ev.type !== 'commit') return;
       if (ev.ref === 'C4' || ev.ref === 'C5') return {cancel: true, miss: 'Attention, cette colonne contient les durées de séjour. Les dates doivent aller dans la colonne D.'};
       if (ev.ref !== 'D4' && ev.ref !== 'D5') return {cancel: true, miss: 'Les dates de Nora et Sarah vont en D4 et D5.'};
@@ -3665,7 +3751,7 @@ lesson(6, {
   coach('Notre tableau commence à ressembler à un véritable planning de réception.', {ok: true});
   // 10. même format
   coach('Regarde notre colonne Arrivée : la date de Lina est affichée avec le mois en lettres…', {hl: {cells: ['D2']}});
-  coach('… mais les autres dates utilisent encore le format numérique.', {hl: {range: 'D3:D5'}});
+  coach('… mais les autres dates s’affichent encore avec le mois en chiffres.', {hl: {range: 'D3:D5'}});
   coach('Ce serait plus clair si elles avaient toutes la même présentation. Nous allons appliquer un même format à la plage <code>D2:D5</code>.', {hl: {range: 'D2:D5'}});
   ask({act: 'Sélectionne <code>D2:D5</code> et applique le format « jour mois année » avec le mois en lettres.', text: 'Exercice 6 · uniformiser',
     hints: ['Nous voulons que toutes les dates aient la même présentation.', 'Sélectionne toute la plage des dates, de D2 à D5.', 'Sélectionne D2:D5, puis applique le format « 28 novembre 2026 ».'], hh: [{range: 'D2:D5'}, {range: 'D2:D5', marker: ['D2', 'D5']}, {range: 'D2:D5', btn: 'format'}],
@@ -3674,10 +3760,10 @@ lesson(6, {
       if (ev.type !== 'fmt' || ev.name !== 'date') return;
       if (ev.range === 'D1:D5') return {miss: 'Tu as inclus le titre « Arrivée ». Nous voulons modifier seulement les cellules contenant des dates.', revert: true};
       if (ev.range === 'C2:C5') return {miss: 'Cette colonne contient les nombres de nuits. Les dates se trouvent juste à droite.', revert: true};
-      if (ev.f !== 'long') return {miss: 'Ce format est valide, mais Thomas souhaite afficher le mois en lettres, avec le jour et l’année.', revert: true};
+      if (ev.f !== 'long') return {miss: 'Ce format est valide, mais Thomas souhaite le jour, le mois en toutes lettres et l’année.', revert: true};
       if (['D2', 'D3', 'D4', 'D5'].every(r => (X.c(r) || {}).f === 'long')) return ev.range === 'D2:D5' ? true : {info: 'Les dates sont uniformes. La prochaine fois, sélectionne la plage entière pour tout faire en une fois.'};
-      return ev.range === 'D2' ? 'Tu as sélectionné une seule date. Il faut inclure les quatre clientes.' : 'Il faut appliquer le format aux quatre dates, de D2 à D5.';
-    }, okHl: {range: 'D2:D5'}, done: 'Excellent ! Toute la colonne utilise maintenant le même format.'});
+      return ev.range === 'D2' ? 'Tu as sélectionné une seule date. Il faut inclure les quatre clients.' : 'Il faut appliquer le format aux quatre dates, de D2 à D5.';
+    }, okHl: {range: 'D2:D5'}, done: 'Excellent ! Les quatre dates utilisent maintenant le même format.'});
   coach('C’est beaucoup plus cohérent. Et tu n’as pas eu besoin de modifier chaque date une par une.', {ok: true});
   // 11. une date erronée
   msg('thomas', 'Petite vérification : Sarah Bernard arrive bien le lundi 30 novembre, pas le dimanche 29. Tu peux contrôler ?', 'Bien sûr ! Nous allons vérifier la date de Sarah.', {ok: false, do: X => { const c = X.c('D5'); if (c && c.v === ISO(30)) { X.set('D5', {v: ISO(29), t: 'd'}); return ['D5']; } }, hl: {cells: ['D5']}, sel: 'D5'});
@@ -3695,11 +3781,11 @@ lesson(6, {
   ask({act: 'Vérifie les quatre dates, corrige les éventuelles erreurs, puis touche « Confirmer les arrivées ».', text: 'Exercice 8 · vérifier', edit: true,
     recap: {btn: 'Confirmer les arrivées', items: [
       ['Titre D1', 'Arrivée', X => X.v('D1') === 'Arrivée' || 'Il manque le titre de la nouvelle colonne. Elle doit s’appeler « Arrivée ».'],
-      ['Lina et Adam', '28 novembre', X => !D_OK(X, 'D2', 28) ? ((X.c('D2') || {}).t !== 'd' && X.v('D2') ? 'Cette cellule ressemble à une date, mais Excel ne l’a pas reconnue comme telle. Ressaisis-la au format jour/mois/année.' : 'Lina arrive le samedi 28 novembre. Vérifie sa date.') : D_OK(X, 'D3', 28) || 'Adam arrive le même jour que Lina.'],
+      ['Lina et Adam', '28 novembre', X => !D_OK(X, 'D2', 28) ? ((X.c('D2') || {}).t !== 'd' && X.v('D2') ? 'Cette cellule ressemble à une date, mais elle est enregistrée comme du texte. Ressaisis-la au format jour/mois/année.' : 'Lina arrive le samedi 28 novembre. Vérifie sa date.') : D_OK(X, 'D3', 28) || 'Adam arrive le même jour que Lina.'],
       ['Nora', '29 novembre', X => D_OK(X, 'D4', 29) || 'Nora arrive dimanche 29 novembre.'],
       ['Sarah', '30 novembre', X => D_OK(X, 'D5', 30) || 'Sarah arrive lundi 30 novembre.'],
       ['Présentation', 'mois en lettres', X => ['D2', 'D3', 'D4', 'D5'].every(r => (X.c(r) || {}).f === 'long') || 'Les dates sont correctes, mais leur présentation est différente. Applique le même format à D2:D5.'],
-      ['Nuits', 'inchangées', X => (X.v('C2') === 3 && X.v('C3') === 4 && X.v('C4') === 4 && X.v('C5') === 2) || 'Attention, nous ne devons pas changer le nombre de nuits des clients. Rétablis la valeur d’origine.']]},
+      ['Nuits', 'inchangées', X => (X.v('C2') === 3 && X.v('C3') === 4 && X.v('C4') === 4 && X.v('C5') === 2) || 'Attention, nous ne devons pas changer le nombre de nuits des clients. Remets la valeur d’origine.']]},
     hints: ['Vérifie les arrivées du samedi, puis celles du dimanche et du lundi.', 'Lina et Adam arrivent le 28, Nora le 29 et Sarah le 30 novembre.', 'Contrôle D2:D5 : 28, 28, 29 et 30 novembre 2026, toutes affichées avec le mois en lettres.'], hh: [{range: 'D2:D3'}, {range: 'D4:D5'}, {pbtn: true}],
     on() {}, done: 'Tout est correct ! Les quatre arrivées sont enregistrées et présentées de façon cohérente.'});
   coach('Thomas peut maintenant préparer les dossiers des clients.', {ok: true});
@@ -3730,9 +3816,9 @@ lesson(7, {
     {id: 'l7f4', t: 'Couleur d’onglet', img: `<svg viewBox="0 0 170 60" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}"><rect x="40" y="14" width="90" height="30" rx="6" fill="#fff" stroke="#D1D1D6"/><text x="85" y="33" font-size="11" text-anchor="middle">Suivi réception</text><rect x="48" y="40" width="74" height="4" rx="2" fill="#3478F6"/></svg>`, pts: ['La couleur d’un onglet sert de <b>repère visuel</b>.', 'Elle ne change pas les informations de la feuille.']},
     {id: 'l7f5', t: 'Déplacer une feuille', img: `<svg viewBox="0 0 170 60" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}">${['Réserv.', 'Suivi', 'Prépa.', 'Petit-déj'].map((t, i) => `<rect x="${4 + i * 41}" y="18" width="38" height="24" rx="5" fill="${i === 1 ? '#E7F4EC' : '#fff'}" stroke="${i === 1 ? '#3478F6' : '#D1D1D6'}"/><text x="${23 + i * 41}" y="34" font-size="8.5" text-anchor="middle">${t}</text>`).join('')}</svg>`, pts: ['On peut modifier l’<b>ordre</b> des feuilles d’un classeur.', 'Les données enregistrées dans les cellules ne changent pas.']},
     {id: 'l7f6', t: 'Dupliquer une feuille', img: `<svg viewBox="0 0 170 60" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}"><rect x="12" y="18" width="62" height="26" rx="6" fill="#fff" stroke="#D1D1D6"/><text x="43" y="35" font-size="10" text-anchor="middle">Préparation</text><rect x="86" y="18" width="78" height="26" rx="6" fill="#E7F4EC" stroke="#107C41"/><text x="125" y="35" font-size="10" text-anchor="middle" fill="#107C41" font-weight="700">Préparation (2)</text></svg>`, pts: ['Dupliquer une feuille crée une copie avec son contenu et sa mise en forme.', 'La feuille d’origine reste présente.']},
-    {id: 'l7f7', t: 'Supprimer une feuille', img: `<svg viewBox="0 0 170 60" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}"><rect x="40" y="16" width="90" height="28" rx="6" fill="#FFE2DC" stroke="#FF3B30"/><text x="85" y="34" font-size="10" text-anchor="middle" fill="#B3261E">Préparation (2)</text><path d="M126 10l12 12M138 10l-12 12" stroke="#FF3B30" stroke-width="2.4"/></svg>`, pts: ['Supprimer une feuille retire cette feuille <b>et son contenu</b> du classeur.', 'Vérifie toujours que tu supprimes la bonne feuille.']},
+    {id: 'l7f7', t: 'Supprimer une feuille', img: `<svg viewBox="0 0 170 60" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}"><rect x="40" y="16" width="90" height="28" rx="6" fill="#FFE2DC" stroke="#FF3B30"/><text x="85" y="34" font-size="10" text-anchor="middle" fill="#B3261E">Préparation (2)</text><path d="M126 10l12 12M138 10l-12 12" stroke="#FF3B30" stroke-width="2.4"/></svg>`, pts: ['Supprimer une feuille retire cette feuille <b>et son contenu</b> du classeur.', 'Cette action est définitive : Annuler ne récupère pas la feuille. Vérifie toujours que tu supprimes la bonne feuille.']},
   ],
-  end: {title: 'Un classeur bien organisé !', talk: ['Bravo ! Tu viens d’apprendre à gérer les feuilles d’un classeur Excel.', 'Tu sais maintenant créer une feuille, la renommer et lui attribuer une couleur.', 'Tu sais aussi changer l’ordre des feuilles, en créer une copie et supprimer une feuille devenue inutile.', 'Et surtout, tu as compris qu’il faut toujours vérifier ce qu’on supprime pour éviter de perdre des informations.'],
+  end: {title: 'Un classeur bien organisé !', talk: ['Bravo ! Tu viens d’apprendre à gérer les feuilles d’un classeur Excel.', 'Tu sais maintenant créer une feuille, la renommer et colorer son onglet.', 'Tu sais aussi changer l’ordre des feuilles, en créer une copie et supprimer une feuille devenue inutile.', 'Et surtout, tu as compris qu’il faut toujours vérifier ce qu’on supprime pour éviter de perdre des informations.'],
     teaser: {from: 'thomas', text: '« Maintenant que nous avons une feuille de suivi, j’aimerais commencer à noter les informations de la journée. Mais je voudrais éviter que quelqu’un saisisse une date incorrecte ou un numéro de chambre qui n’existe pas. »'},
     dsay: ['Dans Excel, on peut définir des règles pour contrôler ce qu’on a le droit de saisir dans certaines cellules.', 'C’est ce qu’on appelle la validation des données.'],
     next: 'Chambre 108 — Attention à la saisie !', nextSub: 'Créer des règles de saisie et utiliser des listes déroulantes.'},
@@ -3794,7 +3880,7 @@ lesson(7, {
     hints: ['Le nom d’une feuille peut être modifié depuis son onglet.', 'Touche l’onglet Feuil4, puis cherche « Renommer ».', 'Touche Renommer, écris Suivi réception, puis valide.'], hh: [{tab: 'suivi'}, {tab: 'suivi'}, {tab: 'suivi'}],
     on(ev) {
       if (ev.type === 'rename') {
-        if (!ev.ok) return ev.why === 'dup' ? 'Deux feuilles d’un même classeur ne peuvent pas avoir exactement le même nom. Choisis « Suivi réception ».' : 'Certains caractères ne sont pas autorisés dans les noms de feuilles Excel. Utilise simplement « Suivi réception ».';
+        if (!ev.ok) return ev.why === 'dup' ? 'Deux feuilles d’un même classeur ne peuvent pas avoir le même nom, même avec des majuscules différentes. Choisis « Suivi réception ».' : 'Certains caractères ne sont pas autorisés dans les noms de feuilles Excel. Utilise simplement « Suivi réception ».';
         if (ev.id !== 'suivi') return {miss: 'Attention, tu modifies une feuille existante. Nous voulons renommer la nouvelle feuille.', revert: true};
         if (norm(ev.name) === 'Suivi réception') return true;
         const m = {'Suivi': 'Le nom est un peu trop général. Thomas souhaite « Suivi réception ».', 'Réception': 'Presque ! Ajoute le mot « Suivi » devant.', 'Suivi reception': 'Presque ! « réception » prend un accent sur le premier e.'};
@@ -3817,10 +3903,10 @@ lesson(7, {
   // 8. ordre
   coach('Notre nouvelle feuille existe, elle porte le bon nom et son onglet est bleu.', {hl: {tab: 'suivi'}});
   coach('Mais Thomas souhaite aussi un ordre précis : Réservations, Suivi réception, Préparation, Petit-déj.', {extra: refCard(ORDRE)});
-  coach('On peut réorganiser les feuilles sans changer leur contenu. Dans le menu d’un onglet, choisis « Déplacer vers la gauche » ou « Déplacer vers la droite ».', {hl: 'tabs'});
+  coach('On peut réorganiser les feuilles sans changer leur contenu. Maintiens ton doigt sur un onglet, puis fais-le glisser à sa nouvelle place. Tu peux aussi utiliser « Déplacer ou copier… » dans le menu de l’onglet.', {hl: 'tabs'});
   const want = ['res', 'suivi', 'prep', 'pdj'];
   ask({act: 'Place les feuilles dans cet ordre : Réservations, Suivi réception, Préparation, Petit-déj.', text: 'Exercice 5 · déplacer les feuilles', extra: refCard(ORDRE),
-    hints: ['Thomas veut consulter les réservations en premier et les petits-déjeuners en dernier.', 'Déplace Réservations au début, puis place Suivi réception juste après.', 'Ouvre le menu de chaque onglet et utilise les déplacements jusqu’à obtenir : Réservations → Suivi réception → Préparation → Petit-déj.'], hh: ['tabs', {tab: 'res'}, {tab: 'pdj'}],
+    hints: ['Thomas veut consulter les réservations en premier et les petits-déjeuners en dernier.', 'Déplace Réservations au début, puis place Suivi réception juste après.', 'Fais glisser les onglets, ou utilise « Déplacer ou copier… », jusqu’à obtenir : Réservations → Suivi réception → Préparation → Petit-déj.'], hh: ['tabs', {tab: 'res'}, {tab: 'pdj'}],
     on(ev, X) {
       if (ev.type === 'move') { const o = X.order; if (o.join() === want.join()) return true; if (o[0] === 'pdj') return {info: 'Bien. Thomas souhaite commencer par les réservations : Petit-déj ira à la fin.'}; if (o[0] === 'res' && o[1] !== 'suivi') return {info: 'La nouvelle feuille doit se trouver juste après Réservations.'}; return {info: 'Continue : il faut Réservations, Suivi réception, Préparation, puis Petit-déj.'}; }
       if (ev.type === 'copy') return {miss: 'Tu as créé une feuille supplémentaire. Pour cet exercice, nous voulons seulement changer l’ordre des onglets.', revert: true};
@@ -3838,7 +3924,7 @@ lesson(7, {
       if (ev.type === 'copy') return ev.id === 'prep' ? true : {miss: ev.id === 'res' ? 'Tu as copié les réservations. Nous voulons copier la feuille Préparation.' : 'Nous voulons copier la feuille Préparation.', revert: true};
       if (ev.type === 'plus') return {miss: 'Tu as ajouté une feuille, mais elle ne contient pas la liste de préparation. Nous voulons une copie du tableau existant.', revert: true};
       if (ev.type === 'move') return {miss: 'La feuille a changé de place, mais aucune copie n’a été créée. Active l’option « Créer une copie ».', revert: true};
-      if (ev.type === 'rename') return {miss: 'Nous devons conserver la feuille originale. Crée une copie distincte.', revert: true};
+      if (ev.type === 'rename') return {miss: 'Renommer ne crée pas de copie. Utilise « Déplacer ou copier… » et active « Créer une copie ».', revert: true};
       if (ev.type === 'cmd' && ev.name === 'paste') return {miss: 'Tu as copié des informations, mais Thomas souhaite une copie complète de la feuille.', revert: true};
       if (ev.type === 'delsheet') return {miss: 'Attention, nous voulons copier une feuille, pas en supprimer.', revert: true};
     }, done: 'Bravo ! Tu viens de dupliquer une feuille.'});
@@ -3846,7 +3932,7 @@ lesson(7, {
   coach('Thomas peut maintenant faire ses vérifications sur cette copie, sans modifier la feuille principale.', {ok: true});
   // 10. supprimer
   msg('thomas', 'C’est bon, j’ai terminé ma vérification ! La copie temporaire ne sert plus. Tu peux la supprimer pour éviter qu’on la confonde avec la vraie liste.', 'D’accord ! Dans Excel, on peut supprimer une feuille lorsqu’elle n’est plus nécessaire.', {ok: false});
-  coach('Mais attention : supprimer une feuille supprime aussi toutes les données qu’elle contient. Il faut toujours vérifier qu’on supprime la bonne.');
+  coach('Mais attention : supprimer une feuille supprime aussi toutes les données qu’elle contient, et cette suppression ne peut pas être annulée. Il faut toujours vérifier qu’on supprime la bonne.');
   coach('Ici, nous devons supprimer uniquement la copie temporaire. La feuille Préparation d’origine doit rester dans le classeur.', {hl: {tab: 'prep'}});
   const isCopy = id => /_c\d+$/.test(id);
   ask({act: 'Supprime la feuille « Préparation (2) ».', text: 'Exercice 7 · supprimer une feuille',
@@ -3858,7 +3944,7 @@ lesson(7, {
         return {miss: m[ev.id] || 'Cette feuille doit rester dans le classeur.', revert: true};
       }
       if (ev.type === 'rename') return {miss: 'Changer son nom ne la supprime pas. Utilise la commande Supprimer.', revert: true};
-      if (ev.type === 'cmd' && ev.name === 'clear') return {miss: 'Tu as effacé son contenu, mais la feuille existe toujours. Nous voulons supprimer l’onglet entier.', revert: true};
+      if (ev.type === 'cmd' && ev.name === 'clear') return {miss: 'Tu as effacé son contenu, mais la feuille existe toujours. Nous voulons supprimer la feuille elle-même.', revert: true};
       if (ev.type === 'delcancel') return {info: 'La copie est toujours présente. Si tu es sûr d’avoir sélectionné Préparation (2), confirme sa suppression.'};
     }, done: 'Parfait ! La copie temporaire a été supprimée.'});
   coach('Et notre feuille Préparation d’origine est toujours là.', {ok: true, hl: {tab: 'prep'}});
@@ -3887,7 +3973,7 @@ lesson(7, {
 });
 
 /* ================= chambre 108 — Attention à la saisie ! ================= */
-const DEM = {title: 'Demandes à enregistrer', rows: [['204 · Lina Moreau', '28/11 · Oreiller supplémentaire · À traiter'], ['102 · Adam Petit', '28/11 · Bagages à monter · En cours'], ['305 · Nora Haddad', '29/11 · Réveil à 7 h · Terminé']]};
+const DEM = {title: 'Demandes à enregistrer', rows: [['204 · Lina Moreau', '28/11/2026 · Oreiller supplémentaire · À traiter'], ['102 · Adam Petit', '28/11/2026 · Bagages à monter · En cours'], ['305 · Nora Haddad', '29/11/2026 · Réveil à 7 h · Terminé']]};
 const STATUTS = ['À traiter', 'En cours', 'Terminé'];
 const MSG_CH = 'Saisis un numéro entier compris entre 101 et 399.';
 const nrm2 = s => norm(s).replace(/[.!]$/, '').toLowerCase();
@@ -3901,10 +3987,10 @@ lesson(8, {
     {id: 'l8f2', t: 'Limiter les nombres', img: mg({t: {A1: 'Chambre', A2: 204, A3: 999}, cols: 1, rows: 3, w: 80, fill: {A3: '#FFE2DC'}, fc: {A3: '#B3261E'}}), pts: ['On peut autoriser uniquement des nombres entiers ou décimaux respectant une condition.', 'Exemple : un entier compris entre 101 et 399.']},
     {id: 'l8f3', t: 'Les listes déroulantes', img: `<svg viewBox="0 0 170 80" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}"><rect x="40" y="6" width="90" height="22" rx="3" fill="#fff" stroke="#107C41" stroke-width="2"/><text x="46" y="21" font-size="10.5">À traiter</text><path d="M118 14l4 4 4-4" stroke="#107C41" stroke-width="2" fill="none"/><rect x="40" y="31" width="90" height="46" rx="6" fill="#fff" stroke="#D1D1D6"/>${STATUTS.map((t, i) => `<text x="48" y="${45 + i * 13}" font-size="10">${t}</text>`).join('')}</svg>`, pts: ['Une <b>liste déroulante</b> permet de choisir une valeur parmi des choix définis à l’avance.', 'Exemple : À traiter, En cours ou Terminé.']},
     {id: 'l8f4', t: 'Le message de saisie', img: `<svg viewBox="0 0 170 74" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}"><rect x="20" y="6" width="56" height="22" fill="#fff" stroke="#107C41" stroke-width="2"/><rect x="20" y="34" width="140" height="36" rx="8" fill="#FFFDE7" stroke="#E5DCA0"/><text x="28" y="49" font-size="9.5" font-weight="700">Numéro de chambre</text><text x="28" y="62" font-size="8.5">Un entier entre 101 et 399.</text></svg>`, pts: ['Un <b>message de saisie</b> apparaît quand on sélectionne la cellule.', 'Il indique ce qui est attendu, avant la saisie.']},
-    {id: 'l8f5', t: 'Les alertes d’erreur', img: `<svg viewBox="0 0 170 70" xmlns="http://www.w3.org/2000/svg"><circle cx="85" cy="35" r="24" fill="#FF3B30"/><path d="M76 26l18 18M94 26L76 44" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>`, pts: ['Les alertes signalent une valeur incorrecte.', 'Le style <b>Arrêt</b> bloque la saisie ; d’autres styles permettent de poursuivre.']},
+    {id: 'l8f5', t: 'Les alertes d’erreur', img: `<svg viewBox="0 0 170 70" xmlns="http://www.w3.org/2000/svg"><circle cx="85" cy="35" r="24" fill="#FF3B30"/><path d="M76 26l18 18M94 26L76 44" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>`, pts: ['Une <b>alerte d’erreur</b> s’affiche quand une valeur non valide est saisie.', 'Le style <b>Arrêt</b> bloque la saisie ; d’autres styles permettent de poursuivre.']},
     {id: 'l8f6', t: 'Contrôler les dates', img: mg({t: {A1: 'Date', A2: '28/11/2026', A3: '31/12/2026'}, cols: 1, rows: 3, w: 90, fill: {A2: '#E7F4EC', A3: '#E7F4EC'}}), pts: ['La validation peut limiter les dates à une période précise.', 'Les cellules doivent contenir de véritables dates.']},
   ],
-  end: {title: 'Des saisies mieux contrôlées !', talk: ['Bravo ! Tu viens de découvrir la validation des données dans Excel.', 'Tu sais maintenant limiter les nombres, contrôler les dates et créer des listes déroulantes.', 'Tu sais aussi afficher une consigne et utiliser une alerte pour signaler une saisie incorrecte.', 'Et surtout, tu as compris qu’une bonne règle de validation aide à rendre un tableau plus fiable.'],
+  end: {title: 'Des saisies mieux contrôlées !', talk: ['Bravo ! Tu viens de découvrir la validation des données dans Excel.', 'Tu sais maintenant limiter les nombres, contrôler les dates et créer des listes déroulantes.', 'Tu sais aussi afficher un message de saisie et utiliser une alerte d’erreur pour signaler une saisie non valide.', 'Et surtout, tu as compris qu’une bonne règle de validation aide à rendre un tableau plus fiable.'],
     teaser: {from: 'camille', text: '« Merci pour le suivi ! J’ai une réunion avec les responsables demain matin. J’aimerais leur présenter les informations du classeur, sans sélectionner les cellules une par une. Tu pourrais m’aider à sélectionner rapidement les bonnes zones du tableau ? »'},
     dsay: ['Ah, les plages de cellules !', 'Nous allons apprendre à les sélectionner plus rapidement et plus précisément.'],
     next: 'Chambre 109 — Avant la réunion', nextSub: 'Sélectionner des plages de cellules avec précision.'},
@@ -3952,13 +4038,13 @@ lesson(8, {
   coach('Maintenant, nous allons définir les règles de saisie.', {ok: true});
   // 5. nombres entiers
   coach('Commençons par les numéros de chambre. Ceux du Grand Hôtel vont de 101 à 399.', {hl: {col: 'B', to: 6}});
-  coach('Nous allons demander à Excel d’accepter uniquement des <b>nombres entiers</b> compris entre ces deux valeurs. Cela évitera de saisir 999 ou 204,5.');
+  coach('Nous allons autoriser uniquement des <b>nombres entiers</b> compris entre ces deux valeurs. Cela évitera de saisir 999 ou 204,5.');
   coach('Attention : la règle ne garantit pas qu’une chambre existe réellement. Elle vérifie seulement que le numéro respecte l’intervalle.');
   coach('Nous allons appliquer cette règle aux cellules <code>B2:B20</code>, pour les prochaines demandes aussi.', {hl: {range: 'B2:B8'}});
   coach('Pour sélectionner une grande plage, touche la zone Nom, en haut à gauche, et écris <code>B2:B20</code>. Tu peux aussi faire glisser ton doigt.', {hl: 'namebox'});
-  coach('Ensuite, ouvre l’outil « Validation » du ruban.', {hl: {btn: 'valid'}});
+  coach('Ensuite, ouvre le bouton « Validation des données » du ruban.', {hl: {btn: 'valid'}});
   ask({act: 'Configure une validation sur <code>B2:B20</code> : <b>Nombre entier</b> compris entre <b>101</b> et <b>399</b>.', text: 'Exercice 2 · nombres entiers', sheet: 'suivi',
-    hints: ['Nous voulons contrôler les valeurs que l’on peut saisir dans la colonne Chambre.', 'Sélectionne B2:B20 (par la zone Nom), puis touche Validation.', 'Choisis Nombre entier, « comprise entre », minimum 101 et maximum 399, puis OK.'], hh: ['namebox', {btn: 'valid'}, {btn: 'valid'}],
+    hints: ['Nous voulons contrôler les valeurs que l’on peut saisir dans la colonne Chambre.', 'Sélectionne B2:B20 (par la zone Nom), puis touche « Validation des données ».', 'Choisis Nombre entier, « comprise entre », minimum 101 et maximum 399, puis OK.'], hh: ['namebox', {btn: 'valid'}, {btn: 'valid'}],
     on(ev) {
       if (ev.type !== 'valid') return;
       const r = ev.rule;
@@ -3976,8 +4062,8 @@ lesson(8, {
   // 6. tester une valeur refusée
   coach('Une règle, c’est bien. Mais vérifions qu’elle fonctionne ! Imaginons qu’un employé essaie d’enregistrer la chambre 999.', {sel: 'B2'});
   coach('Nous allons faire le test dans B2. Pour le moment, cette cellule est vide.', {sel: 'B2', hl: {cells: ['B2']}});
-  ask({act: 'Essaie de saisir <b>999</b> dans <code>B2</code>, valide, et observe la réaction d’Excel.', text: 'Exercice 3 · tester', sheet: 'suivi', sel: 'B2', edit: true, num: true,
-    hints: ['Nous allons volontairement tester une valeur en dehors de l’intervalle autorisé.', 'La limite maximale est 399. Le numéro 999 doit donc être refusé.', 'Touche B2 une deuxième fois, saisis 999, valide, puis ferme l’alerte sans accepter cette valeur.'], hh: [{cells: ['B2']}, {pulse: 'B2'}, {marker: 'B2'}],
+  ask({act: 'Essaie de saisir <b>999</b> dans <code>B2</code>, valide, et observe ce qui se passe.', text: 'Exercice 3 · tester', sheet: 'suivi', sel: 'B2', edit: true, num: true,
+    hints: ['Nous allons volontairement tester une valeur en dehors de l’intervalle autorisé.', 'La limite maximale est 399. Le numéro 999 doit donc être refusé.', 'Touche B2 une deuxième fois, saisis 999, valide, puis touche Annuler dans l’alerte.'], hh: [{cells: ['B2']}, {pulse: 'B2'}, {marker: 'B2'}],
     on(ev) {
       if (ev.type === 'invalid') {
         if (ev.ref !== 'B2') return 'La règle fonctionne aussi ici, mais nous voulons effectuer ce test dans B2.';
@@ -3987,15 +4073,15 @@ lesson(8, {
       }
       if (ev.type === 'commit') return {cancel: true, miss: 'Ce numéro respecte la règle. Pour vérifier le refus, essayons volontairement une valeur trop grande : 999.'};
       if (ev.type === 'valid') return {miss: 'La règle est déjà prête. Il faut maintenant essayer de saisir une valeur incorrecte.', revert: true};
-      if (ev.type === 'cancel') return {info: 'Valide la saisie pour voir si Excel l’accepte.'};
-    }, done: 'Tu vois ? Excel a détecté que 999 ne respecte pas notre règle. La valeur a été refusée.'});
-  coach('C’est exactement ce que Thomas voulait éviter !', {ok: true});
+      if (ev.type === 'cancel') return {info: 'Valide la saisie pour voir si la valeur est acceptée.'};
+    }, done: 'Tu vois ? 999 ne respecte pas notre règle : une alerte d’erreur s’affiche et la valeur n’est pas enregistrée.'});
+  coach('C’est exactement ce que Thomas voulait éviter ! Cette fenêtre est une <b>alerte d’erreur</b> de style <b>Arrêt</b> : elle bloque toute valeur non valide.', {ok: true});
   // 7. liste déroulante
   msg('thomas', ['Super pour les chambres ! Mais pour les statuts, j’aimerais que tout le monde utilise exactement les mêmes mots.', 'Nous avons seulement trois possibilités : À traiter, En cours et Terminé.'], 'Parfait ! Cette fois, nous allons créer une liste déroulante.', {ok: false});
   coach('Au lieu d’écrire un statut à la main, les employés pourront choisir parmi trois valeurs proposées.', {hl: {col: 'D', to: 6}});
   coach('Nous allons appliquer cette liste aux cellules <code>D2:D20</code>. Dans Source, sépare les choix par des points-virgules : <code>À traiter;En cours;Terminé</code>.', {hl: {range: 'D2:D8'}});
   ask({act: 'Configure une <b>liste déroulante</b> sur <code>D2:D20</code> avec les choix « À traiter », « En cours » et « Terminé ».', text: 'Exercice 4 · liste déroulante', sheet: 'suivi',
-    hints: ['Nous voulons proposer des choix plutôt que laisser les employés écrire librement.', 'Sélectionne D2:D20, puis ouvre Validation et choisis Liste.', 'Dans Source, écris À traiter;En cours;Terminé, garde la liste déroulante activée, puis OK.'], hh: ['namebox', {btn: 'valid'}, {btn: 'valid'}],
+    hints: ['Nous voulons proposer des choix plutôt que laisser les employés écrire librement.', 'Sélectionne D2:D20, puis ouvre « Validation des données » et choisis Liste.', 'Dans Source, écris À traiter;En cours;Terminé, garde la liste déroulante activée, puis OK.'], hh: ['namebox', {btn: 'valid'}, {btn: 'valid'}],
     on(ev) {
       if (ev.type !== 'valid') return;
       const r = ev.rule;
@@ -4019,7 +4105,7 @@ lesson(8, {
     hints: ['La demande de Lina n’a pas encore été prise en charge.', 'Son statut est « À traiter ». Il se choisit dans la cellule D2.', 'Sélectionne D2, touche la petite flèche à droite de la cellule, puis « À traiter ».'], hh: [{cells: ['D2']}, {cells: ['D2']}, {marker: 'D2'}],
     on(ev) {
       if (ev.type === 'pick') { if (ev.ref !== 'D2') return {miss: 'Cette cellule correspond à une autre demande. La première est sur la ligne 2.', revert: true}; return ev.value === 'À traiter' ? true : {miss: ev.value === 'En cours' ? 'Ce statut signifie que quelqu’un s’occupe déjà de la demande. Celle de Lina attend encore d’être prise en charge.' : 'L’oreiller n’a pas encore été apporté. La demande n’est donc pas terminée.', revert: true}; }
-      if (ev.type === 'invalid' || ev.type === 'commit') return ev.type === 'commit' ? {cancel: true, miss: 'Le texte ressemble au bon statut, mais nous voulons apprendre à utiliser la liste déroulante.'} : 'Le texte ressemble au bon statut, mais nous voulons apprendre à utiliser la liste déroulante.';
+      if (ev.type === 'invalid' || ev.type === 'commit') return ev.type === 'commit' ? {cancel: true, miss: 'Pour cet exercice, n’écris pas le statut : choisis-le dans la liste déroulante de D2.'} : 'Ce texte ne fait pas partie de la liste. Choisis le statut dans la liste déroulante de D2.';
       if (ev.type === 'sel' && ev.ref === 'D3') return {info: 'Cette cellule correspond à Adam. La première demande est sur la ligne 2.'};
       if (ev.type === 'valid') return {miss: 'La liste est déjà configurée. Il suffit maintenant de l’utiliser dans la cellule.', revert: true};
     }, done: 'Parfait ! Tu viens d’utiliser une liste déroulante.'});
@@ -4029,7 +4115,7 @@ lesson(8, {
   coach('Ce message apparaît lorsqu’on sélectionne la cellule. Il explique ce qu’on attend, avant même qu’une erreur soit commise.', {hl: {range: 'B2:B8'}});
   coach('Titre : « Numéro de chambre ». Message : « Saisis un numéro entier compris entre 101 et 399. »', {extra: `<div class="vmsg on" style="position:static;margin-top:8px;max-width:none"><b>Numéro de chambre</b>${MSG_CH}</div>`});
   ask({act: 'Sur <code>B2:B20</code>, ajoute le message de saisie « Numéro de chambre » : « Saisis un numéro entier compris entre 101 et 399. »', text: 'Exercice 6 · message de saisie', sheet: 'suivi', edit: true,
-    hints: ['Le message de saisie fait partie des options de validation des données.', 'Sélectionne B2:B20, ouvre Validation, puis l’onglet Message de saisie.', 'Active le message, écris le titre « Numéro de chambre » et la consigne demandée, puis OK.'], hh: ['namebox', {btn: 'valid'}, {btn: 'valid'}],
+    hints: ['Le message de saisie fait partie des options de validation des données.', 'Sélectionne B2:B20, ouvre « Validation des données », puis l’onglet Message de saisie.', 'Active le message, écris le titre « Numéro de chambre » et la consigne demandée, puis OK.'], hh: ['namebox', {btn: 'valid'}, {btn: 'valid'}],
     on(ev) {
       if (ev.type === 'commit') return {cancel: true, miss: 'Tu as saisi du texte dans le tableau. La consigne doit être configurée dans Validation des données.'};
       if (ev.type !== 'valid') return;
@@ -4042,12 +4128,12 @@ lesson(8, {
       if (ev.range !== 'B2:B20') return {miss: 'Le message doit aider l’équipe sur toute la plage B2:B20.', revert: true};
       return true;
     }, done: 'Bravo ! L’équipe verra maintenant une consigne en sélectionnant une cellule de la colonne Chambre.'});
-  coach('Regarde : en sélectionnant B3, la bulle de consigne apparaît automatiquement.', {ok: true, sel: 'B3'});
+  coach('Regarde : quand on sélectionne B3, le message de saisie apparaît automatiquement.', {ok: true, sel: 'B3'});
   // 10. dates
   msg('thomas', 'Dernière chose : les demandes concernent la période du 28 novembre au 31 décembre 2026. Peut-on limiter les dates à cette période ?', 'Oui ! La validation des données peut aussi contrôler les dates.', {ok: false});
-  coach('Nous allons accepter uniquement les dates comprises entre le 28/11/2026 et le 31/12/2026, sur <code>A2:A20</code>. Choisis bien le type Date.', {hl: {range: 'A2:A8'}});
+  coach('Nous allons accepter uniquement les dates comprises entre le 28/11/2026 et le 31/12/2026, sur <code>A2:A20</code>. Dans Autoriser, choisis bien Date.', {hl: {range: 'A2:A8'}});
   ask({act: 'Configure une validation sur <code>A2:A20</code> : <b>Date</b> comprise entre le <b>28/11/2026</b> et le <b>31/12/2026</b>.', text: 'Exercice 7 · dates', sheet: 'suivi',
-    hints: ['Nous voulons limiter les dates à une période précise.', 'Sélectionne A2:A20, puis ouvre Validation et choisis Date.', 'Choisis « comprise entre », puis saisis 28/11/2026 comme début et 31/12/2026 comme fin.'], hh: ['namebox', {btn: 'valid'}, {btn: 'valid'}],
+    hints: ['Nous voulons limiter les dates à une période précise.', 'Sélectionne A2:A20, puis ouvre « Validation des données » et choisis Date.', 'Choisis « comprise entre », puis saisis 28/11/2026 comme début et 31/12/2026 comme fin.'], hh: ['namebox', {btn: 'valid'}, {btn: 'valid'}],
     on(ev) {
       if (ev.type !== 'valid') return;
       const r = ev.rule;
@@ -4058,14 +4144,14 @@ lesson(8, {
       if (r.op !== 'between') return {miss: 'Choisis « comprise entre ».', revert: true};
       if (r.min !== '2026-11-28') return {miss: r.min === '2026-10-28' ? 'La période commence en novembre, pas en octobre.' : 'La date de début doit être le 28/11/2026.', revert: true};
       if (r.max !== '2026-12-31') return {miss: r.max === '2025-12-31' ? 'Vérifie l’année : nous préparons la réouverture de 2026.' : 'La date de fin doit être le 31/12/2026.', revert: true};
-      if (r.alert && r.alert.style !== 'stop') return {miss: 'Une alerte de type Avertissement peut permettre de conserver une valeur invalide. Ici, nous voulons une alerte Arrêt.', revert: true};
+      if (r.alert && r.alert.style !== 'stop') return {miss: 'Avec les styles Avertissement et Informations, on peut conserver une valeur non valide. Ici, garde le style Arrêt dans l’onglet Alerte d’erreur.', revert: true};
       if (ev.range !== 'A2:A20') return {miss: 'La règle doit couvrir A2:A20.', revert: true};
       return true;
     }, done: 'Excellent ! Notre tableau possède maintenant trois types de contrôle.'});
   coach('Les numéros de chambre respectent un intervalle, les statuts viennent d’une liste et les dates appartiennent à une période précise.', {ok: true});
   // 11. remplir le suivi
-  coach('Voyons si notre tableau fonctionne dans une situation réelle : nous allons enregistrer les trois demandes de Thomas.', {extra: refCard(DEM)});
-  coach('Pour les dates et les chambres, saisis les valeurs indiquées. Pour les statuts, utilise les listes déroulantes.', {hl: {range: 'A2:D4'}});
+  coach('Voyons si notre tableau fonctionne dans une situation réelle : nous allons enregistrer les trois demandes de Thomas. Tu les retrouves aussi avec le bouton Fiche.', {extra: refCard(DEM)});
+  coach('Pour les dates, les chambres et les demandes, saisis les valeurs indiquées. Pour les statuts, utilise les listes déroulantes.', {hl: {range: 'A2:D4'}});
   const ROWS8 = [[2, 28, 204, 'Oreiller supplémentaire', 'À traiter'], [3, 28, 102, 'Bagages à monter', 'En cours'], [4, 29, 305, 'Réveil à 7 h', 'Terminé']];
   ask({act: 'Complète les lignes 2 à 4 selon la fiche de Thomas, puis touche « Confirmer le suivi ».', text: 'Exercice 8 · enregistrer les demandes', sheet: 'suivi', edit: true,
     recap: {btn: 'Confirmer le suivi', items: [
@@ -4075,7 +4161,7 @@ lesson(8, {
       ['Statuts', 'À traiter, En cours, Terminé', X => X.v('D2') === 'Terminé' ? 'La demande d’oreiller supplémentaire n’a pas encore été traitée.' : ROWS8.every(([r, , , , s]) => X.v('D' + r) === s) || 'Utilise les listes déroulantes pour choisir les statuts : À traiter, En cours, Terminé.'],
       ['Règles', 'toujours actives', X => { const v = X.sheet('suivi').valid || []; return (['A2:A20', 'B2:B20', 'D2:D20'].every(rg => v.some(x => x.range === rg && x.type !== 'any'))) || 'Les données sont peut-être correctes, mais le tableau doit aussi conserver ses contrôles de saisie.'; }]]},
     hints: ['Commence par la première demande, puis complète les deux suivantes.', 'Les chambres sont 204, 102 et 305. Les statuts sont À traiter, En cours et Terminé.', 'Complète A2:D4 selon la fiche de Thomas, utilise les listes de D3 et D4, puis confirme.'], hh: [{range: 'A2:D2'}, {range: 'A3:D4'}, {pbtn: true}],
-    on(ev) { if (ev.type === 'invalid') return ev.ref[0] === 'B' ? 'Ce numéro ne respecte pas la règle. Vérifie la chambre indiquée dans Concierge.' : ev.ref[0] === 'A' ? 'Cette date est en dehors de la période autorisée pour le suivi.' : 'Ce statut n’est pas dans notre liste. Utilise la liste déroulante.'; if (ev.type === 'valid' && ev.rule.type === 'any') return {miss: 'Les données sont peut-être correctes, mais le tableau doit aussi conserver ses contrôles de saisie.', revert: true}; },
+    on(ev) { if (ev.type === 'invalid') return ev.ref[0] === 'B' ? 'Ce numéro ne respecte pas la règle. Vérifie la chambre indiquée dans Concierge.' : ev.ref[0] === 'A' ? 'Cette valeur n’est pas une date comprise entre le 28/11/2026 et le 31/12/2026. Écris la date complète, par exemple 28/11/2026.' : 'Ce statut n’est pas dans notre liste. Utilise la liste déroulante.'; if (ev.type === 'valid' && ev.rule.type === 'any') return {miss: 'Les données sont peut-être correctes, mais le tableau doit aussi conserver ses contrôles de saisie.', revert: true}; },
     done: 'Parfait ! Toutes les demandes sont enregistrées.'});
   coach('Et grâce à nos règles, les prochaines saisies seront mieux encadrées. Tu viens de préparer un véritable outil de suivi !', {ok: true});
   line('reception2', 'thomas', 'Ah, c’est exactement ce qu’il nous fallait ! Je vois les demandes, les chambres et leur état d’avancement.', {expr: 'smile'});
@@ -4123,9 +4209,9 @@ lesson(9, {
   fiches: [
     {id: 'l9f1', t: 'Sélectionner une cellule', img: mg({t: {A1: 'Client', A2: 'Lina'}, cols: 2, rows: 3, w: 44, sel: 'A2'}), pts: ['Sélectionner une cellule indique à Excel où l’on souhaite travailler.', 'La cellule active est entourée d’un contour.']},
     {id: 'l9f2', t: 'Les plages de cellules', img: mg({t: {A1: 'Client', A2: 'Lina', A3: 'Adam', A4: 'Nora', A5: 'Sarah'}, cols: 2, rows: 5, w: 44, sel: 'A2:A5', fill: {A3: '#E7F4EC', A4: '#E7F4EC', A5: '#E7F4EC'}}), pts: ['Une <b>plage</b> désigne un ensemble de cellules.', 'Par exemple, <code>A2:A5</code> comprend A2, A3, A4 et A5.']},
-    {id: 'l9f3', t: 'Lire une référence de plage', img: mg({cols: 4, rows: 4, w: 30, sel: 'A1:D4', box: 'A1:D4', right: 60}), pts: ['Les deux-points indiquent les limites d’une plage.', '<code>A1:D5</code> désigne toutes les cellules du rectangle compris entre A1 et D5.']},
+    {id: 'l9f3', t: 'Lire une référence de plage', img: mg({cols: 4, rows: 5, w: 30, sel: 'A1:D5', box: 'A1:D5', right: 60}), pts: ['Le deux-points (:) sépare la première et la dernière cellule d’une plage.', '<code>A1:D5</code> désigne toutes les cellules du rectangle compris entre A1 et D5.']},
     {id: 'l9f4', t: 'Une colonne entière', img: mg({cols: 3, rows: 4, w: 34, colh: 1, fill: {B1: '#E7F4EC', B2: '#E7F4EC', B3: '#E7F4EC', B4: '#E7F4EC'}}), pts: ['Toucher l’en-tête d’une colonne sélectionne <b>toute la colonne</b> Excel.', 'Ce n’est pas la même chose que quelques cellules de cette colonne.']},
-    {id: 'l9f5', t: 'Une ligne entière', img: mg({cols: 4, rows: 3, w: 30, fill: {A2: '#E7F4EC', B2: '#E7F4EC', C2: '#E7F4EC', D2: '#E7F4EC'}}), pts: ['Toucher l’en-tête d’une ligne sélectionne <b>toute la ligne</b> Excel.', 'Pour les seules cellules d’un tableau, délimite la plage souhaitée.']},
+    {id: 'l9f5', t: 'Une ligne entière', img: mg({cols: 4, rows: 3, w: 30, fill: {A2: '#E7F4EC', B2: '#E7F4EC', C2: '#E7F4EC', D2: '#E7F4EC'}}), pts: ['Toucher l’en-tête d’une ligne sélectionne <b>toute la ligne</b> Excel.', 'Pour ne prendre que les cellules du tableau, sélectionne une plage, par exemple A2:D2.']},
     {id: 'l9f6', t: 'Sélectionner un tableau', img: mg({t: {A1: 'Client', B1: 'Ch.', C1: 'Nuits'}, cols: 3, rows: 4, w: 36, sel: 'A1:C4'}), pts: ['Sélectionner un tableau, c’est inclure toutes les cellules utiles, titres compris.', 'Sans sélectionner inutilement le reste de la feuille.']},
     {id: 'l9f7', t: 'La zone Nom', img: `<svg viewBox="0 0 170 60" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}"><rect x="30" y="14" width="80" height="32" rx="6" fill="#FFF1C2" stroke="#F5C04A" stroke-width="2"/><text x="70" y="35" font-size="14" font-weight="700" text-anchor="middle">A1:D5</text></svg>`, pts: ['La <b>zone Nom</b> affiche la référence de la cellule active.', 'On peut aussi y écrire une référence ou une plage pour la sélectionner.']},
   ],
@@ -4140,7 +4226,7 @@ lesson(9, {
   line('office', 'ding', 'Mais aujourd’hui, Camille a prévu quelque chose d’important.', {notif: N9});
   line('office', 'ding', 'Une réunion avec tous les responsables ! Allons voir ce que Camille nous demande.', {notif: N9});
   S.push({t: 'notif', v: 'office', ...N9, zoom: false, act: 'Touche « Aller voir Camille ».', miss: 'Camille nous attend pour préparer sa réunion. Direction son bureau !'});
-  line('direction', 'camille', 'Bonjour ! Merci d’être venu si vite.', {expr: 'wave'});
+  line('direction', 'camille', 'Bonjour ! Merci de venir si vite.', {expr: 'wave'});
   line('direction', 'camille', 'À 10 h, nous faisons le point avant la réouverture. Thomas parlera des arrivées, Inès des petits-déjeuners et Hugo du budget.', {expr: 'present'});
   line('direction', 'camille', 'Pour ma présentation, je voudrais montrer notre tableau des réservations.', {expr: 'smile'});
   line('direction', 'ding', 'Parfait, il est déjà prêt !');
@@ -4157,15 +4243,15 @@ lesson(9, {
     tips: ['Nous avons plusieurs sélections à préparer.', 'Et bonne nouvelle : nous n’avons pas besoin de modifier les informations. Nous allons simplement sélectionner les bonnes cellules.'], btn: 'Ouvrir le fichier'});
   // 4. noms
   coach('Commençons par les noms des clients. Ils se trouvent dans la colonne A, de la ligne 2 à la ligne 5.', {tools: {ref: REUNION}, hl: {range: 'A2:A5'}});
-  coach('Une plage s’écrit avec deux références séparées par deux-points : <code>A2:A5</code> désigne toutes les cellules de A2 à A5, incluses.', {extra: '<span class="datepart"><span>A2<small>Première</small></span><i>:</i><span>A5<small>Dernière</small></span></span>'});
+  coach('Une plage s’écrit avec deux références séparées par le signe deux-points (:) : <code>A2:A5</code> désigne toutes les cellules de A2 à A5, incluses.', {extra: '<span class="datepart"><span>A2<small>Première</small></span><i>:</i><span>A5<small>Dernière</small></span></span>'});
   coach('Pour sélectionner une plage : touche la première cellule, puis fais glisser ton doigt depuis elle jusqu’à la dernière. Tu peux aussi écrire la plage dans la zone Nom.', {hl: {range: 'A2:A5'}});
   ask(exRange('A2:A5', {act: 'Sélectionne la plage <code>A2:A5</code>.', text: 'Exercice 1 · les noms',
     hints: ['Les noms des clients se trouvent dans la colonne A.', 'Le premier nom est en A2 et le dernier en A5.', 'Sélectionne A2, puis étends la sélection jusqu’à A5.'],
     errs: {A2: 'Tu as sélectionné Lina, mais Camille veut voir les quatre clients. Étends la sélection vers le bas.', 'A1:A5': 'Tu as aussi sélectionné le titre « Client ». Pour le moment, nous voulons uniquement les noms.', 'A2:A4': 'Il manque Sarah Bernard, sur la dernière ligne.', 'B2:B5': 'Cette colonne contient les numéros de chambre. Les noms sont juste à gauche.', 'A2:B5': 'Tu as inclus les chambres. Nous voulons seulement les noms des clients.'},
     done: 'Parfait ! Tu viens de sélectionner plusieurs cellules d’un seul geste.'}));
-  coach('Nous appelons cela une <b>plage de cellules</b>. Toutes les cellules sélectionnées appartiennent ici à la même colonne.', {ok: true, range: 'A2:A5'});
+  coach('Tu as déjà croisé cette notion : c’est une <b>plage de cellules</b>. Toutes les cellules sélectionnées appartiennent ici à la même colonne.', {ok: true, range: 'A2:A5'});
   // 5. titres
-  msg('camille', 'Super ! Pour commencer ma présentation, j’aimerais aussi mettre en évidence les titres du tableau.', 'Bonne idée ! Les titres se trouvent tous sur la première ligne, de la colonne A à la colonne D.', {ok: false});
+  msg('camille', 'Super ! Pour commencer ma présentation, j’aimerais aussi montrer les titres du tableau.', 'Bonne idée ! Les titres se trouvent tous sur la première ligne, de la colonne A à la colonne D.', {ok: false});
   coach('Cette fois, nous allons sélectionner une plage horizontale.', {hl: {range: 'A1:D1'}});
   ask(exRange('A1:D1', {act: 'Sélectionne <code>A1:D1</code>.', text: 'Exercice 2 · les titres',
     hints: ['Les titres se trouvent sur la ligne 1.', 'Ils commencent en A1 et se terminent en D1.', 'Sélectionne A1, puis étends la sélection vers la droite jusqu’à D1.'],
@@ -4183,8 +4269,8 @@ lesson(9, {
   msg('camille', 'Je vois parfois des références comme B2:B5 dans les instructions Excel. Ça signifie quoi exactement ?', 'Bonne question ! Une référence de plage indique quelles cellules sont concernées.', {ok: false});
   coach('Vérifions que tu as compris.', {hl: {range: 'B2:B5'}});
   S.push({t: 'quiz', v: 'sheet', text: 'Que signifie <code>B2:B5</code> ?', wide: true,
-    opts: [{t: 'Toutes les cellules de B2 à B5', ok: true}, {t: 'Uniquement les cellules B2 et B5', why: 'Les deux-points ne désignent pas seulement les extrémités. Ils incluent aussi les cellules entre les deux.'}, {t: 'Toutes les cellules des colonnes B à E', why: 'Les lettres ne changent pas ici. Nous restons dans la colonne B.'}, {t: 'Toute la ligne 2 et toute la ligne 5', why: 'Les chiffres indiquent les lignes, mais nous ne sélectionnons pas les lignes entières.'}],
-    hints: ['Les deux références indiquent le début et la fin d’une plage.', 'Les deux cellules se trouvent dans la même colonne B.', 'Les deux-points signifient « de… à… », en incluant toutes les cellules intermédiaires.'],
+    opts: [{t: 'Toutes les cellules de B2 à B5', ok: true}, {t: 'Uniquement les cellules B2 et B5', why: 'B2:B5 ne désigne pas seulement les deux extrémités : la plage inclut aussi les cellules situées entre elles.'}, {t: 'Toutes les cellules des colonnes B à E', why: 'Les lettres ne changent pas ici. Nous restons dans la colonne B.'}, {t: 'Toute la ligne 2 et toute la ligne 5', why: 'Les chiffres indiquent les lignes, mais nous ne sélectionnons pas les lignes entières.'}],
+    hints: ['Les deux références indiquent le début et la fin d’une plage.', 'Les deux cellules se trouvent dans la même colonne B.', 'Le deux-points signifie « de… à… », en incluant toutes les cellules intermédiaires.'],
     done: 'Exactement ! Une plage comprend toutes les cellules situées entre les deux références, extrémités comprises.'});
   // 8. chambres
   msg('thomas', 'Pour la réunion, Camille aimerait vérifier les chambres attribuées aux clients. Tu peux sélectionner les numéros de chambre ?', 'Bien sûr ! Les numéros se trouvent dans la colonne B.', {ok: false});
@@ -4199,7 +4285,7 @@ lesson(9, {
   coach('Tu te souviens de la colonne qui contient les durées de séjour ? C’est la colonne « Nuits ». Sélectionne les quatre durées, sans le titre.', {hl: {colh: 'C'}});
   ask(exRange('C2:C5', {act: 'Sélectionne les durées de séjour des quatre clients.', text: 'Exercice 6 · les nuits',
     hints: ['Les durées de séjour se trouvent sous le titre « Nuits ».', 'Ce titre se trouve dans la colonne C.', 'Sélectionne C2:C5.'],
-    errs: {'B2:B5': 'Ce sont les numéros de chambre, pas les durées de séjour.', 'D2:D5': 'Cette colonne contient les dates d’arrivée.', 'C1:C5': 'Tu as inclus le titre. Nous voulons seulement les valeurs.', 'C2:C4': 'Il manque la durée du séjour de Sarah.', C3: 'Tu as sélectionné les quatre nuits d’Adam, mais Camille souhaite les durées des quatre clients.'},
+    errs: {'B2:B5': 'Ce sont les numéros de chambre, pas les durées de séjour.', 'D2:D5': 'Cette colonne contient les dates d’arrivée.', 'C1:C5': 'Tu as inclus le titre. Nous voulons seulement les valeurs.', 'C2:C4': 'Il manque la durée du séjour de Sarah.', C3: 'Tu as sélectionné seulement la durée du séjour d’Adam. Camille souhaite celles des quatre clients.'},
     typed: 'Nous ne voulons pas changer les réservations. Il suffit de sélectionner les cellules.',
     done: 'Excellent ! Tu sais retrouver une information grâce à son titre, puis sélectionner uniquement les cellules utiles.'}));
   // 10. ligne entière ou plage
@@ -4208,7 +4294,7 @@ lesson(9, {
   coach('Sélectionner <code>A2:D2</code>, ce n’est donc pas la même chose que sélectionner toute la ligne 2.', {hl: {range: 'A2:D2'}});
   ask(exRange('A2:D2', {act: 'Sélectionne uniquement les quatre cellules de la réservation de Lina, sans sélectionner toute la ligne.', text: 'Exercice 7 · plage ou ligne',
     hints: ['Lina se trouve sur la ligne 2.', 'Sa réservation occupe les colonnes A à D.', 'Sélectionne A2:D2, plutôt que de toucher l’en-tête de ligne 2.'],
-    errs: {row2: 'Tu as sélectionné la ligne entière, y compris les cellules après notre tableau. Nous voulons seulement A2:D2.', 'A2:C2': 'Il manque la date d’arrivée de Lina, en D2.', 'A1:D2': 'Tu as aussi inclus les titres. Nous voulons uniquement la réservation de Lina.', 'A3:D3': 'Cette ligne correspond à Adam. Lina est juste au-dessus.', A2: 'Tu as sélectionné son nom. Il faut aussi inclure la chambre, les nuits et la date.', colA: 'Cette sélection contient tous les noms possibles de la colonne, pas seulement la réservation de Lina.'},
+    errs: {row2: 'Tu as sélectionné la ligne entière, y compris les cellules après notre tableau. Nous voulons seulement A2:D2.', 'A2:C2': 'Il manque la date d’arrivée de Lina, en D2.', 'A1:D2': 'Tu as aussi inclus les titres. Nous voulons uniquement la réservation de Lina.', 'A3:D3': 'Cette ligne correspond à Adam. Lina est juste au-dessus.', A2: 'Tu as sélectionné son nom. Il faut aussi inclure la chambre, les nuits et la date.', colA: 'Tu as sélectionné toute la colonne A. Nous voulons seulement la réservation de Lina : A2:D2.'},
     done: 'Parfait ! Tu comprends maintenant la différence entre une plage de cellules et une ligne entière.'}));
   // 11. dernière vérification
   msg('camille', 'Merci ! La réunion commence dans quelques minutes. Peux-tu sélectionner tout le tableau des réservations pour que je puisse le présenter ?', 'Il est presque l’heure ! Cette fois, je te laisse faire sans te montrer la plage à l’avance.', {ok: false});
@@ -4254,9 +4340,9 @@ lesson(10, {
     {id: 'l10f2', t: 'La référence de cellule', img: mg({cols: 4, rows: 4, w: 30, colh: 2, sel: 'C3', box: 'C3', right: 60}), pts: ['Une référence de cellule combine une lettre de colonne et un numéro de ligne.', 'Par exemple, <code>C3</code> désigne la cellule située à l’intersection de la colonne C et de la ligne 3.']},
     {id: 'l10f3', t: 'Modifier et corriger', img: LDEF[3].fiches[3].img, pts: ['Pour modifier une information, sélectionne la bonne cellule, effectue la correction et valide.', 'La commande <b>Annuler</b> permet de revenir sur certaines actions récentes.']},
     {id: 'l10f4', t: 'Copier et couper', img: LDEF[4].fiches[0].img, pts: ['<b>Copier</b> reproduit une information en conservant l’original.', '<b>Couper</b> permet de la déplacer vers un autre emplacement.']},
-    {id: 'l10f5', t: 'La mise en forme', img: mg({t: {A1: 'Contrôle', A2: 'Vérifier…'}, cols: 2, rows: 3, w: 58, fill: {A1: '#FFF2CC'}, bold: ['A1'], sel: 'A1'}), pts: ['La mise en forme modifie l’apparence des cellules : police, gras, remplissage, bordures et alignement.', 'Elle ne change pas nécessairement la valeur enregistrée.']},
-    {id: 'l10f6', t: 'Les dates', img: LDEF[6].fiches[0].img, pts: ['Excel peut enregistrer les dates comme des valeurs exploitables pour les calculs.', 'Leur affichage dépend du format choisi et des paramètres régionaux.']},
-    {id: 'l10f7', t: 'Gérer les feuilles', img: LDEF[7].fiches[4].img, pts: ['On peut créer, renommer, déplacer, dupliquer et supprimer des feuilles.', 'Avant une suppression, vérifie qu’aucune information importante ne sera perdue.']},
+    {id: 'l10f5', t: 'La mise en forme', img: mg({t: {A1: 'Contrôle', A2: 'Vérifier…'}, cols: 2, rows: 3, w: 58, fill: {A1: '#FFF2CC'}, bold: ['A1'], sel: 'A1'}), pts: ['La mise en forme modifie l’apparence des cellules : gras, couleur de police, couleur de remplissage, bordures et alignement.', 'Elle ne change pas la valeur enregistrée.']},
+    {id: 'l10f6', t: 'Les dates', img: LDEF[6].fiches[0].img, pts: ['Une date saisie au bon format est enregistrée comme une véritable date, et non comme du texte.', 'Leur affichage dépend du format choisi et des paramètres régionaux.']},
+    {id: 'l10f7', t: 'Gérer les feuilles', img: LDEF[7].fiches[4].img, pts: ['On peut créer, renommer, déplacer, dupliquer et supprimer des feuilles.', 'Avant une suppression, vérifie qu’aucune information importante ne sera perdue : une feuille supprimée ne peut pas être récupérée avec Annuler.']},
     {id: 'l10f8', t: 'La validation des données', img: LDEF[8].fiches[2].img, pts: ['Les règles de validation contrôlent certaines valeurs saisies : nombres, dates ou choix dans une liste déroulante.', 'Elles ne remplacent pas toutes les vérifications métier.']},
     {id: 'l10f9', t: 'Les plages de cellules', img: LDEF[9].fiches[2].img, pts: ['Une plage désigne un ensemble de cellules.', '<code>A1:D5</code> représente le rectangle allant de A1 à D5, extrémités comprises.']},
     {id: 'l10f10', t: 'Vérifier un classeur', img: `<svg viewBox="0 0 170 80" xmlns="http://www.w3.org/2000/svg" font-family="${SYSF}">${['Valeurs', 'Formats', 'Règles', 'Feuilles'].map((t, i) => `<circle cx="${30 + (i % 2) * 74}" cy="${24 + Math.floor(i / 2) * 32}" r="9" fill="#E7F4EC"/><path d="M${25 + (i % 2) * 74} ${24 + Math.floor(i / 2) * 32}l3.4 3.4 6-6.6" stroke="#107C41" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="${44 + (i % 2) * 74}" y="${28.5 + Math.floor(i / 2) * 32}" font-size="12" fill="#1C1C1E">${t}</text>`).join('')}</svg>`, pts: ['Avant de partager un fichier, vérifie les valeurs, les formats, les règles de saisie et les feuilles.', 'Une modification doit être justifiée et ne pas altérer les autres informations.']},
@@ -4268,7 +4354,7 @@ lesson(10, {
     dsay: ['Jusqu’à présent, nous avons surtout saisi, corrigé et organisé des informations.', 'Mais Excel peut aussi effectuer des calculs !'],
     nextLabel: 'Étage 2 · Les premiers calculs', next: 'Chambre 201 — Le premier calcul', nextSub: 'Découvrir le signe =, saisir une formule simple et comprendre comment Excel calcule un résultat.'},
 }, () => {
-  title('office', 'Chambre 110 · Mission finale', 'Le contrôle de Camille');
+  title('office', 'Salle de bal · Mission finale', 'Le contrôle de Camille');
   line('office', 'ding', 'Ding ! Aujourd’hui, c’est un grand jour.', {ring: true});
   line('office', 'ding', 'Tu as déjà appris beaucoup de choses depuis ton arrivée au Grand Hôtel.');
   line('office', 'ding', 'Tu sais retrouver une information, corriger une cellule, organiser un classeur et préparer un tableau.');
@@ -4277,7 +4363,7 @@ lesson(10, {
   line('office', 'ding', 'Une version fiable du classeur… Ça ressemble à notre mission la plus importante jusqu’ici !', {notif: N10});
   S.push({t: 'notif', v: 'office', ...N10, zoom: false, act: 'Touche « Rejoindre Camille ».', miss: 'Camille nous attend. Allons découvrir ce qu’elle souhaite vérifier.'});
   // scène 2 : les huit points du contrôle
-  line('direction3', 'camille', 'Bonjour ! Merci d’être venu.', {expr: 'wave'});
+  line('direction3', 'camille', 'Bonjour ! Merci d’être là.', {expr: 'wave'});
   line('direction3', 'camille', 'Nous avons reçu de nouvelles informations concernant les arrivées.', {expr: 'present'});
   line('direction3', 'camille', 'Et avant la réouverture, je veux être certaine que nos tableaux sont cohérents.', {expr: 'think'});
   line('direction3', 'thomas', 'De mon côté, j’ai aussi une nouvelle demande à enregistrer dans le suivi de la réception.', {expr: 'present'});
@@ -4287,14 +4373,14 @@ lesson(10, {
   line('direction3', 'ding', 'Cette fois, tu vas travailler comme un véritable membre de l’équipe.');
   line('direction3', 'camille', 'Tu auras accès aux messages Concierge, aux documents et à ton classeur.', {expr: 'smile'});
   line('direction3', 'camille', 'Si tu hésites, Ding pourra t’aider. Mais essaie d’abord de trouver par toi-même.', {expr: 'smile'});
-  S.push({t: 'choice', v: 'direction3', key: 'c10', q: 'Que réponds-tu ?', opts: ['Je suis prêt à contrôler le classeur.', 'Je peux consulter les messages pendant la mission ?']});
+  S.push({t: 'choice', v: 'direction3', key: 'c10', q: 'Que réponds-tu ?', opts: ['Allons-y, je contrôle le classeur.', 'Je peux consulter les messages pendant la mission ?']});
   line('direction3', 'camille', 'Très bien. Je te fais confiance.', {expr: 'smile', if: ['c10', 0]});
   line('direction3', 'camille', 'Bien sûr. Tu peux consulter les consignes autant de fois que nécessaire. C’est important de vérifier les informations avant de les saisir.', {expr: 'present', if: ['c10', 1]});
   line('direction3', 'ding', 'Et tu peux aussi revenir sur une erreur. L’objectif est de terminer avec un classeur correct.');
   // scène 3 : le tableau de mission
   S.push({t: 'notif', v: 'office', from: 'camille', text: 'Voici les huit vérifications à effectuer avant 11 h.', btn: 'Ouvre le message', act: 'Ouvre le message de Camille.', miss: 'Regarde la notification en haut : Camille nous a écrit.'});
   S.push({t: 'conv', v: 'chat', with: 'camille', msgs: ['Voici les huit vérifications à effectuer avant 11 h.', {card: MISSION}],
-    tips: ['Huit vérifications. Une seule mission.', 'Nous allons commencer par les réservations. Et cette fois, je ne vais pas te montrer immédiatement où cliquer !'], btn: 'Ouvrir le fichier'});
+    tips: ['Huit vérifications. Une seule mission.', 'Nous allons commencer par les réservations. Et cette fois, je ne vais pas te montrer immédiatement où toucher !'], btn: 'Ouvrir le fichier'});
   // 1. retrouver la réservation de Sarah
   coach('Le classeur s’ouvre sur la feuille Petit-déj. Camille a reçu une confirmation concernant Sarah Bernard.');
   msg('camille', 'Retrouve Sarah Bernard dans le classeur et sélectionne la cellule qui contient son numéro de chambre. Ne modifie encore aucune information.', 'Avant de modifier quoi que ce soit, il faut retrouver sa réservation.', {ok: false});
@@ -4319,8 +4405,8 @@ lesson(10, {
   ask(exPut('C3', 5, {act: 'Modifie le nombre de nuits d’Adam Petit de 4 à 5.', text: 'Vérification 2 · le séjour d’Adam', sheet: 'res',
     hints: ['Adam est sur la ligne 3.', 'Le nombre de nuits se trouve dans la colonne C.', 'Sélectionne C3, remplace 4 par 5, puis valide la saisie.'],
     cellErrs: {B3: 'Tu as changé le numéro de chambre d’Adam. Nous devons seulement modifier sa durée de séjour.', C2: 'Cette cellule correspond à Lina. Adam est sur la ligne 3.', C4: 'Cette cellule correspond à Nora. Adam est sur la ligne 3.'},
-    wrong: {cinq: 'Nous voulons conserver une valeur numérique. Saisis le chiffre 5.', Cinq: 'Nous voulons conserver une valeur numérique. Saisis le chiffre 5.', 6: 'Camille a confirmé cinq nuits, pas six.', 4: 'La valeur n’a pas changé : Adam restera cinq nuits.', '4+1': 'Le résultat attendu est le nombre 5. Tu peux simplement le saisir dans la cellule.'},
-    typed: 'La nouvelle valeur apparaît dans l’éditeur, mais elle n’est pas encore enregistrée. Valide la saisie.', empty: 'La cellule est vide. Saisis le nombre 5.',
+    wrong: {cinq: 'Nous voulons conserver une valeur numérique. Saisis le nombre 5.', Cinq: 'Nous voulons conserver une valeur numérique. Saisis le nombre 5.', 6: 'Camille a confirmé cinq nuits, pas six.', 4: 'La valeur n’a pas changé : Adam restera cinq nuits.', '4+1': 'Le résultat attendu est le nombre 5. Tu peux simplement le saisir dans la cellule.'},
+    typed: 'La nouvelle valeur est en cours de saisie, mais elle n’est pas encore enregistrée. Valide la saisie.', empty: 'La cellule est vide. Saisis le nombre 5.',
     other: 'Camille a confirmé cinq nuits. Saisis le nombre 5.', okHl: {cells: ['C3']}, done: 'Excellent ! Adam restera désormais cinq nuits.'}));
   coach('Tu as corrigé la bonne cellule sans modifier les autres réservations.', {ok: true, extra: tick(2)});
   // 3. recopier une consigne
@@ -4367,7 +4453,7 @@ lesson(10, {
     typed: 'Le titre doit rester « Contrôle ». Nous voulons seulement modifier son apparence.',
     check(ev, X) {
       if (ev.type !== 'fmt') return;
-      if (ev.name === 'font') return {miss: 'Tu as modifié la couleur du texte. Il faut changer le fond de la cellule.', revert: true};
+      if (ev.name === 'font') return {miss: 'Tu as modifié la couleur de police. Il faut changer la couleur de remplissage de la cellule.', revert: true};
       if (ev.range !== 'D1') {
         const [a, b] = ev.range.split(':'), p = P(a), q = P(b || a);
         if (b && p.c === 'D' && q.c === 'D') return {miss: 'Seul le titre doit être mis en évidence, pas toutes les consignes.', revert: true};
@@ -4390,7 +4476,7 @@ lesson(10, {
     cellErrs: {D5: 'Cette cellule correspond à Sarah. Nora se trouve sur la ligne 4.', D3: 'Cette cellule correspond à Adam. Nora se trouve sur la ligne 4.', D2: 'Cette cellule correspond à Lina. Nora se trouve sur la ligne 4.'},
     wrong: {'30/10/2026': 'Vérifie le mois : Camille a confirmé novembre.', '30/11/2025': 'Vérifie l’année : nous préparons la réouverture de 2026.', '31/11/2026': 'Le mois de novembre compte 30 jours. Cette date n’existe pas.', '29/11/2026': 'C’est l’ancienne date. Nora arrivera finalement le 30 novembre.'},
     fmtMiss: 'Tu as changé l’affichage, mais la date enregistrée n’est pas encore celle demandée.', okHl: {cells: ['D4']}, done: 'Parfait ! Nora arrivera maintenant le 30 novembre.'}));
-  coach('Et la cellule conserve un véritable format de date.', {ok: true, extra: tick(5)});
+  coach('Et la cellule contient toujours une véritable date, affichée avec le même format.', {ok: true, extra: tick(5)});
   // 6. une feuille temporaire
   msg('camille', 'Pour préparer la réunion, j’aimerais une feuille temporaire appelée Contrôle réunion. Place-la juste après Réservations. Elle servira de brouillon, sans modifier les tableaux existants.', 'Nous avons déjà appris à créer, renommer et déplacer des feuilles.', {ok: false});
   coach('Cette fois, il faut combiner ces trois actions.', {hl: 'tabs', tools: {rib: ['undo'], sheets: true}});
@@ -4400,7 +4486,7 @@ lesson(10, {
   };
   const ctrlNext = X => { const s = ctrlState(X); if (s.ok) return true; if (s.t.length > 1) return 'Une seule feuille suffit pour la réunion. Supprime la feuille supplémentaire créée par erreur.'; if (!s.t.length) return null; if (!s.named.length) return {info: 'La feuille est créée. Renomme-la maintenant « Contrôle réunion ».', kind: 'good'}; return {info: X.order[X.order.length - 1] === s.named[0].id ? 'La feuille existe, mais Camille souhaite la retrouver juste après Réservations.' : 'Le nom est correct. Place maintenant l’onglet juste après Réservations.'}; };
   ask({act: 'Crée une feuille vide nommée « Contrôle réunion » et place-la immédiatement après Réservations.', text: 'Vérification 6 · la feuille temporaire', edit: true,
-    hints: ['Il faut ajouter une feuille au classeur actuel.', 'Crée une feuille vide, puis renomme-la « Contrôle réunion ».', 'Utilise le bouton +, renomme la nouvelle feuille, puis déplace son onglet juste après Réservations.'], hh: ['tabs', {tab: 'Plus'}, {tab: 'Plus'}],
+    hints: ['Il faut ajouter une feuille au classeur actuel.', 'Crée une feuille vide, puis renomme-la « Contrôle réunion ».', 'Utilise le bouton +, renomme la nouvelle feuille, puis vérifie que son onglet se trouve juste après Réservations (fais-le glisser si besoin).'], hh: ['tabs', {tab: 'Plus'}, {tab: 'Plus'}],
     on(ev, X) {
       if (ev.type === 'plus' || ev.type === 'move') return ctrlNext(X);
       if (ev.type === 'copy') return {miss: ev.id === 'res' ? 'Nous voulons une feuille vide pour le brouillon, pas une copie des réservations.' : 'Nous voulons une feuille vide pour le brouillon, pas une copie d’une feuille existante.', revert: true};
@@ -4426,7 +4512,7 @@ lesson(10, {
     on(ev, X) {
       if (ev.type === 'invalid') {
         if (ev.ref[0] === 'B') return 'Ce numéro ne respecte pas la règle de validation. Vérifie le message de Thomas : Adam est en chambre 102.';
-        if (ev.ref[0] === 'A') return parseIn(norm(ev.text) || ' ').t === 'd' ? 'Cette date est hors de la période autorisée. La demande concerne le 28 novembre.' : 'Excel doit reconnaître une valeur de date. Écris-la au format jour/mois/année.';
+        if (ev.ref[0] === 'A') return parseIn(norm(ev.text) || ' ').t === 'd' ? 'Cette date est hors de la période autorisée. La demande concerne le 28 novembre.' : 'Cette saisie n’est pas une date. Écris-la au format jour/mois/année, par exemple 28/11/2026.';
         return 'Nous voulons utiliser la liste déroulante pour garantir un statut cohérent.';
       }
       if (ev.type === 'valid') return {miss: 'Nous devons respecter les règles de la feuille, pas les supprimer.', revert: true};
@@ -4440,7 +4526,7 @@ lesson(10, {
       if (p.r >= 2 && p.r <= 4) return {cancel: true, miss: 'Cette demande existe déjà. Il faut ajouter une nouvelle ligne, pas remplacer l’ancienne.'};
       if (p.r !== 5 || p.ci > 3) return {cancel: true, miss: 'La nouvelle demande va sur la ligne 5 : date en A, chambre en B, demande en C et statut en D.'};
       if (p.c === 'D') return {cancel: true, miss: 'Nous voulons utiliser la liste déroulante pour garantir un statut cohérent.'};
-      if (p.c === 'A') { if (ev.typ !== 'd') return {block: true, miss: 'Excel doit reconnaître une valeur de date. Vérifie le type de la cellule.'}; if (ev.val !== ISO(28)) return {block: true, miss: 'La demande concerne l’arrivée d’Adam, le 28 novembre 2026.'}; return row5(X, 'A5', true); }
+      if (p.c === 'A') { if (ev.typ !== 'd') return {block: true, miss: 'Cette saisie n’est pas enregistrée comme une date. Écris-la au format jour/mois/année, par exemple 28/11/2026.'}; if (ev.val !== ISO(28)) return {block: true, miss: 'La demande concerne l’arrivée d’Adam, le 28 novembre 2026.'}; return row5(X, 'A5', true); }
       if (p.c === 'B') return ev.val === 102 ? row5(X, 'B5', true) : {block: true, miss: 'Vérifie le message de Thomas : Adam est en chambre 102.'};
       const t = apo(ev.text);
       if (t === 'Bouteille d’eau') return row5(X, 'C5', true);
@@ -4480,7 +4566,7 @@ lesson(10, {
   line('meeting4', 'camille', 'C’est un très bon travail.', {expr: 'smile'});
   line('meeting4', 'camille', 'Tu as commencé ici en découvrant simplement les cellules d’un tableau.', {expr: 'present'});
   line('meeting4', 'camille', 'Aujourd’hui, tu as vérifié plusieurs feuilles, corrigé des informations et préparé un classeur complet.', {expr: 'present'});
-  line('meeting4', 'camille', 'Tu peux être fier de ta progression.', {expr: 'wave'});
+  line('meeting4', 'camille', 'Ta progression est remarquable.', {expr: 'wave'});
   line('meeting4', 'ding', 'Ding ! Nous avons réussi !', {ring: true});
   S.push({t: 'end', v: 'end'});
 });
