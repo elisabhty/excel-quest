@@ -1291,6 +1291,7 @@ body.rm .ribbon{transition:none}
 .topbar .chip{position:relative;min-width:44px;justify-content:center}
 .set:has(#segPace){flex-wrap:wrap}
 #segPace button{min-height:44px}
+
 </style>
 </head>
 <body>
@@ -9170,6 +9171,166 @@ lesson(30, {
   S.push({t: 'end', v: 'end'});
 });
 
+/* ---------- Fiches fusionnées : moins de fiches, chacune plus complète ----------
+   Chaque fiche garde l’identifiant (et l’image) d’une fiche d’origine : une fiche déjà débloquée le reste.
+   « keep » reprend le titre et les points d’origine. */
+const FUSION = {
+  1: [
+    {id: 'f1', t: 'Classeur, feuilles et tableaux', pts: ['Un <b>classeur</b> est un fichier Excel qui peut contenir plusieurs <b>feuilles</b>.', 'On passe d’une feuille à l’autre avec les onglets, en bas du tableau.', 'Dans un tableau bien organisé, chaque ligne regroupe les informations d’un même élément.']},
+    {id: 'f3', t: 'Lignes, colonnes et références', pts: ['Les <b>colonnes</b> sont repérées par des lettres, les <b>lignes</b> par des numéros.', '<b>B2</b> désigne la cellule de la colonne B et de la ligne 2.', 'La <b>zone Nom</b>, en haut à gauche, affiche la référence de la cellule sélectionnée.']},
+  ],
+  2: [
+    {id: 'l2f1', t: 'Sélectionner et saisir', pts: ['La <b>cellule active</b> est entourée d’un contour ; la zone Nom affiche sa référence.', 'Pour saisir, sélectionne la cellule, écris, puis valide avec Entrée.']},
+    {id: 'l2f3', t: 'Texte, nombres et vérification', pts: ['Une cellule peut contenir du texte, des nombres ou d’autres types de valeurs.', 'Les valeurs numériques peuvent servir dans des calculs.', 'Après une saisie, compare les informations avec la source.']},
+  ],
+  3: [
+    {id: 'l3f1', t: 'Modifier une cellule', pts: ['Sélectionne la cellule, modifie son contenu, puis valide.', 'La <b>barre de formule</b> affiche le contenu de la cellule active et permet de le modifier.']},
+    {id: 'l3f3', t: 'Effacer et annuler', pts: ['<b>Effacer le contenu</b> vide une cellule sans déplacer les autres : ce n’est pas supprimer la cellule.', '<b>Annuler</b> revient sur une action récente ; <b>Rétablir</b> la refait.']},
+  ],
+  4: [
+    {id: 'l4f1', t: 'Copier, couper, coller', pts: ['<b>Copier</b> garde l’information dans sa cellule et la place dans le Presse-papiers.', '<b>Couper</b> puis <b>Coller</b> déplace l’information : la cellule source se vide.']},
+    {id: 'l4f3', t: 'La poignée de recopie', pts: ['Le petit carré en bas à droite de la sélection est la <b>poignée de recopie</b>.', 'Fais-la glisser pour remplir les cellules voisines.', 'Avec 201 et 202 sélectionnés, elle continue la série : 203, 204, 205…']},
+  ],
+  5: [
+    {id: 'l5f1', t: 'Gras, couleurs et alignement', pts: ['Le <b>gras</b> fait ressortir les titres ; la <b>couleur de remplissage</b> change le fond, la <b>couleur de police</b> le texte.', 'L’<b>alignement</b> place le contenu à gauche, au centre ou à droite.', 'La mise en forme change l’apparence, jamais la valeur.']},
+    {id: 'l5f5', t: 'Bordures et largeur de colonne', pts: ['Les <b>bordures</b> délimitent les cellules d’une plage.', 'Un texte trop long déborde ou se masque : élargis la colonne, la valeur ne change pas.']},
+    {id: 'l5f6', keep: true},
+  ],
+  6: [
+    {id: 'l6f1', t: 'Saisir une date', pts: ['Avec les paramètres français, une date se saisit au format jour/mois/année : 28/11/2026.', 'La cellule contient alors une vraie date, visible dans la barre de formule.']},
+    {id: 'l6f2', t: 'Le format de date', pts: ['Le format décide de l’affichage : « 28/11/2026 » ou « 28 novembre 2026 ».', 'Sélectionne plusieurs cellules pour leur appliquer le même format.', 'Pour changer le jour, le mois ou l’année, modifie la valeur : le format seul ne change pas la date.']},
+  ],
+  7: [
+    {id: 'l7f2', t: 'Créer et renommer une feuille', pts: ['Chaque feuille du classeur a ses propres cellules.', 'Le bouton + près des onglets ajoute une feuille vide.', 'Un nom clair facilite la navigation dans le classeur.']},
+    {id: 'l7f4', img: 'l7f5', t: 'Organiser les onglets', pts: ['La <b>couleur d’onglet</b> sert de repère visuel.', 'On peut <b>déplacer</b> une feuille pour changer l’ordre des onglets.', 'Les données des cellules ne changent pas.']},
+    {id: 'l7f6', img: 'l7f7', t: 'Dupliquer ou supprimer', pts: ['<b>Dupliquer</b> crée une copie de la feuille, contenu et mise en forme compris.', '<b>Supprimer</b> retire la feuille entière et son contenu.', 'Annuler ne la récupère pas : vérifie toujours que c’est la bonne feuille.']},
+  ],
+  8: [
+    {id: 'l8f1', img: 'l8f2', t: 'La validation des données', pts: ['Elle fixe des règles sur les valeurs autorisées dans une cellule ou une plage.', 'Exemples : un entier entre 101 et 399, ou une vraie date dans une période précise.', 'Elle aide à prévenir certaines erreurs de saisie.']},
+    {id: 'l8f3', t: 'Listes, messages et alertes', pts: ['Une <b>liste déroulante</b> propose des choix définis : À traiter, En cours, Terminé.', 'Le <b>message de saisie</b> s’affiche quand on sélectionne la cellule.', 'L’<b>alerte d’erreur</b> réagit à une valeur non valide : le style Arrêt bloque la saisie.']},
+  ],
+  9: [
+    {id: 'l9f2', img: 'l9f3', t: 'Les plages de cellules', pts: ['Une <b>plage</b> désigne un ensemble de cellules.', 'Le deux-points sépare la première et la dernière cellule : <code>A2:A5</code> comprend A2, A3, A4 et A5.', '<code>A1:D5</code> désigne tout le rectangle entre A1 et D5.']},
+    {id: 'l9f4', t: 'Colonnes et lignes entières', pts: ['Toucher l’en-tête d’une colonne ou d’une ligne la sélectionne entièrement.', 'Pour ne prendre que les cellules du tableau, sélectionne une plage, par exemple <code>A2:D2</code>.']},
+    {id: 'l9f6', t: 'Sélectionner un tableau', pts: ['Inclus toutes les cellules utiles, titres compris, sans le reste de la feuille.', 'La <b>zone Nom</b> affiche la référence de la cellule active.', 'On peut aussi y écrire une plage pour la sélectionner.']},
+  ],
+  10: [
+    {id: 'l10f1', t: 'Classeur, cellules et plages', pts: ['Un classeur contient des feuilles, faites de lignes, de colonnes et de cellules.', '<b>C3</b> désigne la cellule de la colonne C et de la ligne 3.', '<code>A1:D5</code> désigne le rectangle de A1 à D5, extrémités comprises.']},
+    {id: 'l10f3', img: 'l10f5', t: 'Modifier et présenter', pts: ['Sélectionne la bonne cellule, corrige, valide ; Annuler revient sur une action récente.', 'Copier garde l’original ; couper le déplace.', 'La mise en forme et le format de date changent l’affichage, pas la valeur.']},
+    {id: 'l10f7', img: 'l10f10', t: 'Gérer et vérifier', pts: ['Une feuille supprimée ne se récupère pas avec Annuler.', 'La validation des données contrôle certaines saisies : nombres, dates, listes.', 'Avant de partager, vérifie les valeurs, les formats, les règles et les feuilles.']},
+  ],
+  11: [
+    {id: 'l11f1', t: 'Écrire une formule', pts: ['Une formule commence par <b>=</b> : la cellule contient un calcul.', 'Le signe + additionne : <code>=95+275</code> donne 370.', 'Valide la saisie pour afficher le résultat.']},
+    {id: 'l11f4', img: 'l11f5', t: 'Formule et résultat', pts: ['La cellule affiche le résultat ; la barre de formule montre le calcul enregistré.', '<code>=630+370</code> affiche 1000, et la formule reste enregistrée.', 'Vérifie les nombres et l’opérateur : un bon résultat ne prouve pas que la formule est bien construite.']},
+  ],
+  12: [
+    {id: 'l12f1', img: 'l12f3', t: 'Les quatre opérations', pts: ['<b>+</b> additionne et <b>-</b> soustrait : <code>=192+90-30</code> donne 252.', '<b>*</b> multiplie (et non ×) : <code>=8*24</code> donne 192.', '<b>/</b> divise : <code>=192/8</code> donne 24. Une division par zéro produit #DIV/0!.']},
+    {id: 'l12f5', keep: true},
+    {id: 'l12f6', keep: true},
+  ],
+  13: [
+    {id: 'l13f2', t: 'Calculer avec des cellules', pts: ['<code>=B2*C2</code> multiplie les valeurs de B2 et C2 : 8 × 24 = 192.', 'Les autres opérateurs s’utilisent de la même façon : <code>=D2+D3</code>, <code>=D4-C5</code>, <code>=G2/G3</code>.']},
+    {id: 'l13f6', t: 'Insérer une référence', pts: ['<b>B2</b> désigne la cellule de la colonne B et de la ligne 2.', 'Pendant la saisie d’une formule, touche une cellule pour insérer sa référence.']},
+    {id: 'l13f7', keep: true},
+  ],
+  14: [
+    {id: 'l14f1', t: 'Le recalcul automatique', pts: ['Quand une valeur change, les formules qui en dépendent se mettent à jour.', 'Si C2 passe de 24 à 26, <code>=B2*C2</code> passe de 192 à 208, et <code>=D2+D3</code> suit.', 'En calcul manuel, il faut lancer un recalcul.']},
+    {id: 'l14f3', img: 'l14f5', t: 'Valeur fixe ou formule', pts: ['Une cellule contenant 192 ne change jamais seule ; <code>=B2*C2</code> suit B2 et C2.', 'Modifie la donnée dans sa cellule source, pas le résultat calculé.']},
+    {id: 'l14f4', t: 'Comparer deux versions', pts: ['Avant une simulation, garde une copie de la feuille d’origine.', 'Un écart n’est pas forcément une erreur : 286 € − 270 € = 16 € entre le nouveau devis et l’ancienne facture.']},
+  ],
+  15: [
+    {id: 'l15f1', t: 'Relier et additionner', pts: ['<code>=D2</code> reprend la valeur de D2 et suit ses changements.', '<code>=L2+L3+L4</code> additionne plusieurs résultats ; pour une longue série, SOMME est plus pratique.']},
+    {id: 'l15f3', t: 'Les références relatives', pts: ['Copiée une ligne plus bas, <code>=J2*K2</code> devient <code>=J3*K3</code>.', 'Trois lignes plus bas, <code>=J5*K5</code> devient <code>=J8*K8</code> : les références suivent le déplacement.']},
+    {id: 'l15f4', t: 'La poignée de recopie', pts: ['Fais glisser la poignée de recopie pour prolonger une formule sur plusieurs cellules.', 'Chaque copie utilise les cellules de sa ligne et se recalcule quand une donnée change.']},
+  ],
+  16: [
+    {id: 'l16f1', t: 'La fonction SOMME', pts: ['<code>=SOMME(L2:L13)</code> additionne les nombres de la plage, bornes comprises.', 'Pendant la saisie, sélectionne la plage dans la grille : sa référence s’insère.', 'Le bouton <b>Σ</b> propose une formule SOMME : vérifie la plage avant de valider.']},
+    {id: 'l16f5', t: 'Cellules vides et texte', pts: ['SOMME ignore les cellules vides et le texte de la plage.', 'Le total peut donc être incomplet : une cellule vide n’est pas toujours zéro.']},
+    {id: 'l16f7', keep: true},
+  ],
+  17: [
+    {id: 'l17f1', t: 'La fonction MOYENNE', pts: ['<code>=MOYENNE(L2:L13)</code> calcule la moyenne des nombres de la plage : 16 €.', 'SOMME donne un total (192 €) ; MOYENNE le divise par le nombre de valeurs (12).', 'Pour vérifier : <code>=L14/12</code> donne aussi 16 €.']},
+    {id: 'l17f5', img: 'l17f6', t: 'Vides, zéros et texte', pts: ['MOYENNE ignore les cellules vides et le texte : 12, 18, 6 et une cellule vide donnent 12.', 'Le zéro, lui, compte : ne confonds pas une valeur nulle avec une valeur inconnue.']},
+    {id: 'l17f7', t: 'Interpréter une moyenne', pts: ['Choisis la plage selon la question : L2:L13 pour le coût, J2:J13 pour les kits.', 'Une moyenne de 16 € n’empêche pas des coûts allant de 6 € à 30 €.']},
+  ],
+  18: [
+    {id: 'l18f1', t: 'MIN et MAX', pts: ['<code>=MAX(L2:L13)</code> donne 30 € ; <code>=MIN(L2:L13)</code> donne 6 €.', 'Ils renvoient une valeur, pas une chambre : 103 et 205 partagent le minimum.', 'L’écart <code>=O5-O6</code> vaut 30 € − 6 € = 24 €.']},
+    {id: 'l18f6', img: 'l18f7', t: 'Vides et zéros', pts: ['MIN et MAX ignorent les cellules vides et le texte.', 'Un 0 compte : MIN peut renvoyer 0. Une cellule vide n’est pas un zéro.']},
+    {id: 'l18f8', t: 'Quelle fonction choisir ?', pts: ['SOMME : total. MOYENNE : moyenne. MIN et MAX : plus petite et plus grande valeur.', 'Exclus la cellule de total de la plage quand tu cherches un extrême.']},
+  ],
+  19: [
+    {id: 'l19f1', t: 'NB et NBVAL', pts: ['<code>=NB(C18:C21)</code> compte les cellules contenant des nombres, zéro compris.', '<code>=NBVAL(A18:A21)</code> compte les cellules non vides : texte, nombres et formules.', 'Choisis la plage sans les en-têtes ni les cellules de résultat.']},
+    {id: 'l19f5', t: 'Ce que chaque fonction compte', pts: ['« À confirmer » est du texte : NBVAL le compte, NB non.', 'Une cellule contenant <code>=""</code> paraît vide, mais NBVAL la compte.', 'Une livraison à 0 € est un montant, pas une donnée manquante.']},
+    {id: 'l19f7', t: 'Repérer les montants manquants', pts: ['<code>=C23-C22</code> compare les pièces attendues aux montants numériques.', 'Quand un montant est saisi, NB et les formules qui en dépendent se recalculent.']},
+  ],
+  20: [
+    {id: 'l20f1', t: 'Total, moyenne et extrêmes', pts: ['<code>SOMME</code> : 192 €. <code>MOYENNE</code> : 16 €.', '<code>MAX</code> : 30 €. <code>MIN</code> : 6 €, partagé par plusieurs chambres.']},
+    {id: 'l20f5', t: 'Compter', pts: ['<code>NB</code> compte les nombres, zéro compris : 4 montants.', '<code>NBVAL</code> compte les cellules non vides, texte compris : 4 références.']},
+    {id: 'l20f8', t: 'Un rapport fiable', pts: ['<code>=J19+J26</code> additionne deux résultats ; <code>=J24-J25</code> mesure un écart.', 'Connais le périmètre des dépenses et vérifie les données sources.', 'Évite les doubles comptages et signale les justificatifs en attente.']},
+  ],
+  21: [
+    {id: 'l21f1', t: 'Un tableau bien structuré', pts: ['Une colonne = un type d’information ; une ligne = un enregistrement.', 'Les en-têtes, sur la première ligne, décrivent les colonnes.', 'Avant de trier, sélectionne tout le tableau (F1:I5), sans la zone de contrôle.']},
+    {id: 'l21f3', t: 'Trier', pts: ['Texte : A → Z en ordre croissant, Z → A en décroissant.', 'Nombres : du plus petit au plus grand en croissant. Dates : du plus ancien au plus récent.', 'Les dates doivent être de vraies dates Excel.']},
+    {id: 'l21f6', t: 'Trier sans casser les lignes', pts: ['Un tri déplace les lignes entières : chaque client garde sa chambre, ses nuits et sa date.', 'Trier une seule colonne séparément rend les données incohérentes.', 'Après un tri, vérifie le nombre de lignes et l’absence de doublons.']},
+  ],
+  22: [
+    {id: 'l22f1', t: 'Activer et effacer un filtre', pts: ['Sélectionne une cellule du tableau, puis Données → Filtrer : des flèches apparaissent sur les en-têtes.', 'Données → Effacer retire les critères et garde les flèches.']},
+    {id: 'l22f4', t: 'Filtrer dates, textes et nombres', pts: ['Un filtre peut retenir une date (28/11/2026), un texte (Lina Moreau) ou une condition numérique.', '<code>&gt;3</code> veut dire strictement supérieur à 3 ; <code>&gt;=3</code>, supérieur ou égal.', 'Plusieurs filtres se combinent : une ligne doit respecter toutes les conditions.']},
+    {id: 'l22f6', t: 'Ce que fait un filtre', pts: ['Un filtre masque temporairement des lignes : il ne les supprime pas.', 'Les numéros de ligne en bleu signalent un filtre actif.', 'Trier change l’ordre des lignes ; filtrer change les lignes visibles.']},
+  ],
+  23: [
+    {id: 'l23f2', t: 'Le tableau structuré', pts: ['Insertion → Tableau transforme une plage en véritable tableau Excel : en-têtes, filtres intégrés, plage extensible.', 'Coche « Mon tableau comporte des en-têtes » si la première ligne contient les titres.', 'La structure change, pas les données.']},
+    {id: 'l23f4', t: 'Nom et style', pts: ['Un nom clair, sans espace, comme <b>tblPetitDejeuner</b>, se modifie dans Création de tableau.', 'Un style et des lignes à bandes rendent le tableau plus lisible.']},
+    {id: 'l23f7', t: 'Un tableau qui s’agrandit', pts: ['Une saisie juste sous la dernière ligne étend le tableau et sa mise en forme.', 'Les filtres intégrés et les formules qui utilisent le tableau suivent la nouvelle ligne.', 'Pour t’entraîner sans risque, travaille sur une copie.']},
+  ],
+  24: [
+    {id: 'l24f1', t: 'Mise en forme conditionnelle', pts: ['Accueil → Mise en forme conditionnelle change l’apparence d’une cellule quand une condition est remplie.', 'Une règle « Égal à » reconnaît un statut comme « À traiter ».', 'Une règle numérique compare à un seuil : 30 n’est pas supérieur à 30.']},
+    {id: 'l24f4', img: 'l24f3', t: 'Une couleur qui suit les données', pts: ['Rouge : à traiter. Orange : en cours. Vert : terminé.', 'Une couleur manuelle reste fixe ; une couleur conditionnelle change avec la valeur.']},
+    {id: 'l24f7', t: 'Gérer et contrôler les règles', pts: ['Gérer les règles permet de consulter, modifier ou supprimer une règle.', 'Corrige une règle existante plutôt que d’en créer une deuxième.', 'Vérifie la plage : ici I2:I5, sans l’en-tête.']},
+  ],
+  25: [
+    {id: 'l25f1', img: 'l25f2', t: 'Valeurs répétées', pts: ['Une valeur répétée apparaît plusieurs fois dans une colonne : ce n’est pas forcément une erreur.', 'Mise en forme conditionnelle → Valeurs en double les met en évidence, même après une modification.']},
+    {id: 'l25f3', t: 'Un vrai doublon ?', pts: ['Un doublon exact : deux lignes identiques sur toutes les colonnes comparées.', 'Compare les champs qui définissent une demande : même chambre ne veut pas dire même demande.', 'Un statut différent peut signaler deux étapes d’une même demande : à vérifier.']},
+    {id: 'l25f5', keep: true},
+    {id: 'l25f7', t: 'Supprimer les doublons', pts: ['L’outil compare les colonnes cochées et supprime des lignes.', 'Analyse toujours avant : distingue les demandes légitimes des doublons exacts.', 'Travaille sur une copie avant de confirmer.']},
+  ],
+  26: [
+    {id: 'l26f1', t: 'NB.SI et ses critères', pts: ['<code>=NB.SI(plage;critère)</code> compte les cellules qui respectent un critère.', 'Un texte s’écrit entre guillemets : <code>"À traiter"</code>.', 'Un nombre (0) ou une comparaison (<code>"&gt;30"</code>) fonctionne aussi ; une cellule vide n’est pas un zéro.']},
+    {id: 'l26f4', t: 'Un critère dans une cellule', pts: ['<code>=NB.SI($I$2:$I$5;T2)</code> : la plage bloquée reste fixe, le critère suit la ligne.', 'Contrôle la synthèse : la somme des catégories doit égaler le total attendu.']},
+    {id: 'l26f5', img: 'l26f7', t: 'Choisir la fonction de comptage', pts: ['<b>NB</b> compte les nombres ; <b>NBVAL</b> les cellules non vides.', '<b>NB.SI</b> : un critère. <b>NB.SI.ENS</b> : plusieurs critères à la fois.']},
+  ],
+  27: [
+    {id: 'l27f1', t: 'SOMME.SI', pts: ['<code>=SOMME.SI(plage;critère;somme_plage)</code> additionne les valeurs qui répondent à un critère.', 'La plage des critères contient les produits ; la plage à additionner, les quantités.', '<code>=SOMME.SI(I2:I9;"Croissants";J2:J9)</code> donne 40.']},
+    {id: 'l27f4', t: 'Critères variables', pts: ['<code>=SOMME.SI($I$2:$I$9;L2;$J$2:$J$9)</code> se recopie : L2 devient L3, les plages restent fixes.', 'Un critère numérique comme <code>"&gt;20"</code> est strict : 20 n’est pas retenu.']},
+    {id: 'l27f5', img: 'l27f6', t: 'Compter ou additionner ?', pts: ['SOMME additionne tout : 94 unités.', 'NB.SI compte les lignes : 3 lignes de croissants.', 'SOMME.SI additionne leurs quantités : 40 croissants.']},
+    {id: 'l27f8', keep: true},
+  ],
+  28: [
+    {id: 'l28f1', t: 'SOMME.SI.ENS', pts: ['Additionne les montants des lignes qui respectent tous les critères à la fois.', 'La plage à additionner vient en premier, puis chaque paire plage ; critère.', 'Fournitures et Réception : 120 + 45 + 180 = 345 €.']},
+    {id: 'l28f4', img: 'l28f5', t: 'Critères texte et nombre', pts: ['Un texte s’écrit entre guillemets ("Fournitures") ou vient d’une cellule ($L3).', 'Un critère <code>"&gt;100"</code> sur la plage des montants ne garde que les montants supérieurs à 100.']},
+    {id: 'l28f6', keep: true},
+    {id: 'l28f7', img: 'l28f8', t: 'Choisir et contrôler', pts: ['SOMME : sans critère. SOMME.SI : un critère. SOMME.SI.ENS : plusieurs.', 'Les totaux par catégorie et par service doivent égaler le total du registre.']},
+  ],
+  29: [
+    {id: 'l29f2', t: 'Choisir le type de graphique', pts: ['<b>Colonnes</b> (Histogramme groupé) : comparer quelques catégories.', '<b>Barres</b> : libellés longs ou nombreux ; la première catégorie s’affiche en bas.', '<b>Courbe</b> : une évolution dans le temps ; deux dates restent deux observations.']},
+    {id: 'l29f5', t: 'Titres et étiquettes', pts: ['Le titre dit ce qui est mesuré ; les titres des axes précisent catégories et valeurs.', 'Les titres des axes suivent leur axe si le type change.', 'Bouton + du graphique → Étiquettes de données, pour lire les valeurs directement.']},
+    {id: 'l29f7', t: 'Un graphique lié aux cellules', pts: ['Prépare une petite zone avec des références de cellule : le tableau historique reste intact.', 'Le graphique lit ses cellules sources : quand une valeur change, il se met à jour.', 'Avant de valider, contrôle les catégories, les titres et les valeurs.']},
+  ],
+  30: [
+    {id: 'l30f1', t: 'Un tableau de bord relié', pts: ['Il rassemble les indicateurs essentiels, chacun lié à ses données par une formule.', '<code>=\'Nouveau devis\'!J27</code> lit une cellule d’une autre feuille : touche son onglet pendant la saisie.']},
+    {id: 'l30f3', t: 'Périmètres et totaux', pts: ['442 €, 1 000 € et 1 365 € ne mesurent pas les mêmes dépenses : on ne les additionne pas.', '192 € + 250 € = 442 € : les composantes sont déjà dans le total.', 'Un écart nul confirme la cohérence, pas les justificatifs.']},
+    {id: 'l30f6', t: 'Alertes et formats', pts: ['Une règle « Supérieur à 0 » signale une action restante ; « Égal à 0 » confirme un écart nul.', 'Format Monétaire pour les euros, format Nombre pour les quantités : 94 unités ne sont pas 94 €.', 'Les références structurées suivent le tableau quand il s’agrandit.']},
+    {id: 'l30f8', keep: true},
+  ],
+};
+Object.entries(FUSION).forEach(([n, list]) => {
+  const D = LDEF[n]; if (!D || !D.fiches) return;
+  const old = D.fiches, by = id => old.find(f => f.id === id);
+  D.fiches = list.map(f => { const o = by(f.id), im = by(f.img || f.id) || o; if (!o || !im) throw new Error('Fiche introuvable : ' + n + ' ' + f.id); return f.keep ? o : {id: f.id, t: f.t, img: im.img, pts: f.pts}; });
+});
+// leçons déjà terminées : toutes leurs fiches restent débloquées
+DB.done.forEach(n => ((LDEF[n] && LDEF[n].fiches) || []).forEach(f => { if (!DB.fiches.includes(f.id)) DB.fiches.push(f.id); }));
+
 const XP_FIRST = 10, XP_LATER = 5, XP_BONUS = 50;
 const starsFor = (firsts, total) => firsts / total >= .85 ? 3 : firsts / total >= .5 ? 2 : 1;
 const PACE = {lente: [1.7, 14000], normale: [1, 8000], rapide: [.72, 6000]};
@@ -9404,7 +9565,7 @@ function renderFiches() {
   allFiches().forEach(([f, n, i, total], index) => {
     const earned = DB.fiches.includes(f.id), floor = floorOf(n);
     const location = roomLabel(n);
-    const keywords = [f.t, location, roomNo(n), LESSONS[n - 1].t, MODULES[floor - 1][0]].join(' ');
+    const keywords = [f.t, location, roomNo(n), LESSONS[n - 1].t, MODULES[floor - 1][0], ...f.pts.map(p => p.replace(/<[^>]+>/g, ''))].join(' ');
     if ((ficheScope === 'earned' && !earned) || !foldSearch(keywords).includes(query)) return;
     if (!groups.has(floor)) groups.set(floor, []);
     const lock = earned ? '' : '<span class="lock-icon" aria-hidden="true">' + IC.lock + '</span>';
